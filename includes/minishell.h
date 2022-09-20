@@ -13,6 +13,8 @@
 # include <string.h>
 
 /*						INCLUDE OTHER HEADER						*/
-
+#include "couleurs.h"
+#include "struct.h"
+#include "lexer.h"
 
 #endif
