@@ -16,5 +16,8 @@
 #include "couleurs.h"
 #include "struct.h"
 #include "lexer.h"
+#include "basics.h"
+#include "free.h"
+#include "tools.h"
 
 #endif

@@ -13,10 +13,25 @@ typedef enum s_token
 	OUT_APPEND
 }		t_token;
 
-typedef struct s_token_lex {
-	char		*content;
-	t_token		token;
-	t_token_lex	*next;
+typedef enum s_set
+{
+	INIT,
+	NOT_INIT
+}	t_set;
+
+typedef struct s_token_lex 
+{
+	struct s_token_lex	*next;
+	char				*content;
+	struct s_token_lex	token;
 }		t_token_lex;
+
+typedef struct s_venv
+{
+	struct s_venv	*next;
+	char			*title;
+	char			*content;
+	t_set			set;
+}		t_venv;
 
 #endif
