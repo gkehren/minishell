@@ -2,13 +2,15 @@
 
 int	main(void)
 {
-	char	*input;
+	char		*input;
+	t_token_lex	*token_list;
 
 	while (42)
 	{
 		input = readline("First prompt :");
-		generate_token(input);
-		//printf("taille str : %d\n", count_charset(" \t", input));
+		token_list = generate_token(input);
+		print_token_lex(token_list);
+		//ft_lstclear_tl(token_list);
 		free(input);
 	}
 	return (0);

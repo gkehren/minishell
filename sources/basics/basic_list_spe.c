@@ -13,14 +13,14 @@ t_token_lex	*ft_lstnew_tl(char *content, t_token token)
 	return (new);
 }
 
-void	ft_lstdelone(t_token_lex *lst)
+void	ft_lstdelone_tl(t_token_lex *lst)
 {
-	if (lst->content)
+	if (lst->content && lst->token == WORD)
 		ft_free((void **)&lst->content);
 	ft_free((void **)&lst);
 }
 
-void	ft_lstclear(t_token_lex *bg_lst)
+void	ft_lstclear_tl(t_token_lex *bg_lst)
 {
 	t_token_lex	*current;
 
@@ -30,7 +30,7 @@ void	ft_lstclear(t_token_lex *bg_lst)
 	while (bg_lst)
 	{
 		bg_lst = bg_lst->next;
-		ft_lstdelone(current);
+		ft_lstdelone_tl(current);
 		current = bg_lst;
 	}
 }

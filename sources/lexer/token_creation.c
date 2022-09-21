@@ -13,13 +13,10 @@ static int	create_token(t_token_lex *token_list, char *content, t_token token)
 
 int	create_spe_token(t_token_lex *token_list, int analyse)
 {
-	int check;
 	const char* symb[] = {"<", "|", ">", "<<", ">>"};
 	const t_token token_symb[] = {IN, PIPE, OUT , IN_HEREDOC, OUT_APPEND};
 
-	check = 0;
-	check = create_token(token_list, (char *)symb[analyse], (t_token)token_symb[analyse]);
-	if (check)
+	if (create_token(token_list, (char *)symb[analyse], (t_token)token_symb[analyse]))
 		return (1);
 	return (0);
 }
@@ -44,6 +41,10 @@ int	create_mand_token(t_token_lex *token_list, char *entry, int *i)
 		count--;
 	}
 	word[j] = '\0';
-	printf("word is %s\n", word);
+	if (create_token(token_list, word, WORD))
+	{
+		ft_free((void **)&word);
+		return (1);
+	}
 	return (0);
 }

@@ -3,6 +3,7 @@
 
 #include "minishell.h"
 
+
 typedef enum s_token
 {
 	WORD,

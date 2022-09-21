@@ -28,7 +28,6 @@ static int	lexer_monitor(char *entry, int *i, t_token_lex *token_list)
 
 	check = 0;
 	analyse = metachar_analysis(entry, *i);
-	printf("analyse : %d\n", analyse);
 	if (analyse != -1)
 		check = create_spe_token(token_list, analyse);
 	else
@@ -42,7 +41,7 @@ static int	lexer_monitor(char *entry, int *i, t_token_lex *token_list)
 	return (0);
 }
 
-t_token_lex	**generate_token(char *entry)
+t_token_lex	*generate_token(char *entry)
 {
 	int			i;
 	t_token_lex	*token_list;
@@ -53,7 +52,13 @@ t_token_lex	**generate_token(char *entry)
 	{
 		while(entry[i] == ' ' || entry[i] == '\t')
 			i++;
-		lexer_monitor(entry, &i, token_list);
+		if (lexer_monitor(entry, &i, token_list))
+		{
+			printf("lol\n");
+			ft_lstclear_tl(token_list);
+			return (NULL);
+		}
 	}
-	return (NULL);
+	printf("word is %s\n", token_list->content);
+	return (token_list);
 }
