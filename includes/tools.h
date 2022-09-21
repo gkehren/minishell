@@ -4,6 +4,6 @@
 #include "minishell.h"
 
 /*						TOOLS						*/
-void	print_token_lex(t_token_lex *lst);
+void	print_token_lex(t_list *lst);
 
 #endif

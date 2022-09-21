@@ -1,17 +1,24 @@
 #include "minishell.h"
 
-static int	create_token(t_token_lex *token_list, char *content, t_token token)
+static int	create_token(t_list **token_list, char *content, t_token token)
 {
-	t_token_lex	*new;
+	t_token_lex	*new_content;
+	t_list		*new_element;
 
-	new = ft_lstnew_tl(content, token);
-	if (new == NULL)
+	new_content = init_token_lex(content, token);
+	if (new_content == NULL)
 		return (1);
-	ft_lstadd_back((void **)&token_list, new);
+	new_element = ft_lstnew((void *)new_content);
+	if (new_element == NULL)
+	{
+		ft_free((void **)&new_content);
+		return (1);
+	}
+	ft_lstadd_back(token_list, new_element);
 	return (0);
 }
 
-int	create_spe_token(t_token_lex *token_list, int analyse)
+int	create_spe_token(t_list **token_list, int analyse)
 {
 	const char* symb[] = {"<", "|", ">", "<<", ">>"};
 	const t_token token_symb[] = {IN, PIPE, OUT , IN_HEREDOC, OUT_APPEND};
@@ -21,13 +28,12 @@ int	create_spe_token(t_token_lex *token_list, int analyse)
 	return (0);
 }
 
-int	create_mand_token(t_token_lex *token_list, char *entry, int *i)
+int	create_mand_token(t_list **token_list, char *entry, int *i)
 {
 	int		count;
 	char	*word;
 	int		j;
 
-	(void)token_list;
 	count = count_charset(" \t", entry + *i);
 	word = (char *)malloc(sizeof(char) * (count + 1));
 	if (word == NULL)

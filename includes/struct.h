@@ -3,6 +3,11 @@
 
 #include "minishell.h"
 
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 
 typedef enum s_token
 {
@@ -22,14 +27,12 @@ typedef enum s_set
 
 typedef struct s_token_lex 
 {
-	struct s_token_lex	*next;
 	char				*content;
-	t_token	token;
+	t_token				token;
 }		t_token_lex;
 
 typedef struct s_venv
 {
-	struct s_venv	*next;
 	char			*title;
 	char			*content;
 	t_set			set;

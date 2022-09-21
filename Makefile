@@ -4,12 +4,13 @@ SRC_PATH = sources/
 OBJ_PATH = obj/
 
 SRC_NAME = 	minishell.c					\
-			basics/basic_list_gen.c		\
-			basics/basic_list_spe.c		\
+			basics/basic_list.c		\
+			basics/basic_list2.c		\
 			clean/free.c				\
 			lexer/lexer.c				\
 			lexer/token_creation.c 		\
 			utils/utils.c 				\
+			utils/handle_struct.c		\
 			tools.c 					\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
