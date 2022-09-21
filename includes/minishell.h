@@ -13,12 +13,12 @@
 # include <string.h>
 
 /*						INCLUDE OTHER HEADER						*/
-#include "couleurs.h"
-#include "struct.h"
-#include "lexer.h"
-#include "basics.h"
-#include "free.h"
-#include "tools.h"
-#include "utils.h"
+# include "couleurs.h"
+# include "struct.h"
+# include "lexer.h"
+# include "basics.h"
+# include "free.h"
+# include "tools.h"
+# include "utils.h"
 
 #endif

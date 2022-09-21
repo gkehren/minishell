@@ -44,13 +44,13 @@ static int	lexer_monitor(char *entry, int *i, t_list **token_list)
 t_list	*generate_token(char *entry)
 {
 	int			i;
-	t_list *token_list;
+	t_list		*token_list;
 
 	token_list = NULL;
 	i = 0;
 	while (entry[i])
 	{
-		while(entry[i] == ' ' || entry[i] == '\t')
+		while (entry[i] == ' ' || entry[i] == '\t')
 			i++;
 		if (lexer_monitor(entry, &i, &token_list))
 		{

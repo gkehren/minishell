@@ -15,7 +15,7 @@ t_list	*ft_lstnew(void *content)
 int	ft_lstsize(t_list *lst)
 {
 	int		count;
-	
+
 	if (!lst)
 		return (0);
 	count = 0;
@@ -51,5 +51,3 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		tmp->next = new;
 	}
 }
-
-

@@ -1,7 +1,7 @@
 #ifndef COULEURS_H
 # define COULEURS_H
 
-#include "minishell.h"
+# include "minishell.h"
 
 # define couleur(param) printf("\033[%sm", param)
 # define NOIR		"40"

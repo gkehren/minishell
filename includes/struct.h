@@ -1,7 +1,7 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#include "minishell.h"
+# include "minishell.h"
 
 typedef struct s_list
 {
@@ -25,7 +25,7 @@ typedef enum s_set
 	NOT_INIT
 }	t_set;
 
-typedef struct s_token_lex 
+typedef struct s_token_lex
 {
 	char				*content;
 	t_token				token;

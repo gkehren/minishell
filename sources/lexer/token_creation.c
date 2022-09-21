@@ -20,10 +20,11 @@ static int	create_token(t_list **token_list, char *content, t_token token)
 
 int	create_spe_token(t_list **token_list, int analyse)
 {
-	const char* symb[] = {"<", "|", ">", "<<", ">>"};
-	const t_token token_symb[] = {IN, PIPE, OUT , IN_HEREDOC, OUT_APPEND};
+	const char		*symb[] = {"<", "|", ">", "<<", ">>"};
+	const t_token	token_symb[] = {IN, PIPE, OUT, IN_HEREDOC, OUT_APPEND};
 
-	if (create_token(token_list, (char *)symb[analyse], (t_token)token_symb[analyse]))
+	if (create_token(token_list, (char *)symb[analyse],
+			(t_token)token_symb[analyse]))
 		return (1);
 	return (0);
 }

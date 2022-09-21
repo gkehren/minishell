@@ -1,7 +1,7 @@
 #ifndef LEXER_H
 # define LEXER_H
 
-#include "minishell.h"
+# include "minishell.h"
 
 /*						LEXER						*/
 t_list		*generate_token(char *entry);
