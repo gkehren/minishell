@@ -31,7 +31,7 @@ int	create_mand_token(t_token_lex *token_list, char *entry, int *i)
 	int		j;
 
 	(void)token_list;
-	count = count_charset(" \t", entry);
+	count = count_charset(" \t", entry + *i);
 	word = (char *)malloc(sizeof(char) * (count + 1));
 	if (word == NULL)
 		return (1);

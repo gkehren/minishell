@@ -30,12 +30,13 @@ static int	lexer_monitor(char *entry, int *i, t_token_lex *token_list)
 	analyse = metachar_analysis(entry, *i);
 	printf("analyse : %d\n", analyse);
 	if (analyse != -1)
-	{
 		check = create_spe_token(token_list, analyse);
-		(*i)++;
-	}
 	else
 		check = create_mand_token(token_list, entry, i);
+	if (analyse == 3 || analyse == 4)
+		(*i) += 2;
+	else if (analyse != -1)
+		(*i)++;
 	if (check)
 		return (1);
 	return (0);
