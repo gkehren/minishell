@@ -3,7 +3,14 @@ NAME = minishell
 SRC_PATH = sources/
 OBJ_PATH = obj/
 
-SRC_NAME = 	minishell.c		\
+SRC_NAME = 	minishell.c					\
+			basics/basic_list_gen.c		\
+			basics/basic_list_spe.c		\
+			clean/free.c				\
+			lexer/lexer.c				\
+			lexer/token_creation.c 		\
+			utils/utils.c 				\
+			tools.c 					\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

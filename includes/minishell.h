@@ -19,5 +19,6 @@
 #include "basics.h"
 #include "free.h"
 #include "tools.h"
+#include "utils.h"
 
 #endif

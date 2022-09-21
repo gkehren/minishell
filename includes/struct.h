@@ -23,7 +23,7 @@ typedef struct s_token_lex
 {
 	struct s_token_lex	*next;
 	char				*content;
-	struct s_token_lex	token;
+	t_token	token;
 }		t_token_lex;
 
 typedef struct s_venv

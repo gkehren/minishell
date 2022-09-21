@@ -7,6 +7,8 @@ int	main(void)
 	while (42)
 	{
 		input = readline("First prompt :");
+		generate_token(input);
+		//printf("taille str : %d\n", count_charset(" \t", input));
 		free(input);
 	}
 	return (0);

@@ -15,11 +15,9 @@ t_token_lex	*ft_lstnew_tl(char *content, t_token token)
 
 void	ft_lstdelone(t_token_lex *lst)
 {
-	t_token_lex	*tmp;
-
-	if (tmp->content)
-		ft_free((void **)&tmp->content);
-	ft_free((void **)&tmp);
+	if (lst->content)
+		ft_free((void **)&lst->content);
+	ft_free((void **)&lst);
 }
 
 void	ft_lstclear(t_token_lex *bg_lst)
