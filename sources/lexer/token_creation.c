@@ -1,5 +1,49 @@
 #include "minishell.h"
 
+static int	find_quote(char *str, int *i, int *count)
+{
+	char	tmp;
+
+	tmp = str[*i];
+	(*count)++;
+	(*i)++;
+	while (str[*i] && str[*i] != tmp)
+	{
+		(*count)++;
+		(*i)++;
+	}
+	if (str[*i] == '\0')
+		return (1);
+	(*i)++;
+	(*count)++;
+	return (0);
+}
+
+static int	count_size_word(char *charset, char *str)
+{
+	int	i;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			if (find_quote(str, &i, &count))
+				return (-1);
+		}
+		else
+		{
+			if (find_char(str[i], charset))
+				return (count);
+			count++;
+			i++;
+		}
+	}
+	return (count);
+}
+
 static int	create_token(t_list **token_list, char *content, t_token token)
 {
 	t_token_lex	*new_content;
@@ -35,7 +79,9 @@ int	create_mand_token(t_list **token_list, char *entry, int *i)
 	char	*word;
 	int		j;
 
-	count = count_charset(" \t<>|", entry + *i);
+	count = count_size_word(" \t<>|", entry + *i);
+	if (count == -1)
+		return (1);
 	word = (char *)malloc(sizeof(char) * (count + 1));
 	if (word == NULL)
 		return (1);
