@@ -21,3 +21,9 @@ int	main(int argc, char **argv, char **env)
 	}
 	return (0);
 }
+
+/* int	main(void)
+{
+	printf("%d\n", ft_strcmp("", NULL));
+	return (0);
+} */

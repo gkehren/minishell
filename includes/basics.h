@@ -13,4 +13,10 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 
+/*						BASIC_STR						*/
+void	ft_putstr_fd(char *s, int fd);
+int		ft_strlen(char *str);
+int		ft_strcmp(char *s1, char *s2);
+char	*ft_strjoin(char *s1, char *s2);
+
 #endif
