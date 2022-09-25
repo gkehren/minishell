@@ -3,15 +3,22 @@ NAME = minishell
 SRC_PATH = sources/
 OBJ_PATH = obj/
 
-SRC_NAME = 	minishell.c					\
-			basics/basic_list.c		\
-			basics/basic_list2.c		\
-			clean/free.c				\
-			lexer/lexer.c				\
-			lexer/token_creation.c 		\
-			utils/utils.c 				\
-			utils/handle_struct.c		\
-			tools.c 					\
+SRC_NAME = 	minishell.c						\
+			basics/basic_list.c				\
+			basics/basic_list2.c			\
+			builtins/env/handle_env.c		\
+			builtins/env/handle_env2.c		\
+			builtins/env/parsing_export.c	\
+			builtins/env/env_tools.c		\
+			builtins/env/unset.c			\
+			builtins/env/env.c				\
+			builtins/env/export.c			\
+			clean/free.c					\
+			lexer/lexer.c					\
+			lexer/token_creation.c 			\
+			utils/utils.c 					\
+			utils/handle_struct.c			\
+			tools.c 						\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
