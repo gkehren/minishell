@@ -38,10 +38,10 @@ static t_venv	**sort_export(t_list **venv)
 	if (tab_sort == NULL)
 		return (NULL);
 	i = -1;
-	while (i++ < size_lst - 1)
+	while (++i < size_lst - 1)
 	{
 		j = i;
-		while (j++ < size_lst)
+		while (++j < size_lst)
 		{
 			if (ft_strcmp(tab_sort[i]->title, tab_sort[j]->title) > 0)
 			{

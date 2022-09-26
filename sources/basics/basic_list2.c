@@ -5,7 +5,8 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*))
 	if (!lst || !del)
 		return ;
 	(*del)(lst->content);
-	ft_free((void **)&lst);
+	free(lst);
+	//ft_free((void **)&lst);
 }
 
 void	ft_lstclear(t_list **lst, void (*del)(void*))

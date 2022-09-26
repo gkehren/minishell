@@ -71,7 +71,7 @@ char	**cut_env(char *env_part)
 	char	**result;
 	int		*size_strs;
 
-	if (find_char('=', env_part))
+	if (!find_char('=', env_part))
 		result = malloc_not_init(env_part);
 	else
 	{

@@ -40,7 +40,10 @@ void	del_venv(void *lst)
 	t_venv	*tmp;
 
 	tmp = (t_venv *)lst;
-	ft_free((void **)&tmp->title);
+	free(tmp->title);
+	//ft_free((void **)&tmp->title);
+	/* if (tmp->content)
+		ft_free((void **)&tmp->content); */
 	if (tmp->content)
-		ft_free((void **)&tmp->content);
+		free(tmp->content);
 }

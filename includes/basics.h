@@ -19,4 +19,7 @@ int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strjoin(char *s1, char *s2);
 
+/*						FT_SPLIT						*/
+char	**ft_split(char *s, char c);
+
 #endif

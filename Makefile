@@ -7,6 +7,7 @@ SRC_NAME = 	minishell.c						\
 			basics/basic_list.c				\
 			basics/basic_list2.c			\
 			basics/basic_str.c				\
+			basics/ft_split.c				\
 			builtins/env/handle_env.c		\
 			builtins/env/handle_env2.c		\
 			builtins/env/parsing_export.c	\
