@@ -74,7 +74,7 @@ static void	export_print_all(t_list **venv)
 			printf("declare -x %s\n", tab_sort[i]->title);
 		i++;
 	}
-	ft_free((void **)tab_sort);
+	free(tab_sort);
 }
 
 static void	export_action(t_list **venv, char **cuting, char **args, int i)
@@ -85,8 +85,8 @@ static void	export_action(t_list **venv, char **cuting, char **args, int i)
 			venv_replace(venv, cuting[0], cuting[1]);
 		else
 		{
-			ft_free((void **)&cuting[0]);
-			ft_free((void **)&cuting[1]);
+			free(cuting[0]);
+			free(cuting[1]);
 		}
 	}
 	else

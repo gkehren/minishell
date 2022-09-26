@@ -55,7 +55,7 @@ static int	create_token(t_list **token_list, char *content, t_token token)
 	new_element = ft_lstnew((void *)new_content);
 	if (new_element == NULL)
 	{
-		ft_free((void **)&new_content);
+		free(new_content);
 		return (1);
 	}
 	ft_lstadd_back(token_list, new_element);
@@ -96,7 +96,7 @@ int	create_mand_token(t_list **token_list, char *entry, int *i)
 	word[j] = '\0';
 	if (create_token(token_list, word, WORD))
 	{
-		ft_free((void **)&word);
+		free(word);
 		return (1);
 	}
 	return (0);

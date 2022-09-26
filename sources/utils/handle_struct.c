@@ -18,8 +18,8 @@ void	del_token_lex(void *lst)
 
 	tmp = (t_token_lex *)lst;
 	if (tmp->content && tmp->token == WORD)
-		ft_free((void **)&tmp->content);
-	ft_free((void **)&tmp);
+		free(tmp->content);
+	free(tmp);
 }
 
 t_venv	*init_venv(char *title, char *content, t_set set)
@@ -41,9 +41,6 @@ void	del_venv(void *lst)
 
 	tmp = (t_venv *)lst;
 	free(tmp->title);
-	//ft_free((void **)&tmp->title);
-	/* if (tmp->content)
-		ft_free((void **)&tmp->content); */
 	if (tmp->content)
 		free(tmp->content);
 }

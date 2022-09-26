@@ -15,6 +15,8 @@ int	main(int argc, char **argv, char **env)
 	args = ft_split("export", 'c');
 	export(&venv, args, 0);
 	ft_lstclear(&venv, del_venv);
+	free(args[0]);
+	free(args);
 	/* while (42)
 	{
 		input = readline("First prompt :");

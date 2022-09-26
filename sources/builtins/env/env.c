@@ -18,7 +18,7 @@ char	**send_env(t_list **venv)
 		tmp_venv = (t_venv *)tmp_list->content;
 		tmp_str = ft_strjoin(tmp_venv->title, "=");
 		env[i] = ft_strjoin(tmp_str, tmp_venv->content);
-		ft_free((void **)&tmp_str);
+		free(tmp_str);
 		i++;
 		tmp_list = tmp_list->next;
 	}

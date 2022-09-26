@@ -45,22 +45,22 @@ static int	handle_malloc_env(char ***result, int **size_strs, char **env_part)
 	*result = (char **)malloc(sizeof(char *) * 2);
 	if (*result == NULL)
 	{
-		ft_free((void **)*size_strs);
+		free(*size_strs);
 		return (1);
 	}
 	(*result)[0] = (char *)malloc(sizeof(char) * (*size_strs)[0]);
 	if ((*result)[0] == NULL)
 	{
-		ft_free((void **)*size_strs);
-		ft_free((void **)(*result));
+		free(*size_strs);
+		free(*result);
 		return (1);
 	}
 	(*result)[1] = (char *)malloc(sizeof(char) * (*size_strs)[1]);
 	if ((*result)[1] == NULL)
 	{
-		ft_free((void **)*size_strs);
-		ft_free((void **)(*result)[0]);
-		ft_free((void **)*result);
+		free(*size_strs);
+		free((*result)[0]);
+		free(*result);
 		return (1);
 	}
 	return (0);
@@ -79,7 +79,7 @@ char	**cut_env(char *env_part)
 			return (NULL);
 		set_env_str(result, size_strs, env_part, 0);
 		set_env_str(result, size_strs, env_part + size_strs[0], 1);
-		ft_free((void **)&size_strs);
+		free(size_strs);
 	}
 	return (result);
 }
@@ -100,7 +100,8 @@ int	parse_env_data(t_list **venv, char **env)
 		if (tmp_venv == NULL)
 			return(malloc_failed_env(venv));
 		ft_lstadd_back(venv, ft_lstnew((void *)tmp_venv));
-		ft_free((void **)&tmp_char);
+		free(tmp_venv);
+		free(tmp_char);
 		i++;
 	}
 	return (0);
