@@ -55,3 +55,20 @@ char	*ft_strjoin(char *s1, char *s2)
 	result[i] = '\0';
 	return (result);
 }
+
+int	ft_strlcpy(char *dst, char *src, int dstsize)
+{
+	int	i;
+
+	if (dstsize != 0)
+	{
+		i = 0;
+		while (i + 1 < dstsize && src[i])
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (ft_strlen(src));
+}

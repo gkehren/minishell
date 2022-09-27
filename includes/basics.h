@@ -18,6 +18,9 @@ void	ft_putstr_fd(char *s, int fd);
 int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strjoin(char *s1, char *s2);
+int		ft_strlcpy(char *dst, char *src, int dstsize);
+/*						BASIC_STR2						*/
+char	*ft_strdup(char *s);
 
 /*						FT_SPLIT						*/
 char	**ft_split(char *s, char c);
