@@ -13,3 +13,4 @@ int	find_char(char c, char *str)
 	}
 	return (0);
 }
+

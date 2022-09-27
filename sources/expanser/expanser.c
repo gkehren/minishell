@@ -1,65 +1,44 @@
 #include "minishell.h"
 
-static int	expand_word(t_expanse expanse, t_list *venv, char *str, int i)
-{
-	int		j;
-	char	*result;
+// static void	set_expanse(t_expanse *expanse, char c)
+// {
+// 	if (expanse->char_to_rem == 0)
+// 	{
+// 		expanse->char_to_rem = c;
+// 		if (c == '\'')
+// 			expanse->mode = PASS;
+// 		else
+// 			expanse->mode = REPLACE;
+// 	}
+// 	else if (expanse->char_to_rem == c)
+// 	{
+// 		expanse->char_to_rem = 0;
+// 		expanse->char_to_rem = REPLACE;
+// 	}
+// }
 
-	result = (char *)malloc(sizeof(char) * (i + 1));
-	if (result == NULL)
-		return (1);
-	j = 0;
-	while (j != i)
-	{
-		result[j] = str[j];
-		j++;
-	}
-	result[j] == '\0';
-	// find_title_word;
-	// find_env_word;
-	// join_env_word;
-	return (0);
-}	
+// static int	expand_process(t_token_lex	*token, t_list *venv)
+// {
+// 	int			i;
+// 	char		*tmp;
+// 	t_expanse	expanse;
 
-static void	set_expanse(t_expanse *expanse, char c)
-{
-	if (expanse->char_to_rem == 0)
-	{
-		expanse->char_to_rem = c;
-		if (c == '\'')
-			expanse->mode = PASS;
-		else
-			expanse->mode = REPLACE;
-	}
-	else if (expanse->char_to_rem == c)
-	{
-		expanse->char_to_rem = 0;
-		expanse->char_to_rem = REPLACE;
-	}
-}
-
-static int	expand_process(t_token_lex	*token, t_list *venv)
-{
-	int			i;
-	char		*tmp;
-	t_expanse	expanse;
-
-	expanse.mode = REPLACE;
-	expanse.char_to_rem = 0;
-	tmp = ft_strdup(token->content);
-	if (tmp == NULL)
-		return (1);
-	i = 0;
-	while (tmp[i])
-	{
-		if (tmp[i] == '\'' || tmp[i] == '\"')
-			set_expanse(&expanse, tmp[i]);
-		if (tmp[i] == '$')
-			expand_word(expanse, venv);
-		i++;
-	}
-	return (0);
-}
+// 	expanse.mode = REPLACE;
+// 	expanse.char_to_rem = 0;
+// 	tmp = ft_strdup(token->content);
+// 	if (tmp == NULL)
+// 		return (1);
+// 	i = 0;
+// 	while (tmp[i])
+// 	{
+// 		if (tmp[i] == '\'' || tmp[i] == '\"')
+// 			set_expanse(&expanse, tmp[i]);
+// 		// if (tmp[i] == '$')
+// 		// 	expand_word(expanse, venv);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 int	expanser(t_list *token_list)
 {

@@ -21,5 +21,6 @@
 # include "tools.h"
 # include "utils.h"
 # include "builtins.h"
+# include "expanser.h"
 
 #endif

@@ -16,11 +16,13 @@ SRC_NAME = 	minishell.c						\
 			builtins/env/unset.c			\
 			builtins/env/env.c				\
 			builtins/env/export.c			\
-			clean/free.c					\
+			expanser/expand_word.c			\
+			expanser/expanser.c 			\
 			lexer/lexer.c					\
 			lexer/token_creation.c 			\
 			utils/utils.c 					\
 			utils/handle_struct.c			\
+			utils/check_char.c				\
 			tools.c 						\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
