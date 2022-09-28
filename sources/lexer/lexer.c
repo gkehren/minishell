@@ -52,6 +52,8 @@ t_list	*generate_token(char *entry)
 	{
 		while (entry[i] == ' ' || entry[i] == '\t')
 			i++;
+		if (!entry[i])
+			break;
 		if (lexer_monitor(entry, &i, &token_list))
 		{
 			ft_lstclear(&token_list, &del_token_lex);
