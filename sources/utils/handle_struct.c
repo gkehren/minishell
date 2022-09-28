@@ -43,4 +43,5 @@ void	del_venv(void *lst)
 	free(tmp->title);
 	if (tmp->content)
 		free(tmp->content);
+	free(tmp);
 }

@@ -100,7 +100,6 @@ int	parse_env_data(t_list **venv, char **env)
 		if (tmp_venv == NULL)
 			return(malloc_failed_env(venv));
 		ft_lstadd_back(venv, ft_lstnew((void *)tmp_venv));
-		free(tmp_venv);
 		free(tmp_char);
 		i++;
 	}

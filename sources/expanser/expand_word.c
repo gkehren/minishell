@@ -1,6 +1,27 @@
 #include "minishell.h"
 
+// static char *join_env_word(char *begin, char *expand)
+// {
 
+// }
+
+static char	*find_env_word(t_list *venv, char *title)
+{
+	t_venv	*tmp_venv;
+
+	while (venv)
+	{
+		tmp_venv = (t_venv *)venv->content;
+		if (!ft_strcmp(tmp_venv->title, title))
+		{
+			free(title);
+			return (tmp_venv->content);
+		}
+		venv = venv->next;
+	}
+	free(title);
+	return (NULL);
+}
 
 static void	find_size_title(char *str, int *i)
 {
@@ -45,25 +66,25 @@ char	*find_title_expand(char *str)
 int	expand_word(t_expanse expanse, t_list *venv, char *str, int i)
 {
 	int		j;
-	char	*result;
-	char	*title;
+	char	*begin;
+	char	*tmp;
 
 	(void)venv;
 	if (expanse.mode == PASS)
 		return (0);
-	result = (char *)malloc(sizeof(char) * (i + 1));
-	if (result == NULL)
+	begin = (char *)malloc(sizeof(char) * (i + 1));
+	if (begin == NULL)
 		return (1);
 	j = 0;
 	while (j != i)
 	{
-		result[j] = str[j];
+		begin[j] = str[j];
 		j++;
 	}
-	result[j] = '\0';
-	title = find_title_expand(str + i + 1);
-	printf("title is %s\n", title);
-	// find_env_word;
+	begin[j] = '\0';
+	printf("last word is %c\n", begin[j - 1]);
+	tmp = find_title_expand(str + i + 1);
+	tmp = find_env_word(venv, tmp);
 	// join_env_word;
 	return (0);
 }
