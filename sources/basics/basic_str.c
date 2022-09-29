@@ -28,7 +28,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	* ft_strjoin(char *s1, char *s2)
 {
 	size_t	size;
 	char	*result;
