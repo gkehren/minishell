@@ -9,6 +9,7 @@ SRC_NAME = 	minishell.c						\
 			basics/basic_str.c				\
 			basics/basic_str2.c				\
 			basics/ft_split.c				\
+			basics/ft_itoa.c				\
 			builtins/env/handle_env.c		\
 			builtins/env/handle_env2.c		\
 			builtins/env/parsing_export.c	\
@@ -17,6 +18,7 @@ SRC_NAME = 	minishell.c						\
 			builtins/env/env.c				\
 			builtins/env/export.c			\
 			expanser/expand_word.c			\
+			expanser/expand_word2.c			\
 			expanser/expanser.c 			\
 			lexer/lexer.c					\
 			lexer/token_creation.c 			\

@@ -17,6 +17,18 @@ static void	set_expanse(t_expanse *expanse, char c)
 	}
 }
 
+static int	init_expand_process(t_expanse *expanse, t_token_lex *token,
+	char **tmp, int *i)
+{
+	expanse->mode = REPLACE;
+	expanse->char_to_rem = 0;
+	*tmp = ft_strdup(token->content);
+	if (tmp == NULL)
+		return (1);
+	*i = 0;
+	return (0);
+}
+
 static int	expand_process(t_token_lex	*token, t_list *venv)
 {
 	int			i;
@@ -24,29 +36,22 @@ static int	expand_process(t_token_lex	*token, t_list *venv)
 	char		*tmp2;
 	t_expanse	expanse;
 
-	expanse.mode = REPLACE;
-	expanse.char_to_rem = 0;
-	tmp = ft_strdup(token->content);
-	tmp2 = token->content;
-	if (tmp == NULL)
+	if (init_expand_process(&expanse, token, &tmp, &i))
 		return (1);
-	i = 0;
-	// write(1, "la\n", 3);
+	tmp2 = token->content;
 	while (tmp[i])
 	{
 		if (tmp[i] == '\'' || tmp[i] == '\"')
-		{
 			set_expanse(&expanse, tmp[i]);
-		}
 		else if (tmp[i] == '$')
 		{
-			expand_word(expanse, venv, &tmp, i);
+			if (expand_word(expanse, venv, &tmp, i))
+				return (1);
 			if (tmp[i] == '\0')
-				break;
+				break ;
 		}
 		i++;
 	}
-	// write(1, "sorti\n", 6);
 	token->content = tmp;
 	free(tmp2);
 	return (0);
@@ -62,9 +67,12 @@ int	expanser(t_list *token_list, t_list *venv)
 		if (tmp_token->token == WORD)
 		{
 			printf("AVANT = %s\n", tmp_token->content);
-			expand_process(tmp_token, venv);
+			if (expand_process(tmp_token, venv))
+			{
+				printf("Malloc error !\n");
+				return (1);
+			}
 			printf("APRES = %s\n", tmp_token->content);
-
 		}
 		token_list = token_list->next;
 	}

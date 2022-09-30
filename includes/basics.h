@@ -25,4 +25,7 @@ char	*ft_strdup(char *s);
 /*						FT_SPLIT						*/
 char	**ft_split(char *s, char c);
 
+/*						FT_ITOA						*/
+char	*ft_itoa(int n);
+
 #endif

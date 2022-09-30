@@ -1,85 +1,101 @@
 #include "minishell.h"
 
-static char *join_env_word(char *begin, char *expand, char *str)
+static int	join_env_word(char *begin, char *expand, char **str, char *tmp_str)
 {
 	char	*result;
 	char	*tmp;
-	char	*tmp2;
 
 	result = ft_strjoin(begin, expand);
+	if (result == NULL)
+		return (free(begin), free(expand), free(tmp_str), 1);
+	free(expand);
 	free(begin);
-	tmp = ft_strdup(str);
-	tmp2 = result;
-	result = ft_strjoin(result, tmp);
+	tmp = ft_strdup(*str);
+	if (tmp == NULL)
+		return (free(tmp_str), free(result), 1);
+	*str = ft_strjoin(result, tmp);
+	if (*str == NULL)
+		return (free(tmp_str), free(result), 1);
+	free(result);
 	free(tmp);
-	free(tmp2);
-	return (result);
+	free(tmp_str);
+	return (0);
 }
 
 static char	*find_env_word(t_list *venv, char *title)
 {
 	t_venv	*tmp_venv;
 
+	title += 1;
 	while (venv)
 	{
 		tmp_venv = (t_venv *)venv->content;
 		if (!ft_strcmp(tmp_venv->title, title))
 		{
+			title -= 1;
 			free(title);
 			return (tmp_venv->content);
 		}
 		venv = venv->next;
 	}
+	title -= 1;
 	free(title);
 	return (NULL);
 }
 
-static void	find_size_title(char *str, int *i)
+static int	find_size_title(char *str, int *i)
 {
-	if (ft_isdigit(str[0]) || str[0] == '!' || str[0] == '@')
-		*i = 1;
+	*i = 1;
+	if (str[1] == '\"' || str[1] == '\'' || str[1] == '$' || str[1] == '\0')
+		return (2);
+	else if (str[1] == '?' || ft_isdigit(str[1])
+		|| !(ft_isalnum(str[1]) || str[1] == '_'))
+	{
+		*i = 2;
+		if (ft_isdigit(str[1]))
+			return (0);
+		else if (str[1] == '?')
+			return (3);
+		else
+			return (2);
+	}
 	else
 	{
-		*i = 0;
+		*i = 1;
 		while (ft_isalnum(str[*i]) || str[*i] == '_')
 			(*i)++;
+		return (0);
 	}
 }
 
-static char	*find_title_expand(char **str)
+static int	find_title_expand(char **str, char **tmp)
 {
-	int		i;
-	int		j;
-	char	*title;
+	int	i;
+	int	j;
+	int	returned;
 
-	find_size_title(*str, &i);
-	title = (char *)malloc(sizeof(char) * (i + 1));
-	if (title == NULL)
-		return (NULL);
-	if (i == 1)
+	returned = find_size_title(*str, &i);
+	if (returned == 3)
+		return (expand_return_value(tmp, str));
+	*tmp = (char *)malloc(sizeof(char) * (i + 1));
+	if (*tmp == NULL)
+		return (1);
+	j = 0;
+	while (j < i)
 	{
-		title[0] = (*str)[0];
-		title[1] = '\0';
+		(*tmp)[j] = (*str)[j];
+		j++;
 	}
-	else
-	{
-		j = 0;
-		while (j < i)
-		{
-			title[j] = (*str)[j];
-			j++;
-		}
-		title[j] = '\0';
-	}
+	(*tmp)[j] = '\0';
 	*str += i;
-	return (title);
+	return (returned);
 }
 
 int	expand_word(t_expanse expanse, t_list *venv, char **str, int i)
 {
 	int		j;
 	char	*begin;
-	char	*tmp;
+	char	*expand;
 	char	*tmp2;
 
 	tmp2 = *str;
@@ -87,18 +103,18 @@ int	expand_word(t_expanse expanse, t_list *venv, char **str, int i)
 		return (0);
 	begin = (char *)malloc(sizeof(char) * (i + 1));
 	if (begin == NULL)
-		return (1);
-	j = 0;
-	while (j != i)
-	{
+		return (free(tmp2), 1);
+	j = -1;
+	while (++j != i)
 		begin[j] = (*str)[j];
-		j++;
-	}
 	begin[j] = '\0';
-	*str += (i + 1);
-	tmp = find_title_expand(str);
-	tmp = find_env_word(venv, tmp);
-	*str = join_env_word(begin, tmp, *str);
-	free(tmp2);
+	*str += i;
+	j = find_title_expand(str, &expand);
+	if (j == 1)
+		return (free(tmp2), free(begin), 1);
+	else if (j == 0)
+		expand = find_env_word(venv, expand);
+	if (join_env_word(begin, expand, str, tmp2))
+		return (1);
 	return (0);
 }
