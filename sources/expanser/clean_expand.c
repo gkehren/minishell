@@ -1,6 +1,7 @@
 #include "minishell.h"
 
-static void	insert_word_token(t_list **token_list, t_list **current, t_list **prec, t_list *tmp_token)
+static void	insert_word_token(t_list **token_list,
+	t_list **current, t_list **prec, t_list *tmp_token)
 {
 	t_list	*next_one;
 
@@ -17,7 +18,8 @@ static void	insert_word_token(t_list **token_list, t_list **current, t_list **pr
 	*current = next_one;
 }
 
-static void	remove_word_token(t_list **token_list, t_list **current, t_list **prec)
+static void	remove_word_token(t_list **token_list,
+	t_list **current, t_list **prec)
 {
 	t_list	*next_one;
 
@@ -30,7 +32,8 @@ static void	remove_word_token(t_list **token_list, t_list **current, t_list **pr
 	*current = next_one;
 }
 
-static void	checker_word(t_list **token_list, t_list **current, t_list **prec, char *word)
+static int	checker_word(t_list **token_list,
+	t_list **current, t_list **prec, char *word)
 {
 	t_list	*tmp_token;
 
@@ -40,11 +43,14 @@ static void	checker_word(t_list **token_list, t_list **current, t_list **prec, c
 	else
 	{
 		tmp_token = generate_token(word);
+		if (tmp_token == NULL)
+			return (1);
 		insert_word_token(token_list, current, prec, tmp_token);
 	}
+	return (0);
 }
 
-void	clean_expand(t_list **token_list)
+int	clean_expand(t_list **token_list)
 {
 	t_list		*prec;
 	t_list		*tmp_list;
@@ -56,6 +62,10 @@ void	clean_expand(t_list **token_list)
 	{
 		tmp_token = (t_token_lex *)tmp_list->content;
 		if (tmp_token->token == WORD)
-			checker_word(token_list, &tmp_list, &prec, tmp_token->content);
+		{
+			if (checker_word(token_list, &tmp_list, &prec, tmp_token->content))
+				return (1);
+		}
 	}
+	return (0);
 }

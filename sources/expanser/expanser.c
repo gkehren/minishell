@@ -78,6 +78,9 @@ int	expanser(t_list **token_list, t_list *venv)
 		}
 		tmp_list = tmp_list->next;
 	}
-	clean_expand(token_list);
+	if (clean_expand(token_list))
+		return (1);
+	if (clean_quotes(token_list))
+		return (1);
 	return (0);
 }
