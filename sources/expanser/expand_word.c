@@ -8,7 +8,6 @@ static int	join_env_word(char *begin, char *expand, char **str, char *tmp_str)
 	result = ft_strjoin(begin, expand);
 	if (result == NULL)
 		return (free(begin), free(expand), free(tmp_str), 1);
-	free(expand);
 	free(begin);
 	tmp = ft_strdup(*str);
 	if (tmp == NULL)
