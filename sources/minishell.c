@@ -24,7 +24,8 @@ int	main(int argc, char **argv, char **env)
 		input = readline("First prompt :");
 		token_list = generate_token(input);
 		print_token_lex(token_list);
-		expanser(token_list, venv);
+		expanser(&token_list, venv);
+		print_token_lex(token_list);
 		ft_lstclear(&token_list, &del_token_lex);
 		free(input);
 	}

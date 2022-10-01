@@ -57,13 +57,15 @@ static int	expand_process(t_token_lex	*token, t_list *venv)
 	return (0);
 }
 
-int	expanser(t_list *token_list, t_list *venv)
+int	expanser(t_list **token_list, t_list *venv)
 {
 	t_token_lex	*tmp_token;
+	t_list		*tmp_list;
 
-	while (token_list)
+	tmp_list = *token_list;
+	while (tmp_list)
 	{
-		tmp_token = (t_token_lex *)token_list->content;
+		tmp_token = (t_token_lex *)tmp_list->content;
 		if (tmp_token->token == WORD)
 		{
 			printf("AVANT = %s\n", tmp_token->content);
@@ -74,7 +76,8 @@ int	expanser(t_list *token_list, t_list *venv)
 			}
 			printf("APRES = %s\n", tmp_token->content);
 		}
-		token_list = token_list->next;
+		tmp_list = tmp_list->next;
 	}
+	clean_expand(token_list);
 	return (0);
 }
