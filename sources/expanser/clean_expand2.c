@@ -24,7 +24,6 @@ static char	*process_clean_quotes(char *str)
 	char	*result;
 
 	size = ft_strlen(str) - count_quotes(str) + 1;
-	printf("la taille est de %d\n", size);
 	result = (char *)malloc(sizeof(char) * size);
 	if (result == NULL)
 		return (NULL);
@@ -41,7 +40,6 @@ static char	*process_clean_quotes(char *str)
 	}
 	result[j] = '\0';
 	free(str);
-	printf("Le resultat est %s\n", result);
 	return (result);
 }
 

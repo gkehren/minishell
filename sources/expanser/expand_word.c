@@ -25,6 +25,11 @@ static char	*find_env_word(t_list *venv, char *title)
 {
 	t_venv	*tmp_venv;
 
+	if (title[0] == '\0')
+	{
+		free(title);
+		return (NULL);
+	}
 	title += 1;
 	while (venv)
 	{
@@ -45,8 +50,10 @@ static char	*find_env_word(t_list *venv, char *title)
 static int	find_size_title(char *str, int *i)
 {
 	*i = 1;
-	if (str[1] == '\"' || str[1] == '\'' || str[1] == '$' || str[1] == '\0')
+	if (str[1] == '$' || str[1] == '\0')
 		return (2);
+	else if (str[1] == '\'' || str[1] == '\"')
+		*i = 0;
 	else if (str[1] == '?' || ft_isdigit(str[1])
 		|| !(ft_isalnum(str[1]) || str[1] == '_'))
 	{
@@ -63,8 +70,8 @@ static int	find_size_title(char *str, int *i)
 		*i = 1;
 		while (ft_isalnum(str[*i]) || str[*i] == '_')
 			(*i)++;
-		return (0);
 	}
+	return (0);
 }
 
 static int	find_title_expand(char **str, char **tmp)
@@ -86,6 +93,8 @@ static int	find_title_expand(char **str, char **tmp)
 		j++;
 	}
 	(*tmp)[j] = '\0';
+	if (i == 0)
+		i = 1;
 	*str += i;
 	return (returned);
 }
