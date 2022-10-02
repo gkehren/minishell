@@ -13,7 +13,10 @@ static int	find_quote(char *str, int *i, int *count)
 		(*i)++;
 	}
 	if (str[*i] == '\0')
+	{
+		printf("minishell: syntax error near unexpected token `%c\'\n", tmp);
 		return (1);
+	}
 	(*i)++;
 	(*count)++;
 	return (0);

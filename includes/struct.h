@@ -54,4 +54,19 @@ typedef struct s_expanse
 	char		char_to_rem;
 }	t_expanse;
 
+/*						PARSER						*/
+typedef struct s_filed
+{
+	int		fd;
+	char	*path;
+}	t_filed;
+
+typedef struct s_cmd
+{
+	char	*full_path;
+	char	**full_cmd;
+	t_filed	*in;
+	t_filed	*out;
+}	t_cmd;
+
 #endif

@@ -22,6 +22,8 @@ int	main(int argc, char **argv, char **env)
 	while (42)
 	{
 		input = readline("First prompt :");
+		if (ft_strcmp(input, "exit") == 0)
+			break ;
 		token_list = generate_token(input);
 		print_token_lex(token_list);
 		expanser(&token_list, venv);
