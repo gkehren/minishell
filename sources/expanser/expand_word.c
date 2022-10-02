@@ -74,25 +74,26 @@ static int	find_size_title(char *str, int *i)
 	return (0);
 }
 
-static int	find_title_expand(char **str, char **tmp)
+static int	find_title_expand(char **str, char **expand, int it)
 {
 	int	i;
 	int	j;
 	int	returned;
 
+	*str += it;
 	returned = find_size_title(*str, &i);
 	if (returned == 3)
-		return (expand_return_value(tmp, str));
-	*tmp = (char *)malloc(sizeof(char) * (i + 1));
-	if (*tmp == NULL)
+		return (expand_return_value(expand, str));
+	*expand = (char *)malloc(sizeof(char) * (i + 1));
+	if (*expand == NULL)
 		return (1);
 	j = 0;
 	while (j < i)
 	{
-		(*tmp)[j] = (*str)[j];
+		(*expand)[j] = (*str)[j];
 		j++;
 	}
-	(*tmp)[j] = '\0';
+	(*expand)[j] = '\0';
 	if (i == 0)
 		i = 1;
 	*str += i;
@@ -116,13 +117,14 @@ int	expand_word(t_expanse expanse, t_list *venv, char **str, int i)
 	while (++j != i)
 		begin[j] = (*str)[j];
 	begin[j] = '\0';
-	*str += i;
-	j = find_title_expand(str, &expand);
+	j = find_title_expand(str, &expand, i);
 	if (j == 1)
 		return (free(tmp2), free(begin), 1);
 	else if (j == 0)
 		expand = find_env_word(venv, expand);
 	if (join_env_word(begin, expand, str, tmp2))
 		return (1);
+	if (j != 0)
+		free(expand);
 	return (0);
 }

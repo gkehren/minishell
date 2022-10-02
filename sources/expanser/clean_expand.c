@@ -66,6 +66,11 @@ int	clean_expand(t_list **token_list)
 			if (checker_word(token_list, &tmp_list, &prec, tmp_token->content))
 				return (1);
 		}
+		else
+		{
+			prec = tmp_list;
+			tmp_list = tmp_list->next;
+		}
 	}
 	return (0);
 }
