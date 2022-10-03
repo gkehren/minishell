@@ -24,6 +24,8 @@ SRC_NAME = 	minishell.c						\
 			expanser/expanser.c 			\
 			lexer/lexer.c					\
 			lexer/token_creation.c 			\
+			parser/parser.c 				\
+			parser/parser_checker.c 		\
 			utils/utils.c 					\
 			utils/handle_struct.c			\
 			utils/check_char.c				\

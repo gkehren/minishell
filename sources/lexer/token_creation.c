@@ -13,10 +13,7 @@ static int	find_quote(char *str, int *i, int *count)
 		(*i)++;
 	}
 	if (str[*i] == '\0')
-	{
-		printf("minishell: syntax error near unexpected token `%c\'\n", tmp);
-		return (1);
-	}
+		print_error_char("minishell: syntax error near unexpected token `", tmp, "\'\n");
 	(*i)++;
 	(*count)++;
 	return (0);
@@ -69,8 +66,15 @@ int	create_spe_token(t_list **token_list, int analyse)
 {
 	const char		*symb[] = {"<", "|", ">", "<<", ">>"};
 	const t_token	token_symb[] = {IN, PIPE, OUT, IN_HEREDOC, OUT_APPEND};
+	char			*content;
+	int				i;
 
-	if (create_token(token_list, (char *)symb[analyse],
+	i = ft_strlen((char *)symb[analyse]);
+	content = (char *)malloc(sizeof(char) * (i + 1));
+	if (content == NULL)
+		return (1);
+	ft_strlcpy(content, (char *)symb[analyse], i + 1);
+	if (create_token(token_list, content,
 			(t_token)token_symb[analyse]))
 		return (1);
 	return (0);

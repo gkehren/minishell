@@ -13,3 +13,17 @@ int	find_char(char c, char *str)
 	}
 	return (0);
 }
+
+int	print_error(char *error)
+{
+	ft_putstr_fd(error, 2);
+	return (1);
+}
+
+int	print_error_char(char *error_b, char c, char *error_e)
+{
+	ft_putstr_fd(error_b, 2);
+	write(1, &c, 2);
+	ft_putstr_fd(error_e, 2);
+	return (1);
+}

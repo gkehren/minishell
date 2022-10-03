@@ -62,3 +62,15 @@ int	clean_quotes(t_list **token_list)
 	}
 	return (0);
 }
+
+void	turn_to_word(t_list *token_list)
+{
+	t_token_lex	*tmp_content;
+
+	while (token_list)
+	{
+		tmp_content = (t_token_lex *)token_list->content;
+		tmp_content->token = WORD;
+		token_list = token_list->next;
+	}
+}

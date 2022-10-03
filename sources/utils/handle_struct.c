@@ -17,8 +17,7 @@ void	del_token_lex(void *lst)
 	t_token_lex	*tmp;
 
 	tmp = (t_token_lex *)lst;
-	if (tmp->content && tmp->token == WORD)
-		free(tmp->content);
+	free(tmp->content);
 	free(tmp);
 }
 

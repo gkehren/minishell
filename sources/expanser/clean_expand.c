@@ -45,6 +45,7 @@ static int	checker_word(t_list **token_list,
 		tmp_token = generate_token(word);
 		if (tmp_token == NULL)
 			return (1);
+		turn_to_word(tmp_token);
 		insert_word_token(token_list, current, prec, tmp_token);
 	}
 	return (0);

@@ -65,8 +65,7 @@ typedef struct s_cmd
 {
 	char	*full_path;
 	char	**full_cmd;
-	t_filed	*in;
-	t_filed	*out;
+	t_filed	*files;
 }	t_cmd;
 
 #endif
