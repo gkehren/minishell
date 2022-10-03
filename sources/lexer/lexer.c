@@ -2,7 +2,7 @@
 
 static int	metachar_analysis(char *entry, int i)
 {
-	if (entry[i] == entry[i + 1])
+	if (entry[i] == entry[i + 1] && entry[i] != '|')
 	{
 		if (entry[i] == '<')
 			return (3);
