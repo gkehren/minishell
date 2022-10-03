@@ -25,9 +25,12 @@ int	main(int argc, char **argv, char **env)
 		if (ft_strcmp(input, "exit") == 0)
 			break ;
 		token_list = generate_token(input);
+		if (token_list == NULL)
+			return (1);
 		print_token_lex(token_list);
 		expanser(&token_list, venv);
 		print_token_lex(token_list);
+		parser_checker(&token_list);
 		ft_lstclear(&token_list, &del_token_lex);
 		free(input);
 	}

@@ -6,6 +6,6 @@
 /*						PARSER						*/
 
 /*						PARSER_CHECKER						*/
-
+int	parser_checker(t_list **token_list);
 
 #endif

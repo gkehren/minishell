@@ -27,3 +27,11 @@ int	print_error_char(char *error_b, char c, char *error_e)
 	ft_putstr_fd(error_e, 2);
 	return (1);
 }
+
+int	print_error_str(char *error_b, char *content, char *error_e)
+{
+	ft_putstr_fd(error_b, 2);
+	ft_putstr_fd(content, 2);
+	ft_putstr_fd(error_e, 2);
+	return (1);
+}
