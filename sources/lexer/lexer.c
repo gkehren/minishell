@@ -41,6 +41,23 @@ static int	lexer_monitor(char *entry, int *i, t_list **token_list)
 	return (0);
 }
 
+static int	check_token_word(t_list *token_list)
+{
+	t_token_lex	*tmp_content;
+
+	while (token_list)
+	{
+		tmp_content = (t_token_lex *)token_list->content;
+		if (tmp_content->token == WORD)
+		{
+			if (!ft_isalnum(tmp_content->content[0]) && !good_token(tmp_content->content[0]))
+				return (print_error_char("minishell: syntax error near unexpected token `", tmp_content->content[0], "\'\n"));
+		}
+		token_list = token_list->next;
+	}
+	return (0);
+}
+
 t_list	*generate_token(char *entry)
 {
 	int			i;
@@ -60,5 +77,7 @@ t_list	*generate_token(char *entry)
 			return (NULL);
 		}
 	}
+	if (check_token_word(token_list))
+		return (NULL);
 	return (token_list);
 }

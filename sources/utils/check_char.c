@@ -20,3 +20,18 @@ int	ft_isalnum(int c)
 		return (1);
 	return (0);
 }
+
+int	good_token(int c)
+{
+	const char	token[] = {'$', '\"', '\'', '_', '\0'};
+	int			i;
+
+	i = 0;
+	while (token[i])
+	{
+		if (c == token[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}

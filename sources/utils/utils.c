@@ -23,7 +23,7 @@ int	print_error(char *error)
 int	print_error_char(char *error_b, char c, char *error_e)
 {
 	ft_putstr_fd(error_b, 2);
-	write(1, &c, 2);
+	write(2, &c, 1);
 	ft_putstr_fd(error_e, 2);
 	return (1);
 }
