@@ -50,8 +50,11 @@ static int	check_token_word(t_list *token_list)
 		tmp_content = (t_token_lex *)token_list->content;
 		if (tmp_content->token == WORD)
 		{
-			if (!ft_isalnum(tmp_content->content[0]) && !good_token(tmp_content->content[0]))
-				return (print_error_char("minishell: syntax error near unexpected token `", tmp_content->content[0], "\'\n"));
+			if (!ft_isalnum(tmp_content->content[0])
+				&& !good_token(tmp_content->content[0]))
+				return (print_error_char
+					("minishell: syntax error near unexpected token `",
+						tmp_content->content[0], "\'\n"));
 		}
 		token_list = token_list->next;
 	}

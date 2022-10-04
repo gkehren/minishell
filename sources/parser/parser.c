@@ -27,7 +27,6 @@
 // 	{
 // 		tmp_token = (t_token_lex *)tmp_list->content;
 // 		if (tmp_token ->content == PIPE)
-			
 // 		tmp_list = tmp_list->next;
 // 	}
 // 	return (cmd_list);
