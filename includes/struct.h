@@ -55,17 +55,11 @@ typedef struct s_expanse
 }	t_expanse;
 
 /*						PARSER						*/
-typedef struct s_filed
-{
-	int		fd;
-	char	*path;
-}	t_filed;
-
 typedef struct s_cmd
 {
 	char	*full_path;
 	char	**full_cmd;
-	t_filed	*files;
+	t_list	*token_files;
 }	t_cmd;
 
 #endif
