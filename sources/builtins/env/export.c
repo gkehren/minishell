@@ -77,25 +77,29 @@ static void	export_print_all(t_list **venv)
 	free(tab_sort);
 }
 
-static void	export_action(t_list **venv, char **cuting, char **args, int i)
+static int	export_action(t_list **venv, char **cuting, char **args, int i)
 {
 	if (venv_exist(venv, cuting[0]) == 0)
 	{
 		if (find_char('=', args[i]))
 			venv_replace(venv, cuting[0], cuting[1]);
 		else
-		{
-			free(cuting[0]);
-			free(cuting[1]);
-		}
+			return (free(cuting[0]), free(cuting[1]), 0);
 	}
 	else
 	{
 		if (find_char('=', args[i]))
-			venv_create(venv, cuting[0], NULL, NOT_INIT);
+		{
+			if (venv_create(venv, cuting[0], NULL, NOT_INIT))
+				return (1);
+		}
 		else
-			venv_create(venv, cuting[0], cuting[1], INIT);
+		{
+			if (venv_create(venv, cuting[0], cuting[1], INIT))
+				return (1);
+		}
 	}
+	return (0);
 }
 
 int	export(t_list **venv, char **args, int status_ret)
@@ -114,7 +118,8 @@ int	export(t_list **venv, char **args, int status_ret)
 		while (args[i])
 		{
 			cuting = cut_env(args[i]);
-			export_action(venv, cuting, args, i);
+			if (export_action(venv, cuting, args, i))
+				return (free(cuting), 1);
 			free(cuting);
 			i++;
 		}

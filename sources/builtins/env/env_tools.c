@@ -47,6 +47,8 @@ int	venv_create(t_list **venv, char *title, char *content, t_set set)
 	if (new == NULL)
 		return (1);
 	tmp_list->next = ft_lstnew((void *)new);
+	if (tmp_list->next == NULL)
+		return (1);
 	return (0);
 }
 
