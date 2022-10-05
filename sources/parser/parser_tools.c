@@ -1,18 +1,5 @@
 #include "minishell.h"
 
-// static char	*copy_word(char *src, int size)
-// {
-// 	int		size;
-// 	char	*dst;
-
-// 	size = ft_strlen(src);
-// 	dst = (char *)malloc(sizeof(char) * (size + 1));
-// 	if (dst == NULL)
-// 		return (NULL);
-// 	ft_strlcpy(dst, src, size);
-// 	return (dst);
-// }
-
 char	**new_full_cmd(char **full_cmd, char *cmd)
 {
 	int		size;

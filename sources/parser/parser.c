@@ -34,7 +34,6 @@ static int	process_cmd(t_list **tmp_list, t_cmd *current_cmd)
 		}
 		else
 		{
-			write(1, "la\n", 3);
 			if (new_token_files(&current_cmd->token_files, tmp_content, (t_token_lex *)(*tmp_list)->next->content))
 				return (1);
 			(*tmp_list) = (*tmp_list)->next->next;
