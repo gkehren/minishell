@@ -5,6 +5,7 @@ int	main(int argc, char **argv, char **env)
 	char		*input;
 	t_list		*venv;
 	t_list		*token_list;
+	t_list		*cmd;
 	//t_venv		*tmp_venv;
 
 	(void)argc;
@@ -27,10 +28,13 @@ int	main(int argc, char **argv, char **env)
 		token_list = generate_token(input);
 		if (token_list == NULL)
 			return (1);
-		print_token_lex(token_list);
+		//print_token_lex(token_list);
 		expanser(&token_list, venv);
-		print_token_lex(token_list);
-		parser_checker(&token_list);
+		//print_token_lex(token_list);
+		if (parser_checker(&token_list))
+			return (1);
+		cmd = generate_cmd(token_list);
+		print_cmd(cmd);
 		ft_lstclear(&token_list, &del_token_lex);
 		free(input);
 	}
@@ -40,6 +44,9 @@ int	main(int argc, char **argv, char **env)
 
 // int	main(void)
 // {
-// 	printf("%s\n", find_title_expand("HOME{e"));
+// 	char	**args;
+
+// 	args = ft_split("lol mdr xd", ' ');
+// 	free_double_tab((void **)args);
 // 	return (0);
 // }

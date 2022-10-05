@@ -26,9 +26,11 @@ SRC_NAME = 	minishell.c						\
 			lexer/token_creation.c 			\
 			parser/parser.c 				\
 			parser/parser_checker.c 		\
+			parser/parser_tools.c 			\
 			utils/utils.c 					\
 			utils/handle_struct.c			\
 			utils/check_char.c				\
+			utils/free.c					\
 			tools.c 						\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)

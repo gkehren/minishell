@@ -5,5 +5,6 @@
 
 /*						TOOLS						*/
 void	print_token_lex(t_list *lst);
+void	print_cmd(t_list *lst);
 
 #endif

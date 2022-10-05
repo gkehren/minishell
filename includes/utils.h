@@ -14,11 +14,15 @@ t_token_lex	*init_token_lex(char *content, t_token token);
 void 		del_token_lex(void *lst);
 t_venv 		*init_venv(char *title, char *content, t_set set);
 void 		del_venv(void *lst);
+void		del_cmd(void *lst);
 
 /*						CHECK_CHAR						*/
 int 		ft_isdigit(int c);
 int 		ft_isalpha(int c);
 int 		ft_isalnum(int c);
 int			good_token(int c);
+
+/*						FREE						*/
+void	free_double_tab(void **ptr);
 
 #endif

@@ -44,3 +44,13 @@ void	del_venv(void *lst)
 		free(tmp->content);
 	free(tmp);
 }
+
+void	del_cmd(void *lst)
+{
+	t_cmd	*tmp;
+
+	tmp = (t_cmd *)lst;
+	free(tmp->full_path);
+	free_double_tab((void **)tmp->full_cmd);
+	ft_lstclear(&tmp->token_files, &del_token_lex);
+}

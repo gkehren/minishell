@@ -31,3 +31,27 @@ void	print_token_lex(t_list *lst)
 	}
 	printf("\n");
 }
+
+void	print_cmd(t_list *lst)
+{
+	t_cmd	*cmd;
+	int		i;
+
+	while (lst)
+	{
+		i = 0;
+		cmd = (t_cmd *)lst->content;
+		printf("FULL PATH : %s\n", cmd->full_path);
+		printf("FULL CMD : { ");
+		while (cmd->full_cmd[i + 1])
+		{
+			printf("[%s] ", cmd->full_cmd[i]);
+			i++;
+		}
+		printf("[%s]", cmd->full_cmd[i]);
+		printf(" }\n");
+		print_token_lex(cmd->token_files);
+		printf("\n\n");
+		lst = lst->next;
+	}
+}
