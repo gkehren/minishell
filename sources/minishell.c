@@ -25,14 +25,14 @@ int	main(int argc, char **argv, char **env)
 		input = readline("First prompt :");
 		if (ft_strcmp(input, "exit") == 0)
 			break ;
-		token_list = generate_token(input);
+		token_list = generate_token(input, 1);
 		if (token_list == NULL)
-			return (1);
+			break ;
 		//print_token_lex(token_list);
 		expanser(&token_list, venv);
 		//print_token_lex(token_list);
 		if (parser_checker(&token_list))
-			return (1);
+			break ;
 		cmd = generate_cmd(token_list);
 		print_cmd(cmd);
 		ft_lstclear(&cmd, &del_cmd);

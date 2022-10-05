@@ -42,7 +42,7 @@ static int	checker_word(t_list **token_list,
 		remove_word_token(token_list, current, prec);
 	else
 	{
-		tmp_token = generate_token(word);
+		tmp_token = generate_token(word, 0);
 		if (tmp_token == NULL)
 			return (1);
 		turn_to_word(tmp_token);

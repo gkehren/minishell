@@ -61,7 +61,7 @@ static int	check_token_word(t_list *token_list)
 	return (0);
 }
 
-t_list	*generate_token(char *entry)
+t_list	*generate_token(char *entry, int mode)
 {
 	int			i;
 	t_list		*token_list;
@@ -80,7 +80,10 @@ t_list	*generate_token(char *entry)
 			return (NULL);
 		}
 	}
-	if (check_token_word(token_list))
-		return (NULL);
+	if (mode == 1)
+	{
+		if (check_token_word(token_list))
+			return (ft_lstclear(&token_list, &del_token_lex), NULL);
+	}
 	return (token_list);
 }
