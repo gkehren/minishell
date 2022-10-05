@@ -42,7 +42,7 @@ static int	process_cmd(t_list **tmp_list, t_cmd *current_cmd)
 	return (0);
 }
 
-static int	add_cmd(t_list **cmd_list, t_cmd **current_cmd)
+static int	add_cmd(t_list **cmd_list, t_cmd **current_cmd, t_list *tmp_list)
 {
 	t_list	*new_cmd;
 
@@ -50,9 +50,12 @@ static int	add_cmd(t_list **cmd_list, t_cmd **current_cmd)
 	if (new_cmd == NULL)
 		return (free(*current_cmd), 1);
 	ft_lstadd_back(cmd_list, new_cmd);
-	*current_cmd = init_current_cmd();
-	if (*current_cmd == NULL)
-		return (ft_lstclear(cmd_list, &del_cmd), 1);
+	if (tmp_list)
+	{
+		*current_cmd = init_current_cmd();
+		if (*current_cmd == NULL)
+			return (ft_lstclear(cmd_list, &del_cmd), 1);
+	}
 	return (0);
 }
 
@@ -71,8 +74,9 @@ t_list	*generate_cmd(t_list *token_list)
 	{
 		if (process_cmd(&tmp_list, current_cmd))
 			return (NULL);
-		if (add_cmd(&cmd_list, &current_cmd))
+		if (add_cmd(&cmd_list, &current_cmd, tmp_list))
 			return (NULL);
 	}
+	ft_lstclear(&token_list, &del_token_lex);
 	return (cmd_list);
 }

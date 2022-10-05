@@ -43,12 +43,13 @@ void	print_cmd(t_list *lst)
 		cmd = (t_cmd *)lst->content;
 		printf("FULL PATH : %s\n", cmd->full_path);
 		printf("FULL CMD : { ");
-		while (cmd->full_cmd[i + 1])
+		while (cmd->full_cmd && cmd->full_cmd[i + 1])
 		{
 			printf("[%s] ", cmd->full_cmd[i]);
 			i++;
 		}
-		printf("[%s]", cmd->full_cmd[i]);
+		if (cmd->full_cmd)
+			printf("[%s]", cmd->full_cmd[i]);
 		printf(" }\n");
 		print_token_lex(cmd->token_files);
 		printf("\n\n");

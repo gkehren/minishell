@@ -35,7 +35,7 @@ int	main(int argc, char **argv, char **env)
 			return (1);
 		cmd = generate_cmd(token_list);
 		print_cmd(cmd);
-		ft_lstclear(&token_list, &del_token_lex);
+		ft_lstclear(&cmd, &del_cmd);
 		free(input);
 	}
 	ft_lstclear(&venv, del_venv);

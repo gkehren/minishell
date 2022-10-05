@@ -5,10 +5,11 @@ void	free_double_tab(void **ptr)
 	int	i;
 
 	i = 0;
-	while (ptr[i])
+	while (ptr && ptr[i])
 	{
 		free(ptr[i]);
 		i++;
 	}
-	free(ptr);
+	if (ptr)
+		free(ptr);
 }

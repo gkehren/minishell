@@ -34,10 +34,14 @@ int	new_token_files(t_list **token_files, t_token_lex *token_redir, t_token_lex 
 {
 	t_token_lex	*new_file;
 	t_list		*new_element;
+	char		*tmp;
 
-	new_file = init_token_lex(token_word->content, token_redir->token);
-	if (new_file == NULL)
+	tmp = ft_strdup(token_word->content);
+	if (tmp == NULL)
 		return (1);
+	new_file = init_token_lex(tmp, token_redir->token);
+	if (new_file == NULL)
+		return (free(tmp), 1);
 	new_element = ft_lstnew((void *)new_file);
 	if (new_element == NULL)
 		return (del_token_lex(new_file), 1);
