@@ -32,6 +32,7 @@ SRC_NAME = 	minishell.c						\
 			utils/check_char.c				\
 			utils/free.c					\
 			tools.c 						\
+			exec/exec.c 					\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

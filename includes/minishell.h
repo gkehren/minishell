@@ -23,5 +23,6 @@
 # include "builtins.h"
 # include "expanser.h"
 # include "parser.h"
+# include "exec.h"
 
 #endif
