@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:10:10 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/06 03:13:54 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/06 14:35:39 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,7 @@ int	exec(t_list *lcmd, t_list *venv)
 {
 	t_cmd	*cmd;
 	int		i;
-	char	**args;
 
-	args = malloc(2 * sizeof(char *));
-	args[0] = malloc(3 * sizeof(char));
-	args[0] = "ls";
-	args[1] = malloc(3 * sizeof(char));
-	args[1] = "-l";
-	(void)venv;
 	while (lcmd)
 	{
 		i = 0;
@@ -48,9 +41,7 @@ int	exec(t_list *lcmd, t_list *venv)
 		while (cmd->full_cmd[i])
 		{
 			// - manage redirection with token
-			// - need parse arg of each command
-			// - need env as char **
-			exec_cmd("/bin/ls", args, NULL);
+			exec_cmd("/bin/ls", cmd->full_cmd, send_env(&venv));
 			//print_token_lex(cmd->token_files);
 			//printf("\n");
 			i++;
