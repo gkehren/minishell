@@ -17,6 +17,7 @@ SRC_NAME = 	minishell.c						\
 			builtins/env/unset.c			\
 			builtins/env/env.c				\
 			builtins/env/export.c			\
+			builtins/pwd.c 					\
 			expanser/clean_expand.c 		\
 			expanser/clean_expand2.c		\
 			expanser/expand_word.c			\

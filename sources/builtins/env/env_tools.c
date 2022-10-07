@@ -16,6 +16,22 @@ int	venv_exist(t_list **venv, char *title)
 	return (1);
 }
 
+char	*venv_find_content(t_list **venv, char *title)
+{
+	t_list	*tmp_list;
+	t_venv	*tmp_venv;
+
+	tmp_list = *venv;
+	while (tmp_list)
+	{
+		tmp_venv = (t_venv *)tmp_list->content;
+		if (!ft_strcmp(tmp_venv->title, title))
+			return (tmp_venv->content);
+		tmp_list = tmp_list->next;
+	}
+	return (NULL);
+}
+
 void	venv_replace(t_list **venv, char *title, char *content)
 {
 	t_list	*tmp_list;

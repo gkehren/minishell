@@ -1,52 +1,58 @@
 #include "minishell.h"
 
+// int	main(int argc, char **argv, char **env)
+// {
+// 	char		*input;
+// 	t_list		*venv;
+// 	t_list		*token_list;
+// 	t_list		*cmd;
+// 	//t_venv		*tmp_venv;
+
+// 	(void)argc;
+// 	(void)argv;
+// 	venv = NULL;
+// 	if (parse_env_data(&venv, env))
+// 		return (1);
+// 	//AFFICHAGE ENV
+// 	// while (venv)
+// 	// {
+// 	// 	tmp_venv = (t_venv *)venv->content;
+// 	// 	printf("title is %s\n", tmp_venv->title);
+// 	// 	venv = venv->next;
+// 	// }
+// 	while (42)
+// 	{
+// 		input = readline("First prompt :");
+// 		if (ft_strcmp(input, "exit") == 0)
+// 			break ;
+// 		token_list = generate_token(input, 1);
+// 		if (token_list == NULL)
+// 			break ;
+// 		//print_token_lex(token_list);
+// 		expanser(&token_list, venv);
+// 		//print_token_lex(token_list);
+// 		if (parser_checker(&token_list))
+// 			break ;
+// 		cmd = generate_cmd(token_list);
+// 		print_cmd(cmd);
+// 		ft_lstclear(&cmd, &del_cmd);
+// 		free(input);
+// 	}
+// 	ft_lstclear(&venv, del_venv);
+// 	return (0);
+// }
+
+/*	TEST BUILTINS */
 int	main(int argc, char **argv, char **env)
 {
-	char		*input;
 	t_list		*venv;
-	t_list		*token_list;
-	t_list		*cmd;
-	//t_venv		*tmp_venv;
+	char 		**args;
 
+	args = ft_split("pwd", ' ');
 	(void)argc;
 	(void)argv;
 	venv = NULL;
-	if (parse_env_data(&venv, env))
-		return (1);
-	//AFFICHAGE ENV
-	// while (venv)
-	// {
-	// 	tmp_venv = (t_venv *)venv->content;
-	// 	printf("title is %s\n", tmp_venv->title);
-	// 	venv = venv->next;
-	// }
-	while (42)
-	{
-		input = readline("First prompt :");
-		if (ft_strcmp(input, "exit") == 0)
-			break ;
-		token_list = generate_token(input, 1);
-		if (token_list == NULL)
-			break ;
-		//print_token_lex(token_list);
-		expanser(&token_list, venv);
-		//print_token_lex(token_list);
-		if (parser_checker(&token_list))
-			break ;
-		cmd = generate_cmd(token_list);
-		print_cmd(cmd);
-		ft_lstclear(&cmd, &del_cmd);
-		free(input);
-	}
-	ft_lstclear(&venv, del_venv);
+	parse_env_data(&venv, env);
+	pwd(0, args, &venv);
 	return (0);
 }
-
-// int	main(void)
-// {
-// 	char	**args;
-
-// 	args = ft_split("lol mdr xd", ' ');
-// 	free_double_tab((void **)args);
-// 	return (0);
-// }

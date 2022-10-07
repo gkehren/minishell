@@ -5,6 +5,7 @@
 
 /*						ENV_TOOLS						*/
 int		venv_exist(t_list **venv, char *title);
+char	*venv_find_content(t_list **venv, char *title);
 void	venv_replace(t_list **venv, char *title, char *content);
 int		venv_create(t_list **venv, char *title, char *content, t_set set);
 void	venv_remove(t_list **venv, char *title);
@@ -30,6 +31,6 @@ int		parsing_export(char **args);
 int		unset(t_list **venv, char **args, int status_ret);
 
 /*						PWD						*/
-
+int		pwd(int argc, char **argv, t_list **venv);
 
 #endif

@@ -11,6 +11,7 @@
 # include <sys/types.h>
 # include <fcntl.h>
 # include <string.h>
+# include <limits.h>
 
 /*						INCLUDE OTHER HEADER						*/
 # include "couleurs.h"
