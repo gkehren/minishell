@@ -31,6 +31,6 @@ int		parsing_export(char **args);
 int		unset(t_list **venv, char **args, int status_ret);
 
 /*						PWD						*/
-int		pwd(int argc, char **argv, t_list **venv);
+int		pwd(char **args, t_list **venv);
 
 #endif

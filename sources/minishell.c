@@ -48,11 +48,11 @@ int	main(int argc, char **argv, char **env)
 	t_list		*venv;
 	char 		**args;
 
-	args = ft_split("pwd", ' ');
+	args = ft_split("pwd ls env", ' ');
 	(void)argc;
 	(void)argv;
 	venv = NULL;
 	parse_env_data(&venv, env);
-	pwd(0, args, &venv);
+	pwd(args, &venv);
 	return (0);
 }
