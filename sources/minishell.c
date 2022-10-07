@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:48:27 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/06 14:32:59 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/07 14:24:07 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	main(int argc, char **argv, char **env)
 		if (parser_checker(&token_list))
 			return (1);
 		cmd = generate_cmd(token_list);
-		print_cmd(cmd);
+		//print_cmd(cmd);
 		if (exec(cmd, venv))
 			return (1);
 		ft_lstclear(&token_list, &del_token_lex);

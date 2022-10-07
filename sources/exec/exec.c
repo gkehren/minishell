@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:10:10 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/06 14:35:39 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/07 14:26:03 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ int	exec(t_list *lcmd, t_list *venv)
 		while (cmd->full_cmd[i])
 		{
 			// - manage redirection with token
-			exec_cmd("/bin/ls", cmd->full_cmd, send_env(&venv));
+			if (exec_cmd(path_command(cmd->full_cmd[i], send_env(&venv)),
+					cmd->full_cmd, send_env(&venv)) == 1)
+				return (1);
 			//print_token_lex(cmd->token_files);
 			//printf("\n");
 			i++;
