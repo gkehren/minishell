@@ -9,6 +9,7 @@ static t_cmd	*init_current_cmd(void)
 		return (NULL);
 	current_cmd->full_path = NULL;
 	current_cmd->full_cmd = NULL;
+	current_cmd->argc = 0;
 	current_cmd->token_files = NULL;
 	return (current_cmd);
 }
@@ -78,5 +79,6 @@ t_list	*generate_cmd(t_list *token_list)
 			return (NULL);
 	}
 	ft_lstclear(&token_list, &del_token_lex);
+	init_argc_cmd(cmd_list);
 	return (cmd_list);
 }

@@ -51,6 +51,7 @@ void	print_cmd(t_list *lst)
 		if (cmd->full_cmd)
 			printf("[%s]", cmd->full_cmd[i]);
 		printf(" }\n");
+		printf("argc : %d\n", cmd->argc);
 		print_token_lex(cmd->token_files);
 		printf("\n\n");
 		lst = lst->next;

@@ -59,6 +59,7 @@ typedef struct s_cmd
 {
 	char	*full_path;
 	char	**full_cmd;
+	int		argc;
 	t_list	*token_files;
 }	t_cmd;
 

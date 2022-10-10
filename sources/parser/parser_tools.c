@@ -48,3 +48,24 @@ int	new_token_files(t_list **token_files, t_token_lex *token_redir, t_token_lex 
 	ft_lstadd_back(token_files, new_element);
 	return (0);
 }
+
+static int	count_argc(char **full_cmd)
+{
+	int	i;
+
+	i = 0;
+	while (full_cmd && full_cmd[i])
+		i++;
+	return (i);
+}
+
+void	init_argc_cmd(t_list *cmd)
+{
+	t_cmd	*tmp_cmd;
+	while (cmd)
+	{
+		tmp_cmd = (t_cmd *)cmd->content;
+		tmp_cmd->argc = count_argc(tmp_cmd->full_cmd);
+		cmd = cmd->next;
+	}
+}
