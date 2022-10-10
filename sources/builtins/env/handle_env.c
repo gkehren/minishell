@@ -87,10 +87,12 @@ int	parse_env_data(t_list **venv, char **env)
 			return (malloc_failed_env(venv));
 		tmp_venv = init_venv(tmp_char[0], tmp_char[1], INIT);
 		if (tmp_venv == NULL)
-			return (free_double_tab((void **)tmp_char), malloc_failed_env(venv));
+			return (free_double_tab((void **)tmp_char),
+				malloc_failed_env(venv));
 		new_list = ft_lstnew((void *)tmp_venv);
 		if (new_list == NULL)
-			return (free_double_tab((void **)tmp_char), del_venv(tmp_venv), malloc_failed_env(venv));
+			return (free_double_tab((void **)tmp_char),
+				del_venv(tmp_venv), malloc_failed_env(venv));
 		ft_lstadd_back(venv, new_list);
 		free(tmp_char);
 		i++;

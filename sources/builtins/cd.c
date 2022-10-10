@@ -21,7 +21,7 @@ static int	set_up_env_var(t_list **venv)
 
 static int	swap_pwd_env(t_list **venv)
 {
-	char *old_pwd;
+	char	*old_pwd;
 
 	old_pwd = ft_strdup(venv_find_content(venv, "PWD"));
 	if (old_pwd == NULL)
@@ -54,7 +54,7 @@ static char	*return_env_path(int argc, char **args, t_list **venv)
 	return (path);
 }
 
-static int check_errors(int argc, char **args, t_list **venv)
+static int	check_errors(int argc, char **args, t_list **venv)
 {
 	if (argc > 2)
 		return (print_error("minishell: cd: too many arguments"));

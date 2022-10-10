@@ -58,7 +58,8 @@ static int	check_errors(char **args)
 
 	if (check_parsing(args))
 	{
-		print_error_str("exit\nbash: exit: ", args[1], ": numeric argument required\n");
+		print_error_str("exit\nbash: exit: ", args[1],
+			": numeric argument required\n");
 		return (2);
 	}
 	tmp = ft_itoa(ft_atoi(args[1]));
@@ -66,7 +67,8 @@ static int	check_errors(char **args)
 		return (1);
 	if (checker_integer(args[1], tmp, NULL))
 	{
-		print_error_str("exit\nbash: exit: ", args[1], ": numeric argument required\n");
+		print_error_str("exit\nbash: exit: ", args[1],
+			": numeric argument required\n");
 		return (2);
 	}
 	return (0);
