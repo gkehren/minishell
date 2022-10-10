@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:10:10 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/10 16:00:52 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/11 01:43:06 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	exec(t_list *lcmd, t_list *venv)
 	while (lcmd)
 	{
 		cmd = (t_cmd *)lcmd->content;
-		pid = fork();
 		if (pipe(fd) == -1)
 			return (1);
+		pid = fork();
 		if (pid == -1)
 			return (perror("fork"), 1);
 		else if (pid == 0)
