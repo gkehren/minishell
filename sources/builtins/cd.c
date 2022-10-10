@@ -87,7 +87,7 @@ int	cd(int argc, char **args, t_list **venv)
 	}
 	else
 		print_cd_error(path, strerror(errno));
-	if (argc == 2 && ft_strcmp(argv[1], "-") == 0)
+	if (argc == 2 && ft_strcmp(args[1], "-") == 0)
 		printf("%s\n", venv_find_content(venv, "PWD"));
 	return (ret);
 }

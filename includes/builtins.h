@@ -36,4 +36,7 @@ int		pwd(int argc, char **args, t_list **venv);
 /*						CD						*/
 int		cd(int argc, char **args, t_list **venv);
 
+/*						ECHO						*/
+int		echo(int argc, char **argv, t_list **venv);
+
 #endif

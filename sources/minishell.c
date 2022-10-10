@@ -48,11 +48,14 @@ int	main(int argc, char **argv, char **env)
 	t_list		*venv;
 	char 		**args;
 
-	args = ft_split("pwd ls env", ' ');
+	args = ft_split("echo Hola -n", ' ');
 	(void)argc;
 	(void)argv;
 	venv = NULL;
 	parse_env_data(&venv, env);
-	pwd(3, args, &venv);
+	//pwd(3, args, &venv);
+	echo(1, args, &venv);
+	ft_lstclear(&venv, &del_venv);
+	free_double_tab((void **)args);
 	return (0);
 }

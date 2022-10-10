@@ -12,6 +12,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <limits.h>
+# include <errno.h>
 
 /*						INCLUDE OTHER HEADER						*/
 # include "couleurs.h"
