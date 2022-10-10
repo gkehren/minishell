@@ -1,10 +1,10 @@
 #include "minishell.h"
 
-int	unset(t_list **venv, char **args, int status_ret)
+int	unset(int argc, char **args, t_list **venv)
 {
 	int	i;
 
-	(void)status_ret;
+	(void)argc;
 	i = 0;
 	while (args[i])
 	{

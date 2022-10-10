@@ -53,6 +53,6 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	venv = NULL;
 	parse_env_data(&venv, env);
-	pwd(args, &venv);
+	pwd(3, args, &venv);
 	return (0);
 }

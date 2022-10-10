@@ -3,11 +3,11 @@
 #define ERROR_MSG "minishell: pwd: -"
 #define ERROR_MSG2 "minishell: pwd: --: invalid option\n"
 
-static int	check_arg_pwd(char **args)
+static int	check_arg_pwd(int argc, char **args)
 {
 	int	i;
 
-	if (args[1] != NULL && args[1][0] == '-')
+	if (argc > 1 && args[1][0] == '-')
 	{
 		i = 0;
 		while (args[1][i] == '-' && args[1][i])
@@ -23,12 +23,12 @@ static int	check_arg_pwd(char **args)
 	return (0);
 }
 
-int	pwd(char **args, t_list **venv)
+int	pwd(int argc, char **args, t_list **venv)
 {
 	char		path[PATH_MAX];
 	char		*tmp;
 
-	if (check_arg_pwd(args))
+	if (check_arg_pwd(argc, args))
 		return (1);
 	getcwd(path, PATH_MAX);
 	if (path == NULL)

@@ -35,3 +35,12 @@ int	print_error_str(char *error_b, char *content, char *error_e)
 	ft_putstr_fd(error_e, 2);
 	return (1);
 }
+
+void	print_cd_error(char *path, char *strerror)
+{
+	ft_putstr_fd("minishell: cd: ", 2);
+	ft_putstr_fd(path, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(strerror, 2);
+	ft_putstr_fd("\n", 2);
+}

@@ -26,13 +26,13 @@ char	**send_env(t_list **venv)
 	return (env);
 }
 
-void	env(t_list **venv, char **args, int status_ret)
+void	env(int argc, char **args, t_list **venv)
 {
 	t_list	*tmp_list;
 	t_venv	*tmp_venv;
 
 	(void)args;
-	(void)status_ret;
+	(void)argc;
 	tmp_list = *venv;
 	while (tmp_list)
 	{

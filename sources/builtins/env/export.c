@@ -79,7 +79,7 @@ static void	export_print_all(t_list **venv)
 
 static int	export_action(t_list **venv, char **cuting, char **args, int i)
 {
-	if (venv_exist(venv, cuting[0]) == 0)
+	if (venv_exist(venv, cuting[0]) == 1)
 	{
 		if (find_char('=', args[i]))
 			venv_replace(venv, cuting[0], cuting[1]);
@@ -102,12 +102,12 @@ static int	export_action(t_list **venv, char **cuting, char **args, int i)
 	return (0);
 }
 
-int	export(t_list **venv, char **args, int status_ret)
+int	export(int argc, char **args, t_list **venv)
 {
 	int		i;
 	char	**cuting;
 
-	(void)status_ret;
+	(void)argc;
 	if (ft_strcmp(args[0], "export") == 0 && args[1] == NULL)
 		export_print_all(venv);
 	else

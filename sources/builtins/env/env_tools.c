@@ -10,10 +10,10 @@ int	venv_exist(t_list **venv, char *title)
 	{
 		tmp_venv = (t_venv *)tmp_list->content;
 		if (!ft_strcmp(tmp_venv->title, title))
-			return (0);
+			return (1);
 		tmp_list = tmp_list->next;
 	}
-	return (1);
+	return (0);
 }
 
 char	*venv_find_content(t_list **venv, char *title)

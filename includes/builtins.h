@@ -12,10 +12,10 @@ void	venv_remove(t_list **venv, char *title);
 
 /*						ENV						*/
 char	**send_env(t_list **venv);
-void	env(t_list **venv, char **args, int status_ret);
+void	env(int argc, char **args, t_list **venv);
 
 /*						EXPORT						*/
-int		export(t_list **venv, char **args, int status_ret);
+int		export(int argc, char **args, t_list **venv);
 
 /*						HANDLE_ENV						*/
 char	**cut_env(char *env_part);
@@ -28,9 +28,12 @@ int		malloc_failed_env(t_list **venv);
 int		parsing_export(char **args);
 
 /*						UNSET						*/
-int		unset(t_list **venv, char **args, int status_ret);
+int		unset(int argc, char **args, t_list **venv);
 
 /*						PWD						*/
-int		pwd(char **args, t_list **venv);
+int		pwd(int argc, char **args, t_list **venv);
+
+/*						CD						*/
+int		cd(int argc, char **args, t_list **venv);
 
 #endif
