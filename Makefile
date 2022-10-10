@@ -20,6 +20,7 @@ SRC_NAME = 	minishell.c						\
 			builtins/pwd.c 					\
 			builtins/cd.c 					\
 			builtins/echo.c 				\
+			builtins/exit.c					\
 			expanser/clean_expand.c 		\
 			expanser/clean_expand2.c		\
 			expanser/expand_word.c			\

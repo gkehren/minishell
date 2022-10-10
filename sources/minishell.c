@@ -10,6 +10,7 @@
 
 // 	(void)argc;
 // 	(void)argv;
+//	g_status = 0;
 // 	venv = NULL;
 // 	if (parse_env_data(&venv, env))
 // 		return (1);
@@ -48,13 +49,14 @@ int	main(int argc, char **argv, char **env)
 	t_list		*venv;
 	char 		**args;
 
-	args = ft_split("echo Hola -n", ' ');
+	args = ft_split("exit -666", ' ');
 	(void)argc;
 	(void)argv;
 	venv = NULL;
 	parse_env_data(&venv, env);
 	//pwd(3, args, &venv);
-	echo(1, args, &venv);
+	//echo(1, args, &venv);
+	ft_exit(2, args, &venv);
 	ft_lstclear(&venv, &del_venv);
 	free_double_tab((void **)args);
 	return (0);

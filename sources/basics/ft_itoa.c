@@ -56,7 +56,7 @@ static char	*create_number(char *result, int n, long tmp)
 	return (result);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(long long n)
 {
 	char	*result;
 	long	tmp;

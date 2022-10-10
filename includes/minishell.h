@@ -26,4 +26,6 @@
 # include "expanser.h"
 # include "parser.h"
 
+int	g_status;
+
 #endif

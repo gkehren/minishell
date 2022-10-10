@@ -39,4 +39,7 @@ int		cd(int argc, char **args, t_list **venv);
 /*						ECHO						*/
 int		echo(int argc, char **argv, t_list **venv);
 
+/*						EXIT						*/
+int		ft_exit(int argc, char **args, t_list **venv);
+
 #endif

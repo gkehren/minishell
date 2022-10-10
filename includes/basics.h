@@ -10,22 +10,25 @@ t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 
 /*						BASIC_LIST2						*/
-void	ft_lstdelone(t_list *lst, void (*del)(void*));
-void	ft_lstclear(t_list **lst, void (*del)(void*));
+void		ft_lstdelone(t_list *lst, void (*del)(void*));
+void		ft_lstclear(t_list **lst, void (*del)(void*));
 
 /*						BASIC_STR						*/
-void	ft_putstr_fd(char *s, int fd);
-int		ft_strlen(char *str);
-int		ft_strcmp(char *s1, char *s2);
-char	*ft_strjoin(char *s1, char *s2);
-int		ft_strlcpy(char *dst, char *src, int dstsize);
+void		ft_putstr_fd(char *s, int fd);
+int			ft_strlen(char *str);
+int			ft_strcmp(char *s1, char *s2);
+char		*ft_strjoin(char *s1, char *s2);
+int			ft_strlcpy(char *dst, char *src, int dstsize);
+
 /*						BASIC_STR2						*/
-char	*ft_strdup(char *s);
+char		*ft_strdup(char *s);
+long long	ft_atoi(char *str);
+int			ft_strncmp(char *s1, char *s2, size_t n);
 
 /*						FT_SPLIT						*/
 char	**ft_split(char *s, char c);
 
 /*						FT_ITOA						*/
-char	*ft_itoa(int n);
+char	*ft_itoa(long long n);
 
 #endif
