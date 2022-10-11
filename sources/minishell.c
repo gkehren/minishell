@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:48:27 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/11 14:06:53 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/11 17:46:27 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	main(int argc, char **argv, char **env)
 	t_list		*venv;
 	t_list		*token_list;
 	t_list		*cmd;
-
+	
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, handle_sigint);
 	(void)argc;
 	(void)argv;
 	venv = NULL;

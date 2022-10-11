@@ -13,6 +13,7 @@
 # include <string.h>
 # include <limits.h>
 # include <errno.h>
+# include <signal.h>
 
 /*						INCLUDE OTHER HEADER						*/
 # include "couleurs.h"
@@ -26,6 +27,7 @@
 # include "expanser.h"
 # include "parser.h"
 # include "exec.h"
+# include "signals.h"
 
 int	g_status;
 
