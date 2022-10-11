@@ -4,7 +4,7 @@ int	expand_return_value(char **expand, char **str)
 {
 	char	*tmp;
 
-	tmp = ft_itoa((long long)42);
+	tmp = ft_itoa((long long)g_status);
 	if (tmp == NULL)
 		return (1);
 	*expand = ft_strdup(tmp);
