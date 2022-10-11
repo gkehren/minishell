@@ -6,11 +6,47 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:25:54 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/07 14:27:02 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/11 13:55:53 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	get_token_id(t_list *ltoken)
+{
+	t_token_lex	*token;
+
+	if (!ltoken)
+		return (6);
+	token = (t_token_lex *)ltoken->content;
+	if (token->token == WORD)
+		return (WORD);
+	else if (token->token == PIPE)
+		return (PIPE);
+	else if (token->token == IN)
+		return (IN);
+	else if (token->token == OUT)
+		return (OUT);
+	else if (token->token == IN_HEREDOC)
+		return (IN_HEREDOC);
+	else if (token->token == OUT_APPEND)
+		return (OUT_APPEND);
+	return (-1);
+}
+
+char	*get_token_content(t_list *lcmd)
+{
+	t_cmd		*cmd;
+	t_list		*ltoken;
+	t_token_lex	*token;
+
+	cmd = (t_cmd *)lcmd->content;
+	ltoken = (t_list *)cmd->token_files;
+	if (!ltoken)
+		return (NULL);
+	token = (t_token_lex *)ltoken->content;
+	return (token->content);
+}
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
