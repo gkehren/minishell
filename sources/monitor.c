@@ -3,6 +3,7 @@
 static void	malloc_failed(void)
 {
 	ft_putstr_fd("Malloc failed !", 2);
+	rl_clear_history();
 	exit(500);
 }
 
@@ -14,7 +15,8 @@ void	monitor(t_list *venv, t_list *token_list, t_list *cmd, char **env)
 		return (malloc_failed());
 	while (42)
 	{
-		input = readline("MINISHELL$>");
+		input = readline("MINISHELL$> ");
+		add_history(input);
 		if (ft_strcmp(input, "exit") == 0)
 			break ;
 		token_list = generate_token(input, 1);
