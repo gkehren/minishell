@@ -68,13 +68,8 @@ int	expanser(t_list **token_list, t_list *venv)
 		tmp_token = (t_token_lex *)tmp_list->content;
 		if (tmp_token->token == WORD)
 		{
-			//printf("AVANT = %s\n", tmp_token->content);
 			if (expand_process(tmp_token, venv))
-			{
-				printf("Malloc error !\n");
 				return (1);
-			}
-			//printf("APRES = %s\n", tmp_token->content);
 		}
 		tmp_list = tmp_list->next;
 	}

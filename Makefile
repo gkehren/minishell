@@ -4,6 +4,8 @@ SRC_PATH = sources/
 OBJ_PATH = obj/
 
 SRC_NAME = 	minishell.c						\
+			monitor.c						\
+			tools.c 						\
 			basics/basic_list.c				\
 			basics/basic_list2.c			\
 			basics/basic_str.c				\
@@ -36,7 +38,6 @@ SRC_NAME = 	minishell.c						\
 			utils/handle_struct.c			\
 			utils/check_char.c				\
 			utils/free.c					\
-			tools.c 						\
 			exec/exec.c 					\
 			exec/utils.c					\
 
