@@ -10,15 +10,10 @@ static void	malloc_failed(void)
 static void parsing_part(t_list **venv, t_list **token_list, t_list **cmd, char *input)
 {
 	*token_list = generate_token(input, 1);
-	if (*token_list == NULL)
-		return (ft_lstclear(venv, &del_venv), malloc_failed());
-	if (expanser(token_list, *venv))
-		return (ft_lstclear(venv, &del_venv), ft_lstclear(token_list, &del_token_lex), malloc_failed());
+	expanser(token_list, *venv);
 	if (parser_checker(token_list))
 		return (ft_lstclear(venv, &del_venv), ft_lstclear(token_list, &del_token_lex), exit(2));
 	*cmd = generate_cmd(*token_list);
-	if (*cmd == NULL)
-		return (ft_lstclear(venv, &del_venv), ft_lstclear(token_list, &del_token_lex), malloc_failed());
 }
 
 void	monitor(t_list *venv, t_list *token_list, t_list *cmd, char **env)
