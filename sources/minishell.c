@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:48:27 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/10 21:11:12 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/11 10:38:51 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int argc, char **argv, char **env)
 		print_cmd(cmd);
 		// if (exec(cmd, venv))
 		// 	return (1);
+		ft_lstclear(&cmd, &del_cmd);
 		free(input);
 	}
 	ft_lstclear(&venv, del_venv);

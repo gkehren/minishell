@@ -66,7 +66,7 @@ static int	check_errors(int argc, char **args, t_list **venv)
 	return (0);
 }
 
-int	cd(int argc, char **args, t_list **venv)
+int	ft_cd(int argc, char **args, t_list **venv)
 {
 	char	*path;
 	int		ret;

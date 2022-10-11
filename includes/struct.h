@@ -10,6 +10,9 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+/*						BUILTINS						*/
+typedef int (*t_builtins)(int, char **, t_list **);
+
 /*						LEXER						*/
 typedef enum s_token
 {
@@ -57,10 +60,11 @@ typedef struct s_expanse
 /*						PARSER						*/
 typedef struct s_cmd
 {
-	char	*full_path;
-	char	**full_cmd;
-	int		argc;
-	t_list	*token_files;
+	char		*full_path;
+	char		**full_cmd;
+	int			argc;
+	t_builtins	builtin;
+	t_list		*token_files;
 }	t_cmd;
 
 #endif

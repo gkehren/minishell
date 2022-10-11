@@ -31,6 +31,7 @@ SRC_NAME = 	minishell.c						\
 			parser/parser.c 				\
 			parser/parser_checker.c 		\
 			parser/parser_tools.c 			\
+			parser/check_builtins.c 		\
 			utils/utils.c 					\
 			utils/handle_struct.c			\
 			utils/check_char.c				\

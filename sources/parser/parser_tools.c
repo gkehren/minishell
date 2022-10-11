@@ -62,6 +62,7 @@ static int	count_argc(char **full_cmd)
 void	init_argc_cmd(t_list *cmd)
 {
 	t_cmd	*tmp_cmd;
+	
 	while (cmd)
 	{
 		tmp_cmd = (t_cmd *)cmd->content;

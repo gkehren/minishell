@@ -24,7 +24,7 @@ static int	check_arg_pwd(int argc, char **args)
 	return (0);
 }
 
-int	pwd(int argc, char **args, t_list **venv)
+int	ft_pwd(int argc, char **args, t_list **venv)
 {
 	char		path[PATH_MAX];
 	char		*tmp;

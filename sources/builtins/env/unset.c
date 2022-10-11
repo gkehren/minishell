@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	unset(int argc, char **args, t_list **venv)
+int	ft_unset(int argc, char **args, t_list **venv)
 {
 	int	i;
 

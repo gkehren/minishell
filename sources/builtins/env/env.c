@@ -26,7 +26,7 @@ char	**send_env(t_list **venv)
 	return (env);
 }
 
-void	env(int argc, char **args, t_list **venv)
+int	ft_env(int argc, char **args, t_list **venv)
 {
 	t_list	*tmp_list;
 	t_venv	*tmp_venv;
@@ -41,4 +41,5 @@ void	env(int argc, char **args, t_list **venv)
 			printf("%s=%s\n", tmp_venv->title, tmp_venv->content);
 		tmp_list = tmp_list->next;
 	}
+	return (0);
 }

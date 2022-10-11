@@ -80,5 +80,6 @@ t_list	*generate_cmd(t_list *token_list)
 	}
 	ft_lstclear(&token_list, &del_token_lex);
 	init_argc_cmd(cmd_list);
+	init_builtins_cmd(cmd_list);
 	return (cmd_list);
 }
