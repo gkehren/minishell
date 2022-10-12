@@ -7,7 +7,6 @@ static t_cmd	*init_current_cmd(void)
 	current_cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (current_cmd == NULL)
 		return (NULL);
-	current_cmd->full_path = NULL;
 	current_cmd->full_cmd = NULL;
 	current_cmd->argc = 0;
 	current_cmd->token_files = NULL;

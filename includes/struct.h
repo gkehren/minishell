@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 01:58:21 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/12 18:39:07 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/12 19:14:19 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ typedef struct s_files
 /*						PARSER						*/
 typedef struct s_cmd
 {
-	char		*full_path;
 	char		**full_cmd;
 	int			argc;
 	t_builtins	builtin;

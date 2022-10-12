@@ -41,7 +41,6 @@ void	print_cmd(t_list *lst)
 	{
 		i = 0;
 		cmd = (t_cmd *)lst->content;
-		printf("FULL PATH : %s\n", cmd->full_path);
 		printf("FULL CMD : { ");
 		while (cmd->full_cmd && cmd->full_cmd[i + 1])
 		{
