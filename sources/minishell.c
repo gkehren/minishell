@@ -6,11 +6,13 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:48:27 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/11 18:24:41 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/12 11:09:58 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_status;
 
 int	main(int argc, char **argv, char **env)
 {
