@@ -15,6 +15,7 @@ static int	check_files(t_list *token_list)
 			{
 				print_error_str("bash: ", tmp_token->content, ": ");
 				ft_putstr_fd(strerror(errno), 2);
+				ft_putstr_fd("\n", 2);
 				return (1);
 			}
 		}
