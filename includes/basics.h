@@ -24,6 +24,8 @@ int			ft_strlcpy(char *dst, char *src, int dstsize);
 char		*ft_strdup(char *s);
 long long	ft_atoi(char *str);
 int			ft_strncmp(char *s1, char *s2, size_t n);
+void		ft_putchar_fd(char c, int fd);
+void		ft_putnbr_fd(int n, int fd);
 
 /*						FT_SPLIT						*/
 char	**ft_split(char *s, char c);

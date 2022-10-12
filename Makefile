@@ -39,11 +39,13 @@ SRC_NAME = 	minishell.c						\
 			utils/handle_struct.c			\
 			utils/check_char.c				\
 			utils/free.c					\
+			utils/print_error.c  			\
 			exec/exec.c 					\
 			exec/utils.c					\
 			exec/child.c 					\
 			exec/builtins_exec.c 			\
 			exec/files.c 					\
+			exec/heredoc.c 					\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

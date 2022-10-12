@@ -5,10 +5,13 @@
 
 /*						UTILS						*/
 int 		find_char(char c, char *str);
+
+/*						PRINT_ERROR						*/
 int			print_error(char *error);
 int			print_error_char(char *error_b, char c, char *error_e);
 int			print_error_str(char *error_b, char *content, char *error_e);
 void		print_cd_error(char *path, char *strerror);
+void		print_nb_error(char *begin, int nb, char *end);
 
 /*						HANDLE_STRUCT						*/
 t_token_lex	*init_token_lex(char *content, t_token token);
