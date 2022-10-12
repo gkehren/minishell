@@ -19,7 +19,8 @@
 int			exec(t_list *lcmd, t_list *env);
 void	child_process(int *fd, int *fdd, char **env, t_list *lcmd);
 void	child_process_out(int *fd, int *fdd, char **env, t_list *lcmd);
-void	child_process_in(void);
+void	child_process_in(int *fd, int *fdd, char **env, t_list *lcmd);
+void	child_process_heredoc(char **env, t_list *lcmd);
 
 /*						UTILS						*/
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);

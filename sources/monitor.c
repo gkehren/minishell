@@ -29,7 +29,7 @@ void	monitor(t_list *venv, t_list *token_list, t_list *cmd, char **env)
 			return (ft_lstclear(&venv, &del_venv), printf("exit\n"), rl_clear_history(), exit(g_status));
 		add_history(input);
 		parsing_part(&venv, &token_list, &cmd, input);
-		//exec(cmd, venv); //child non ferme lors de l'ajout d'un infile
+		exec(cmd, venv); //child non ferme lors de l'ajout d'un infile
 		ft_lstclear(&cmd, &del_cmd);
 		free(input);
 	}

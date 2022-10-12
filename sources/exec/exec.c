@@ -27,7 +27,7 @@ static void	parent_process(t_list *lcmd, char **env, int *fdd)
 	else if (pid == 0)
 	{
 		if (get_token_id(cmd->token_files) == IN)
-			child_process_in();
+			child_process_in(fd, fdd, env, lcmd);
 		else if (get_token_id(cmd->token_files) == OUT)
 			child_process_out(fd, fdd, env, lcmd);
 		else
@@ -43,18 +43,15 @@ static void	parent_process(t_list *lcmd, char **env, int *fdd)
 
 int	exec(t_list *lcmd, t_list *venv)
 {
-	//t_cmd		*cmd;
+	t_cmd	*cmd;
 	int			fdd;
 
 	fdd = 0;
 	while (lcmd)
 	{
-		//cmd = (t_cmd *)lcmd->content;
-		//if (get_token_id(cmd->token_files) == IN)
-		//	printf("INFILE\n");
-		//else if (get_token_id(cmd->token_files) == OUT)
-		//	parent_process_out(lcmd, send_env(&venv));
-		//else
+		cmd = (t_cmd *)lcmd->content;
+		if (get_token_id(cmd->token_files) == IN_HEREDOC)
+			child_process_heredoc(send_env(&venv), lcmd);
 		parent_process(lcmd, send_env(&venv), &fdd);
 		lcmd = lcmd->next;
 	}
