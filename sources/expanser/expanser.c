@@ -1,8 +1,10 @@
 #include "minishell.h"
 
-static void	set_expanse(t_expanse *expanse, char c)
+static void	set_expanse(t_expanse *expanse, char c, int heredoc)
 {
-	if (expanse->char_to_rem == 0)
+	if (heredoc == 1)
+		expanse->mode = REPLACE;
+	else if (expanse->char_to_rem == 0)
 	{
 		expanse->char_to_rem = c;
 		if (c == '\'')
@@ -29,7 +31,7 @@ static int	init_expand_process(t_expanse *expanse, t_token_lex *token,
 	return (0);
 }
 
-static int	expand_process(t_token_lex	*token, t_list *venv)
+static int	expand_process(t_token_lex	*token, t_list *venv, int heredoc)
 {
 	int			i;
 	char		*tmp;
@@ -42,7 +44,7 @@ static int	expand_process(t_token_lex	*token, t_list *venv)
 	while (tmp[i])
 	{
 		if (tmp[i] == '\'' || tmp[i] == '\"')
-			set_expanse(&expanse, tmp[i]);
+			set_expanse(&expanse, tmp[i], heredoc);
 		else if (tmp[i] == '$')
 		{
 			if (expand_word(expanse, venv, &tmp, i))
@@ -57,7 +59,7 @@ static int	expand_process(t_token_lex	*token, t_list *venv)
 	return (0);
 }
 
-int	expanser(t_list **token_list, t_list *venv)
+int	expanser(t_list **token_list, t_list *venv, int heredoc)
 {
 	t_token_lex	*tmp_token;
 	t_list		*tmp_list;
@@ -68,7 +70,7 @@ int	expanser(t_list **token_list, t_list *venv)
 		tmp_token = (t_token_lex *)tmp_list->content;
 		if (tmp_token->token == WORD)
 		{
-			if (expand_process(tmp_token, venv))
+			if (expand_process(tmp_token, venv, heredoc))
 				return (1);
 		}
 		tmp_list = tmp_list->next;

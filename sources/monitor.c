@@ -10,7 +10,7 @@ static void	malloc_failed(void)
 static void parsing_part(t_list **venv, t_list **token_list, t_list **cmd, char *input)
 {
 	*token_list = generate_token(input, 1);
-	expanser(token_list, *venv);
+	expanser(token_list, *venv, 0);
 	if (parser_checker(token_list))
 		return (ft_lstclear(venv, &del_venv), ft_lstclear(token_list, &del_token_lex), exit(2));
 	*cmd = generate_cmd(*token_list);
