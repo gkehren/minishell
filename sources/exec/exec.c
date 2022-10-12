@@ -12,18 +12,24 @@
 
 #include "minishell.h"
 
-static void	parent_process(t_list *lcmd, char **env, int *fdd)
+void	exec_error(t_list *lcmd, t_list *venv)
+{
+	perror("Minishell");
+	ft_lstclear(&lcmd, &del_cmd);
+	ft_lstclear(&venv, &del_venv);
+	exit(1);
+}
+
+int	parent_process(t_list *lcmd, char **env, int *fdd)
 {
 	t_cmd	*cmd;
 	pid_t	pid;
 	int		fd[2];
 
 	cmd = (t_cmd *)lcmd->content;
-	if (pipe(fd) == -1)
-		exit(1);
 	pid = fork();
-	if (pid == -1)
-		exit(1);
+	if (pipe(fd) == -1 || pid == -1)
+		return (free_double_tab((void *)env), 1);
 	else if (pid == 0)
 	{
 		if (get_token_id(cmd->token_files) == IN)
@@ -35,24 +41,23 @@ static void	parent_process(t_list *lcmd, char **env, int *fdd)
 	}
 	else
 	{
+		free_double_tab((void *)env);
 		close(fd[1]);
 		(*fdd) = fd[0];
 		wait(NULL);
 	}
+	return (0);
 }
 
 int	exec(t_list *lcmd, t_list *venv)
 {
-	t_cmd	*cmd;
-	int			fdd;
+	int	fdd;
 
 	fdd = 0;
 	while (lcmd)
 	{
-		cmd = (t_cmd *)lcmd->content;
-		if (get_token_id(cmd->token_files) == IN_HEREDOC)
-			child_process_heredoc(send_env(&venv), lcmd);
-		parent_process(lcmd, send_env(&venv), &fdd);
+		if (parent_process(lcmd, send_env(&venv), &fdd) == 1)
+			return (exec_error(lcmd, venv), 1);
 		lcmd = lcmd->next;
 	}
 	return (0);
