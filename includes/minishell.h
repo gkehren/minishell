@@ -29,7 +29,7 @@
 # include "exec.h"
 # include "signals.h"
 
-int	g_status;
+extern int	g_status;
 
 void	monitor(t_list *venv, t_list *token_list, t_list *cmd, char **env);
 
