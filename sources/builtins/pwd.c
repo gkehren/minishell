@@ -31,8 +31,7 @@ int	ft_pwd(int argc, char **args, t_list **venv)
 
 	if (check_arg_pwd(argc, args))
 		return (1);
-	getcwd(path, PATH_MAX);
-	if (path == NULL)
+	if (getcwd(path, PATH_MAX) == NULL)
 	{
 		tmp = venv_find_content(venv, "PWD");
 		if (tmp == NULL || ft_strlcpy(path, tmp, PATH_MAX) == 0)

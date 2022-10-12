@@ -43,6 +43,7 @@ SRC_NAME = 	minishell.c						\
 			exec/utils.c					\
 			exec/child.c 					\
 			exec/builtins_exec.c 			\
+			exec/files.c 					\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

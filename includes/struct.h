@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
+/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 01:58:21 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/11 01:58:22 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/12 10:31:54 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,14 @@ typedef struct s_expanse
 	char		char_to_rem;
 }	t_expanse;
 
+/*						FILES						*/
+typedef struct s_files
+{
+	int	infile;
+	int	outfile;
+	int	is_builtin;
+}	t_files;
+
 /*						PARSER						*/
 typedef struct s_cmd
 {
@@ -77,6 +85,7 @@ typedef struct s_cmd
 	int			argc;
 	t_builtins	builtin;
 	t_list		*token_files;
+	t_files		*files;
 }	t_cmd;
 
 #endif
