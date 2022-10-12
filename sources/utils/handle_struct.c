@@ -9,6 +9,7 @@ t_token_lex	*init_token_lex(char *content, t_token token)
 		return (NULL);
 	token_lex->content = content;
 	token_lex->token = token;
+	token_lex->heredoc_ex = 0;
 	return (token_lex);
 }
 

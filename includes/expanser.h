@@ -14,7 +14,7 @@ int		expand_return_value(char **expand, char **str);
 /*						CLEAN_EXPAND						*/
 int		clean_expand(t_list **token_list);
 /*						CLEAN_EXPAND2						*/
-int		clean_quotes(t_list **token_list);
+int 	clean_quotes_v2(t_list *cmd);
 void	turn_to_word(t_list *token_list);
 
 #endif

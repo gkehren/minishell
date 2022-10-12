@@ -79,6 +79,7 @@ t_list	*generate_cmd(t_list *token_list)
 			return (NULL);
 	}
 	ft_lstclear(&token_list, &del_token_lex);
+	clean_quotes_v2(cmd_list);
 	init_argc_cmd(cmd_list);
 	init_builtins_cmd(cmd_list);
 	init_files_cmd(cmd_list);

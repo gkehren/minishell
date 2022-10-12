@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 01:58:21 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/12 10:31:54 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/12 18:39:07 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_token_lex
 {
 	char				*content;
 	t_token				token;
+	int					heredoc_ex;
 }		t_token_lex;
 
 /*						ENV						*/
@@ -72,9 +73,9 @@ typedef struct s_expanse
 /*						FILES						*/
 typedef struct s_files
 {
-	int	infile;
-	int	outfile;
-	int	is_builtin;
+	int		infile;
+	int		outfile;
+	char	*title_heredoc;
 }	t_files;
 
 /*						PARSER						*/

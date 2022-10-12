@@ -28,9 +28,9 @@ void	monitor(t_list *venv, t_list *token_list, t_list *cmd, char **env)
 		if (input == 0)
 			return (ft_lstclear(&venv, &del_venv), printf("exit\n"), rl_clear_history(), exit(g_status));
 		add_history(input);
-		heredoc("lol");
 		parsing_part(&venv, &token_list, &cmd, input);
 		//exec(cmd, venv); //child non ferme lors de l'ajout d'un infile
+		//heredoc("lol");
 		ft_lstclear(&cmd, &del_cmd);
 		free(input);
 	}

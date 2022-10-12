@@ -14,12 +14,12 @@ int	heredoc(char *stop)
 	// result = NULL;
 	while (42)
 	{
-		count_line++;
 		input = readline("> ");
 		if (input == 0)
 			return (print_nb_error(EXIT_1, count_line, EXIT_2), 0);
 		if (ft_strcmp(input, stop) == 0)
 			break;
+		count_line++;
 	}
 	return (0);
 }
