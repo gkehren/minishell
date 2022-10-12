@@ -44,7 +44,7 @@ void	child_process_in(int *fd, int *fdd, char **env, t_list *lcmd)
 {
 	t_cmd	*cmd;
 	char	*path;
-	int	infile;
+	int		infile;
 
 	(void)fdd;
 	cmd = (t_cmd *)lcmd->content;

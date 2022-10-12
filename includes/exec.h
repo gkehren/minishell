@@ -23,9 +23,9 @@ void	child_process_in(int *fd, int *fdd, char **env, t_list *lcmd);
 void	exec_error(t_list *lcmd, t_list *venv);
 
 /*						UTILS						*/
-char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
-char		*path_command(char *cmd, char **env);
-int			get_token_id(t_list *ltoken);
-char		*get_token_content(t_list *lcmd);
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	*path_command(char *cmd, char **env);
+int		get_token_id(t_list *ltoken);
+char	*get_token_content(t_list *lcmd);
 
 #endif
