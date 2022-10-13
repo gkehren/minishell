@@ -3,7 +3,8 @@
 #define EXIT_1 "minishell: warning: here-document at line "
 #define EXIT_2 " delimited by end-of-file (wanted `end\')\n"
 
-t_heredoc init_heredoc_var(char *stop, int heredoc_ex, t_files *files, int mode)
+t_heredoc	init_heredoc_var(char *stop, int heredoc_ex,
+	t_files *files, int mode)
 {
 	t_heredoc	heredoc_var;
 
@@ -28,7 +29,7 @@ static int	expand_heredoc(char *str, t_heredoc hevar, t_list *venv)
 	}
 	hevar.files->infile = open("tmp", O_CREAT | O_WRONLY, 0777);
 	if (hevar.files->infile == -1)
-			return (del_token_lex((void *)tmp), 1);
+		return (del_token_lex((void *)tmp), 1);
 	write(hevar.files->infile, tmp->content, ft_strlen(tmp->content) - 1);
 	close(hevar.files->infile);
 	hevar.files->infile = open("tmp", O_RDONLY);
@@ -38,7 +39,7 @@ static int	expand_heredoc(char *str, t_heredoc hevar, t_list *venv)
 	return (0);
 }
 
-static char *process_heredoc(char *input, char *current)
+static char	*process_heredoc(char *input, char *current)
 {
 	char	*tmp;
 	char	*result;
@@ -70,10 +71,10 @@ int	heredoc(t_heredoc hevar, t_list *venv)
 		if (input == 0)
 		{
 			print_nb_error(EXIT_1, count_line, EXIT_2);
-			break;
+			break ;
 		}
 		if (ft_strcmp(input, hevar.stop) == 0)
-			break;
+			break ;
 		result = process_heredoc(input, result);
 		if (result == NULL)
 			return (1);

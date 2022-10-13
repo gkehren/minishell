@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:02:44 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/13 18:24:43 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/13 22:29:41 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void		child_process_in(void);
 
 /*						FILES						*/
 int			init_files_cmd(t_list *cmd, t_list *venv);
+/*						FILES2						*/
+int			init_infile(t_list *token_list, t_files *files, t_list *venv);
+int			init_outfile(t_list *token_list, t_files *files);
 
 /*						HEREDOC						*/
 t_heredoc	init_heredoc_var(char *stop, int heredoc_ex, t_files *files, int mode);
