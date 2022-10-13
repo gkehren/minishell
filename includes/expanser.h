@@ -4,6 +4,7 @@
 #include "minishell.h"
 
 /*						EXPANSER						*/
+int		expand_process(t_token_lex	*token, t_list *venv, int heredoc);
 int		expanser(t_list **token_list, t_list *venv, int heredoc);
 
 /*						EXPAND_WORD						*/

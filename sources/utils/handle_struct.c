@@ -53,5 +53,6 @@ void	del_cmd(void *lst)
 	tmp = (t_cmd *)lst;
 	free_double_tab((void **)tmp->full_cmd);
 	ft_lstclear(&tmp->token_files, &del_token_lex);
+	free(tmp->files);
 	free(lst);
 }

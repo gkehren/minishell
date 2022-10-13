@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 01:58:21 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/12 19:14:19 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/13 10:06:19 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,14 @@ typedef struct s_cmd
 	t_list		*token_files;
 	t_files		*files;
 }	t_cmd;
+
+/*						HEREDOC						*/
+typedef struct s_heredoc
+{
+	char	*stop;
+	int		heredoc_ex;
+	t_files	*files;
+	int		mode;
+}	t_heredoc;
 
 #endif

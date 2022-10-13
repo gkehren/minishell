@@ -31,7 +31,7 @@ static int	init_expand_process(t_expanse *expanse, t_token_lex *token,
 	return (0);
 }
 
-static int	expand_process(t_token_lex	*token, t_list *venv, int heredoc)
+int	expand_process(t_token_lex	*token, t_list *venv, int heredoc)
 {
 	int			i;
 	char		*tmp;

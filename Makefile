@@ -12,6 +12,8 @@ SRC_NAME = 	minishell.c						\
 			basics/basic_str2.c				\
 			basics/ft_split.c				\
 			basics/ft_itoa.c				\
+			basics/get_next_line_utils.c 	\
+			basics/get_next_line.c 			\
 			builtins/env/handle_env.c		\
 			builtins/env/handle_env2.c		\
 			builtins/env/parsing_export.c	\

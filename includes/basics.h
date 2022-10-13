@@ -33,4 +33,10 @@ char	**ft_split(char *s, char c);
 /*						FT_ITOA						*/
 char	*ft_itoa(long long n);
 
+/*						GET_NEXT_LINE						*/
+void	*ft_calloc(size_t count, size_t size);
+void	ft_substr(char *s, unsigned int start, char *save);
+char	*ft_subuff(char *buff, int id_line);
+char	*get_next_line(int fd);
+
 #endif
