@@ -97,6 +97,7 @@ char	*get_next_line(int fd)
 
 	if (BUFFER_SIZE < 1 || fd < 0 || (read(fd, 0, 0) <= -1))
 		return (NULL);
+	printf("la\n");
 	result = NULL;
 	buff = initialize_buff(&ret, save, fd);
 	if (buff == NULL)

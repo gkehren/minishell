@@ -13,7 +13,7 @@ static void parsing_part(t_list **venv, t_list **token_list, t_list **cmd, char 
 	expanser(token_list, *venv, 0);
 	if (parser_checker(token_list))
 		return (ft_lstclear(venv, &del_venv), ft_lstclear(token_list, &del_token_lex), exit(2));
-	*cmd = generate_cmd(*token_list);
+	*cmd = generate_cmd(*token_list, *venv);
 }
 
 void	monitor(t_list *venv, t_list *token_list, t_list *cmd, char **env)

@@ -59,7 +59,7 @@ static int	add_cmd(t_list **cmd_list, t_cmd **current_cmd, t_list *tmp_list)
 	return (0);
 }
 
-t_list	*generate_cmd(t_list *token_list)
+t_list	*generate_cmd(t_list *token_list, t_list *venv)
 {
 	t_list	*cmd_list;
 	t_list	*tmp_list;
@@ -81,6 +81,6 @@ t_list	*generate_cmd(t_list *token_list)
 	clean_quotes_v2(cmd_list);
 	init_argc_cmd(cmd_list);
 	init_builtins_cmd(cmd_list);
-	init_files_cmd(cmd_list);
+	init_files_cmd(cmd_list, venv);
 	return (cmd_list);
 }

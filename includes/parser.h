@@ -4,7 +4,7 @@
 # include "minishell.h"
 
 /*						PARSER						*/
-t_list	*generate_cmd(t_list *token_list);
+t_list	*generate_cmd(t_list *token_list, t_list *venv);
 
 /*						PARSER_CHECKER						*/
 int		parser_checker(t_list **token_list);

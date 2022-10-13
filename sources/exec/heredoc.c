@@ -24,14 +24,15 @@ static int	expand_heredoc(char *str, t_heredoc hevar, t_list *venv)
 	if (hevar.heredoc_ex == 0)
 		expand_process(tmp, venv, 1);
 	// printf("str is equal to %s\n", tmp->content);
-	hevar.files->infile = open("tmp", O_CREAT | O_WRONLY);
-	printf("fd equal to %d\n", hevar.files->infile);
+	hevar.files->infile = open("tmp", O_CREAT | O_WRONLY, 0777);
+	printf("error fd -> %s\n", strerror(errno));
 	hevar.files->title_heredoc = NULL;
-	printf("return write : %ld\n", write(hevar.files->infile, "MDR", 3));
-	printf("error -> %s\n", strerror(errno));
+	write(hevar.files->infile, tmp->content, ft_strlen(tmp->content));
+	close(hevar.files->infile);
+	hevar.files->infile = open("tmp", O_RDONLY);
+	printf("error write -> %s\n", strerror(errno));
 	// write(hevar.files->infile, "MDR", 3);
 	printf("gnl said : %s\n", get_next_line(hevar.files->infile));
-	close(hevar.files->infile);
 	del_token_lex((void *)tmp);
 	return (0);
 }
