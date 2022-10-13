@@ -32,6 +32,12 @@ void	print_token_lex(t_list *lst)
 	printf("\n");
 }
 
+void	print_file(t_files *files)
+{
+	printf("infile is %d\n", files->infile);
+	printf("outfile is %d\n", files->outfile);
+}
+
 void	print_cmd(t_list *lst)
 {
 	t_cmd	*cmd;
@@ -56,6 +62,7 @@ void	print_cmd(t_list *lst)
 		else
 			printf("builtin : 0\n");
 		print_token_lex(cmd->token_files);
+		print_file(cmd->files);
 		printf("\n\n");
 		lst = lst->next;
 	}

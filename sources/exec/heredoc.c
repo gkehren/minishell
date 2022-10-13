@@ -22,35 +22,47 @@ static int	expand_heredoc(char *str, t_heredoc hevar, t_list *venv)
 	if (tmp == NULL)
 		return (1);
 	if (hevar.heredoc_ex == 0)
-		expand_process(tmp, venv, 1);
-	// printf("str is equal to %s\n", tmp->content);
+	{
+		if (expand_process(tmp, venv, 1))
+			return (del_token_lex((void *)tmp), 1);
+	}
 	hevar.files->infile = open("tmp", O_CREAT | O_WRONLY, 0777);
-	printf("error fd -> %s\n", strerror(errno));
-	hevar.files->title_heredoc = NULL;
-	write(hevar.files->infile, tmp->content, ft_strlen(tmp->content));
+	if (hevar.files->infile == -1)
+			return (del_token_lex((void *)tmp), 1);
+	write(hevar.files->infile, tmp->content, ft_strlen(tmp->content) - 1);
 	close(hevar.files->infile);
 	hevar.files->infile = open("tmp", O_RDONLY);
-	printf("error write -> %s\n", strerror(errno));
-	// write(hevar.files->infile, "MDR", 3);
-	printf("gnl said : %s\n", get_next_line(hevar.files->infile));
 	del_token_lex((void *)tmp);
+	if (hevar.files->infile == -1)
+		return (1);
 	return (0);
 }
 
-// static void	init_heredoc(t_files *files, int heredoc_ex, char *str)
-// {
+static char *process_heredoc(char *input, char *current)
+{
+	char	*tmp;
+	char	*result;
 
-// }
+	tmp = input;
+	input = ft_strjoin(input, "\n");
+	if (input == NULL)
+		return (free(input), free(current), NULL);
+	free(tmp);
+	tmp = current;
+	result = ft_strjoin(current, input);
+	if (result == NULL)
+		return (free(input), free(current), NULL);
+	free(tmp);
+	return (result);
+}
 
 int	heredoc(t_heredoc hevar, t_list *venv)
 {
 	char	*result;
-	char	*tmp;
 	char	*input;
 	int		count_line;
 
 	count_line = 1;
-	tmp = NULL;
 	result = NULL;
 	while (42)
 	{
@@ -62,14 +74,11 @@ int	heredoc(t_heredoc hevar, t_list *venv)
 		}
 		if (ft_strcmp(input, hevar.stop) == 0)
 			break;
-		tmp = result;
-		result = ft_strjoin(result, input);
+		result = process_heredoc(input, result);
 		if (result == NULL)
-			return (free(tmp), 1);
-		free(tmp);
+			return (1);
 		count_line++;
 	}
-	printf("result is equal to %s\n", result);
 	if (expand_heredoc(result, hevar, venv))
 		return (1);
 	return (0);
