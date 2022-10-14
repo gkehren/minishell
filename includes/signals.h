@@ -5,5 +5,7 @@
 
 /*						SIGNALS						*/
 void	handle_sigint(int sig);
+void	begin_signal(void);
+void	handle_sigint_hevar(int sig);
 
 #endif

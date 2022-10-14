@@ -62,14 +62,24 @@ int	heredoc(t_heredoc hevar, t_list *venv)
 	char	*result;
 	char	*input;
 	int		count_line;
+	int		temp;
 
-	count_line = 1;
+	temp = dup(STDIN_FILENO);
 	result = NULL;
-	while (42)
+	stop = 1;
+	signal(SIGINT, handle_sigint_hevar);
+	while (1)
 	{
 		input = readline("> ");
 		if (input == 0)
 		{
+			if (stop == -42)
+			{
+				signal(SIGINT, handle_sigint);
+				return (dup2(temp, STDIN_FILENO), close(temp), free(result), 0);
+			}
+			else
+				close(temp);
 			print_nb_error(EXIT_1, count_line, EXIT_2);
 			break ;
 		}
