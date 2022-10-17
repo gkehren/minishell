@@ -30,7 +30,8 @@ static int	expand_heredoc(char *str, t_heredoc hevar, t_list *venv)
 	hevar.files->infile = open("tmp", O_CREAT | O_WRONLY, 0777);
 	if (hevar.files->infile == -1)
 		return (del_token_lex((void *)tmp), 1);
-	write(hevar.files->infile, tmp->content, ft_strlen(tmp->content) - 1);
+	if (str)
+		write(hevar.files->infile, tmp->content, ft_strlen(tmp->content) - 1);
 	close(hevar.files->infile);
 	hevar.files->infile = open("tmp", O_RDONLY);
 	del_token_lex((void *)tmp);
@@ -53,34 +54,34 @@ static char	*process_heredoc(char *input, char *current)
 	result = ft_strjoin(current, input);
 	if (result == NULL)
 		return (free(input), free(current), NULL);
+	free(input);
 	free(tmp);
 	return (result);
 }
 
-int	heredoc(t_heredoc hevar, t_list *venv)
+static void	begin_heredoc(char **result, int *temp)
 {
-	char	*result;
-	char	*input;
-	int		count_line;
-	int		temp;
-
-	temp = dup(STDIN_FILENO);
-	result = NULL;
 	stop = 1;
+	*temp = dup(STDIN_FILENO);
+	*result = NULL;
 	signal(SIGINT, handle_sigint_hevar);
-	while (1)
+}
+
+int	heredoc(t_heredoc hevar, t_list *venv, char *result, int temp)
+{
+	char	*input;
+
+	begin_heredoc(&result, &temp);
+	while (42)
 	{
 		input = readline("> ");
 		if (input == 0)
 		{
 			if (stop == -42)
-			{
-				signal(SIGINT, handle_sigint);
-				return (dup2(temp, STDIN_FILENO), close(temp), free(result), 0);
-			}
-			else
-				close(temp);
-			print_nb_error(EXIT_1, count_line, EXIT_2);
+				return (signal(SIGINT, handle_sigint), dup2(temp, STDIN_FILENO),
+					close(temp), free(result), 0);
+			close(temp);
+			write(1, "\n", 1);
 			break ;
 		}
 		if (ft_strcmp(input, hevar.stop) == 0)
@@ -88,7 +89,6 @@ int	heredoc(t_heredoc hevar, t_list *venv)
 		result = process_heredoc(input, result);
 		if (result == NULL)
 			return (1);
-		count_line++;
 	}
 	if (expand_heredoc(result, hevar, venv))
 		return (1);

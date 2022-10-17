@@ -70,7 +70,7 @@ static int	pro_init_infile(t_list *token_list, t_files *files,
 		{
 			hevar = init_heredoc_var(tmp_token->content,
 					tmp_token->heredoc_ex, files, 0);
-			if (heredoc(hevar, venv))
+			if (heredoc(hevar, venv, NULL, dup(STDIN_FILENO)))
 				return (1);
 		}
 	}
@@ -93,7 +93,7 @@ int	init_infile(t_list *token_list, t_files *files, t_list *venv)
 		{
 			heredoc_var = init_heredoc_var(tmp_token->content,
 					tmp_token->heredoc_ex, files, 0);
-			if (heredoc(heredoc_var, venv))
+			if (heredoc(heredoc_var, venv, NULL, dup(STDIN_FILENO)))
 				return (1);
 		}
 		token_list = token_list->next;
