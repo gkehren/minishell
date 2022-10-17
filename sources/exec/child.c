@@ -19,6 +19,7 @@ void	redirect_child(t_list *lcmd, t_cmd *cmd, int *fd, int *fdd)
 		if (lcmd->next != NULL)
 			dup2(fd[1], STDOUT_FILENO);
 	}
+	close(*fdd);
 	close(fd[0]);
 	close(fd[1]);
 }
@@ -46,10 +47,7 @@ void	child_process_builtins(int *fd, int *fdd, t_list *venv, t_list *lcmd, t_bui
 	t_cmd	*cmd;
 
 	cmd = (t_cmd *)lcmd->content;
-	close(fd[0]);
-	dup2((*fdd), STDIN_FILENO);
-	if (lcmd->next != NULL)
-		dup2(fd[1], STDOUT_FILENO);
+	redirect_child(lcmd, cmd, fd, fdd);
 	(*builtins)(cmd->argc, cmd->full_cmd, &venv);
 	ft_lstclear(&lcmd, &del_cmd);
 	ft_lstclear(&venv, &del_venv);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
+/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:10:10 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/17 21:45:50 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/18 00:22:16 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ int	parent_process(t_list *lcmd, t_list *venv, int *fdd)
 	{
 		close(fd[1]);
 		(*fdd) = fd[0];
+		if (lcmd->next == NULL)
+			close(*fdd);
+		if (cmd->files->infile != -2)
+			close(cmd->files->infile);
+		if (cmd->files->outfile != -2)
+			close(cmd->files->outfile);
 		wait(NULL);
 	}
 	return (0);

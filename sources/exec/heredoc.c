@@ -60,10 +60,9 @@ static char	*process_heredoc(char *input, char *current)
 	return (result);
 }
 
-static void	begin_heredoc(char **result, int *temp)
+static void	begin_heredoc(char **result)
 {
 	stop = 1;
-	*temp = dup(STDIN_FILENO);
 	*result = NULL;
 	signal(SIGINT, handle_sigint_hevar);
 }
@@ -72,7 +71,7 @@ int	heredoc(t_heredoc hevar, t_list *venv, char *result, int temp)
 {
 	char	*input;
 
-	begin_heredoc(&result, &temp);
+	begin_heredoc(&result);
 	while (42)
 	{
 		input = readline("> ");
@@ -80,7 +79,7 @@ int	heredoc(t_heredoc hevar, t_list *venv, char *result, int temp)
 		{
 			if (stop == -42)
 				return (signal(SIGINT, handle_sigint), dup2(temp, STDIN_FILENO),
-					close(temp), free(result), 0);
+					close(temp), free(result), free(input), 0);
 			close(temp);
 			write(1, "\n", 1);
 			break ;
@@ -89,9 +88,10 @@ int	heredoc(t_heredoc hevar, t_list *venv, char *result, int temp)
 			break ;
 		result = process_heredoc(input, result);
 		if (result == NULL)
-			return (1);
+			return (close(temp), 1);
 	}
+	free(input);
 	if (expand_heredoc(result, hevar, venv))
-		return (1);
-	return (0);
+		return (close(temp), 1);
+	return (close(temp), 0);
 }

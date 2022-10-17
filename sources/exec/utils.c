@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
+/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:25:54 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/17 21:45:04 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/18 00:09:09 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	delete_tmp(void)
 	const char		*path = "/usr/bin/rm";
 	char *const		args[] = {"rm", ".270607020399", NULL};
 
-	write(1, "LAAAAAAAAAAA\n", 13);
 	pid = fork();
 	if (pid == -1)
 		return (perror("fork"), EXIT_FAILURE);
