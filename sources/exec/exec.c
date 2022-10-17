@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
+/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:10:10 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/17 15:08:39 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/17 16:14:28 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	parent_process(t_list *lcmd, char **env, int *fdd)
 	{
 		if (get_token_id(cmd->token_files) == IN)
 			child_process_in(fd, fdd, env, lcmd);
-		else if (get_token_id(cmd->token_files) == OUT)
+		else if (get_token_id(cmd->token_files) == OUT || get_token_id(cmd->token_files) == OUT_APPEND)
 			child_process_out(fd, fdd, env, lcmd);
 		else
 			child_process(fd, fdd, env, lcmd);
@@ -55,9 +55,9 @@ int	exec(t_list *lcmd, t_list *venv)
 	int		fdd;
 
 	fdd = 0;
-	cmd = (t_cmd *)lcmd->content;
 	while (lcmd)
 	{
+		cmd = (t_cmd *)lcmd->content;
 		if (cmd->builtin != NULL)
 			only_builtins(cmd->builtin, cmd, venv);
 		else if (parent_process(lcmd, send_env(&venv), &fdd) == 1)
