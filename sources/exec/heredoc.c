@@ -37,6 +37,7 @@ static int	expand_heredoc(char *str, t_heredoc hevar, t_list *venv)
 	del_token_lex((void *)tmp);
 	if (hevar.files->infile == -1)
 		return (1);
+	hevar.files->is_heredoc = 1;
 	return (0);
 }
 

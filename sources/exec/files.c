@@ -36,6 +36,7 @@ static t_files	*set_files(t_list *token_list, t_list *venv)
 	files = (t_files *)malloc(sizeof(t_files));
 	if (files == NULL)
 		return (NULL);
+	files->is_heredoc = 0;
 	files->infile = -2;
 	files->outfile = -2;
 	if (check_files(token_list))

@@ -16,9 +16,6 @@ static t_list	*ft_lstlast_in(t_list *token_list)
 			return (token_list);
 		token_list = token_list->next;
 	}
-	tmp_token = (t_token_lex *)token_list->next->content;
-	if (tmp_token->token == OUT || tmp_token->token == OUT_APPEND)
-		return (NULL);
 	return (token_list);
 }
 

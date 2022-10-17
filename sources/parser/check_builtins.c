@@ -15,7 +15,7 @@ static t_builtins	check_builtins(t_cmd *cmd)
 			break ;
 		i++;
 	}
-	if (str[i] == NULL)
+	if (str[i] == NULL || cmd->full_cmd == NULL)
 		return (NULL);
 	else
 		return (tab_b[i]);

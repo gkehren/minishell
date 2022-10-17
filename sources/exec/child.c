@@ -6,6 +6,8 @@ void	child_process(int *fd, int *fdd, char **env, t_list *lcmd)
 	char	*path;
 
 	cmd = (t_cmd *)lcmd->content;
+	if (!cmd->full_cmd)
+		exit(0);
 	path = path_command(cmd->full_cmd[0], env);
 	if (!path)
 		return (perror("Minishell"), free_double_tab((void *)env), free(path));
@@ -15,6 +17,7 @@ void	child_process(int *fd, int *fdd, char **env, t_list *lcmd)
 		dup2(fd[1], STDOUT_FILENO);
 	if (execve(path, cmd->full_cmd, env) == -1)
 		return (perror("Minishell"), free_double_tab((void *)env), free(path));
+	exit(0);
 }
 
 void	child_process_out(int *fd, int *fdd, char **env, t_list *lcmd)
