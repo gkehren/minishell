@@ -21,6 +21,7 @@ void	child_process(int *fd, int *fdd, char **env, t_list *lcmd);
 void	child_process_out(int *fd, int *fdd, char **env, t_list *lcmd);
 void	child_process_in(int *fd, int *fdd, char **env, t_list *lcmd);
 void	exec_error(t_list *lcmd, t_list *venv);
+int		only_builtins(t_builtins p_builtins, t_cmd *cmd, t_list *venv);
 
 /*						UTILS						*/
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);

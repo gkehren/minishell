@@ -51,24 +51,18 @@ int	parent_process(t_list *lcmd, char **env, int *fdd)
 
 int	exec(t_list *lcmd, t_list *venv)
 {
-	int	fdd;
+	t_cmd	*cmd;
+	int		fdd;
 
 	fdd = 0;
+	cmd = (t_cmd *)lcmd->content;
 	while (lcmd)
 	{
-		if (parent_process(lcmd, send_env(&venv), &fdd) == 1)
+		if (cmd->builtin != NULL)
+			only_builtins(cmd->builtin, cmd, venv);
+		else if (parent_process(lcmd, send_env(&venv), &fdd) == 1)
 			return (exec_error(lcmd, venv), 1);
 		lcmd = lcmd->next;
 	}
 	return (0);
 }
-
-		//if (current_b != NULL && nb_cmd == 1)
-		//	only_builtins(current_b, tmp, exec);
-		//else
-		//{
-		//	if (current_b != NULL)
-		//		body_fork_builtins(current_b, tmp, exec, nb_cmd);
-		//	else
-		//		body_fork(exec, tmp, nb_cmd);
-		//}
