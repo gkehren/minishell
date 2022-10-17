@@ -27,13 +27,13 @@ static int	expand_heredoc(char *str, t_heredoc hevar, t_list *venv)
 		if (expand_process(tmp, venv, 1))
 			return (del_token_lex((void *)tmp), 1);
 	}
-	hevar.files->infile = open("tmp", O_CREAT | O_WRONLY, 0777);
+	hevar.files->infile = open(".270607020399", O_CREAT | O_WRONLY, 0777);
 	if (hevar.files->infile == -1)
 		return (del_token_lex((void *)tmp), 1);
 	if (str)
-		write(hevar.files->infile, tmp->content, ft_strlen(tmp->content) - 1);
+		write(hevar.files->infile, tmp->content, ft_strlen(tmp->content));
 	close(hevar.files->infile);
-	hevar.files->infile = open("tmp", O_RDONLY);
+	hevar.files->infile = open(".270607020399", O_RDONLY);
 	del_token_lex((void *)tmp);
 	if (hevar.files->infile == -1)
 		return (1);
