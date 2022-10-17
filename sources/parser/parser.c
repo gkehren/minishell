@@ -7,9 +7,9 @@ static t_cmd	*init_current_cmd(void)
 	current_cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (current_cmd == NULL)
 		return (NULL);
-	current_cmd->full_path = NULL;
 	current_cmd->full_cmd = NULL;
 	current_cmd->argc = 0;
+	current_cmd->builtin = NULL;
 	current_cmd->token_files = NULL;
 	return (current_cmd);
 }
@@ -60,7 +60,7 @@ static int	add_cmd(t_list **cmd_list, t_cmd **current_cmd, t_list *tmp_list)
 	return (0);
 }
 
-t_list	*generate_cmd(t_list *token_list)
+t_list	*generate_cmd(t_list *token_list, t_list *venv)
 {
 	t_list	*cmd_list;
 	t_list	*tmp_list;
@@ -79,7 +79,10 @@ t_list	*generate_cmd(t_list *token_list)
 			return (NULL);
 	}
 	ft_lstclear(&token_list, &del_token_lex);
+	clean_quotes_v2(cmd_list);
 	init_argc_cmd(cmd_list);
 	init_builtins_cmd(cmd_list);
+	if (init_files_cmd(cmd_list, venv))
+		return (ft_lstclear(&cmd_list, &del_cmd), NULL);
 	return (cmd_list);
 }

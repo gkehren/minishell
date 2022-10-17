@@ -6,7 +6,7 @@ static void	exit_status(long long int_status, t_list **venv)
 	if (int_status != 2)
 		printf("exit (%lld)\n", int_status);
 	ft_lstclear(venv, &del_venv);
-	exit(int_status % 256);
+	exit(int_status);
 }
 
 static int	checker_integer(char *str, char *tmp, char *tmp2)

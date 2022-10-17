@@ -4,7 +4,8 @@
 #include "minishell.h"
 
 /*						EXPANSER						*/
-int		expanser(t_list **token_list, t_list *venv);
+int		expand_process(t_token_lex	*token, t_list *venv, int heredoc);
+int		expanser(t_list **token_list, t_list *venv, int heredoc);
 
 /*						EXPAND_WORD						*/
 int		expand_word(t_expanse expanse, t_list *venv, char **str, int i);
@@ -14,7 +15,7 @@ int		expand_return_value(char **expand, char **str);
 /*						CLEAN_EXPAND						*/
 int		clean_expand(t_list **token_list);
 /*						CLEAN_EXPAND2						*/
-int		clean_quotes(t_list **token_list);
+int 	clean_quotes_v2(t_list *cmd);
 void	turn_to_word(t_list *token_list);
 
 #endif

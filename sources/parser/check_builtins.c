@@ -9,7 +9,7 @@ static t_builtins	check_builtins(t_cmd *cmd)
 	int					i;
 
 	i = 0;
-	while (str[i])
+	while (str[i] && cmd->full_cmd)
 	{
 		if (strcmp(cmd->full_cmd[0], str[i]) == 0)
 			break ;

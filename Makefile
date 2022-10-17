@@ -12,6 +12,8 @@ SRC_NAME = 	minishell.c						\
 			basics/basic_str2.c				\
 			basics/ft_split.c				\
 			basics/ft_itoa.c				\
+			basics/get_next_line_utils.c 	\
+			basics/get_next_line.c 			\
 			builtins/env/handle_env.c		\
 			builtins/env/handle_env2.c		\
 			builtins/env/parsing_export.c	\
@@ -39,10 +41,14 @@ SRC_NAME = 	minishell.c						\
 			utils/handle_struct.c			\
 			utils/check_char.c				\
 			utils/free.c					\
+			utils/print_error.c  			\
 			exec/exec.c 					\
 			exec/utils.c					\
 			exec/child.c 					\
 			exec/builtins_exec.c 			\
+			exec/files.c 					\
+			exec/files2.c 					\
+			exec/heredoc.c 					\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
+/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 01:58:21 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/11 01:58:22 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/13 18:17:04 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_token_lex
 {
 	char				*content;
 	t_token				token;
+	int					heredoc_ex;
 }		t_token_lex;
 
 /*						ENV						*/
@@ -69,14 +70,30 @@ typedef struct s_expanse
 	char		char_to_rem;
 }	t_expanse;
 
+/*						FILES						*/
+typedef struct s_files
+{
+	int		infile;
+	int		outfile;
+}	t_files;
+
 /*						PARSER						*/
 typedef struct s_cmd
 {
-	char		*full_path;
 	char		**full_cmd;
 	int			argc;
 	t_builtins	builtin;
 	t_list		*token_files;
+	t_files		*files;
 }	t_cmd;
+
+/*						HEREDOC						*/
+typedef struct s_heredoc
+{
+	char	*stop;
+	int		heredoc_ex;
+	t_files	*files;
+	int		mode;
+}	t_heredoc;
 
 #endif

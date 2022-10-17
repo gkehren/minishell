@@ -9,6 +9,7 @@ t_token_lex	*init_token_lex(char *content, t_token token)
 		return (NULL);
 	token_lex->content = content;
 	token_lex->token = token;
+	token_lex->heredoc_ex = 0;
 	return (token_lex);
 }
 
@@ -50,8 +51,8 @@ void	del_cmd(void *lst)
 	t_cmd	*tmp;
 
 	tmp = (t_cmd *)lst;
-	free(tmp->full_path);
 	free_double_tab((void **)tmp->full_cmd);
 	ft_lstclear(&tmp->token_files, &del_token_lex);
+	free(tmp->files);
 	free(lst);
 }
