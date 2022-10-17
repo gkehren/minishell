@@ -24,11 +24,19 @@ int			ft_strlcpy(char *dst, char *src, int dstsize);
 char		*ft_strdup(char *s);
 long long	ft_atoi(char *str);
 int			ft_strncmp(char *s1, char *s2, size_t n);
+void		ft_putchar_fd(char c, int fd);
+void		ft_putnbr_fd(int n, int fd);
 
 /*						FT_SPLIT						*/
 char	**ft_split(char *s, char c);
 
 /*						FT_ITOA						*/
 char	*ft_itoa(long long n);
+
+/*						GET_NEXT_LINE						*/
+void	*ft_calloc(size_t count, size_t size);
+void	ft_substr(char *s, unsigned int start, char *save);
+char	*ft_subuff(char *buff, int id_line);
+char	*get_next_line(int fd);
 
 #endif

@@ -43,22 +43,40 @@ static char	*process_clean_quotes(char *str)
 	return (result);
 }
 
-int	clean_quotes(t_list **token_list)
+static int	clean_tk(t_list *token_list)
 {
-	t_list		*tmp_list;
 	t_token_lex	*tmp_token;
 
-	tmp_list = *token_list;
-	while (tmp_list)
+	while (token_list)
 	{
-		tmp_token = (t_token_lex *)tmp_list->content;
-		if (tmp_token->token == WORD)
+		tmp_token = (t_token_lex *)token_list->content;
+		tmp_token->content = process_clean_quotes(tmp_token->content);
+		if (tmp_token->content == NULL)
+			return (1);
+		token_list = token_list->next;
+	}
+	return (0);
+}
+
+int clean_quotes_v2(t_list *cmd)
+{
+	t_cmd	*tmp_cmd;
+	int		i;
+
+	while (cmd)
+	{
+		tmp_cmd = (t_cmd *)cmd->content;
+		i = 0;
+		while (tmp_cmd->full_cmd && tmp_cmd->full_cmd[i])
 		{
-			tmp_token->content = process_clean_quotes(tmp_token->content);
-			if (tmp_token->content == NULL)
+			tmp_cmd->full_cmd[i] = process_clean_quotes(tmp_cmd->full_cmd[i]);
+			if (tmp_cmd->full_cmd[i] == NULL)
 				return (1);
+			i++;
 		}
-		tmp_list = tmp_list->next;
+		if (clean_tk(tmp_cmd->token_files))
+			return (1);
+		cmd = cmd->next;
 	}
 	return (0);
 }
