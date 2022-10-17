@@ -10,7 +10,7 @@ static int	check_files(t_list *token_list)
 		tmp_token = (t_token_lex *)token_list->content;
 		if (tmp_token->token != IN_HEREDOC)
 		{
-			if (tmp_token->token == OUT_APPEND)
+			if (tmp_token->token == OUT_APPEND || tmp_token->token == OUT)
 				fd = open(tmp_token->content, O_RDONLY | O_CREAT, 0644);
 			else
 				fd = open(tmp_token->content, O_RDONLY);
