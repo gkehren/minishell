@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
+/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:02:44 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/17 21:32:51 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/18 01:56:08 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 
 /*						EXEC						*/
 
-int			exec(t_list *lcmd, t_list *env);
-void		child_process(int *fd, int *fdd, t_list *venv, t_list *lcmd);
-void		child_process_builtins(int *fd, int *fdd, t_list *venv, t_list *lcmd, t_builtins builtins);
+int			exec(t_list **lcmd, t_list **venv);
+int			parent_process(t_exec *exec, t_list *lcmd, int *fdd);
+void		child_process(int *fd, int *fdd, t_list **venv, t_list *lcmd);
+void		child_process_builtins(int *fd, int *fdd, t_exec *exec, t_list *lcmd);
 int			only_builtins(t_builtins p_builtins, t_cmd *cmd, t_list *venv);
 
 /*						FILES						*/

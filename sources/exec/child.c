@@ -19,19 +19,19 @@ void	redirect_child(t_list *lcmd, t_cmd *cmd, int *fd, int *fdd)
 		if (lcmd->next != NULL)
 			dup2(fd[1], STDOUT_FILENO);
 	}
-	close(*fdd);
+	close(*fdd); // A NE PAS FERMER TOUT LE TEMPS
 	close(fd[0]);
 	close(fd[1]);
 }
 
-void	child_process(int *fd, int *fdd, t_list *venv, t_list *lcmd)
+void	child_process(int *fd, int *fdd, t_list **venv, t_list *lcmd)
 {
 	t_cmd	*cmd;
 	char	*path;
 	char	**env;
 
 	cmd = (t_cmd *)lcmd->content;
-	env = send_env(&venv);
+	env = send_env(venv);
 	if (!cmd->full_cmd)
 		exit(0);
 	path = path_command(cmd->full_cmd[0], env);
@@ -42,14 +42,16 @@ void	child_process(int *fd, int *fdd, t_list *venv, t_list *lcmd)
 		return (free(path), perror("Minishell"), free_double_tab((void *)env));
 }
 
-void	child_process_builtins(int *fd, int *fdd, t_list *venv, t_list *lcmd, t_builtins builtins)
+void	child_process_builtins(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 {
-	t_cmd	*cmd;
+	t_cmd		*cmd;
+	t_builtins	builtins;
 
 	cmd = (t_cmd *)lcmd->content;
+	builtins = (t_builtins)cmd->builtin;
 	redirect_child(lcmd, cmd, fd, fdd);
-	(*builtins)(cmd->argc, cmd->full_cmd, &venv);
-	ft_lstclear(&lcmd, &del_cmd);
-	ft_lstclear(&venv, &del_venv);
+	(*builtins)(cmd->argc, cmd->full_cmd, exec->venv);
+	ft_lstclear(exec->cmd, &del_cmd);
+	ft_lstclear(exec->venv, &del_venv);
 	exit(0);
 }

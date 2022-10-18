@@ -25,7 +25,7 @@ static int	pro_init_outfile(t_token_lex *tmp_token, t_files *files)
 		files->outfile = open(tmp_token->content, O_CREAT | O_WRONLY, 0644);
 	else if (tmp_token->token == OUT_APPEND)
 		files->outfile = open(tmp_token->content,
-			O_APPEND | O_WRONLY | O_CREAT, 0644);
+				O_APPEND | O_WRONLY | O_CREAT, 0644);
 	if (files->outfile == -1)
 		return (1);
 	return (0);

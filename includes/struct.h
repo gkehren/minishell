@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 01:58:21 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/18 00:47:34 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/18 01:50:18 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,8 @@ typedef struct s_heredoc
 /*						EXEC						*/
 typedef struct s_exec
 {
-	t_list		*cmd;
-	t_list		*venv;
-	t_builtins	builtins;
-	int			fd[2];
-	int			fdd;
+	t_list		**cmd;
+	t_list		**venv;
 }	t_exec;
 
 #endif

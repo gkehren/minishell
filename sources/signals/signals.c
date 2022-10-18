@@ -1,5 +1,17 @@
 #include "minishell.h"
 
+void	handle_sigint_pro(int sig)
+{
+	(void)sig;
+	printf("\n");
+}
+
+void	handle_sigquit_pro(int sig)
+{
+	(void)sig;
+	printf("Quit: %d\n", sig);
+}
+
 void	handle_sigint(int sig)
 {
 	(void)sig;
