@@ -66,6 +66,8 @@ t_list	*generate_cmd(t_list *token_list, t_list *venv)
 	t_list	*tmp_list;
 	t_cmd	*current_cmd;
 
+	if (!token_list)
+		return (NULL);
 	cmd_list = NULL;
 	tmp_list = token_list;
 	current_cmd = init_current_cmd();
