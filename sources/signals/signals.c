@@ -9,7 +9,7 @@ void	handle_sigint_pro(int sig)
 void	handle_sigquit_pro(int sig)
 {
 	(void)sig;
-	printf("Quit: %d\n", sig);
+	printf("Quit\n");
 }
 
 void	handle_sigint(int sig)
