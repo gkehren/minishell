@@ -19,7 +19,8 @@ void	redirect_child(t_list *lcmd, t_cmd *cmd, int *fd, int *fdd)
 		if (lcmd->next != NULL)
 			dup2(fd[1], STDOUT_FILENO);
 	}
-	close(*fdd); // A NE PAS FERMER TOUT LE TEMPS
+	if (lcmd->next != NULL) // JE CROIS QUE C'EST FIX
+		close(*fdd); // A NE PAS FERMER TOUT LE TEMPS
 	close(fd[0]);
 	close(fd[1]);
 }
