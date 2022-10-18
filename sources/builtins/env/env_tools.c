@@ -44,7 +44,6 @@ void	venv_replace(t_list **venv, char *title, char *content)
 		if (!ft_strcmp(tmp_venv->title, title))
 		{
 			free(tmp_venv->content);
-			free(title);
 			tmp_venv->content = content;
 			tmp_venv->set = INIT;
 			return ;
