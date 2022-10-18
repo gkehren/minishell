@@ -7,5 +7,7 @@
 void	handle_sigint(int sig);
 void	begin_signal(void);
 void	handle_sigint_hevar(int sig);
+void	handle_sigint_pro(int sig);
+void	handle_sigquit_pro(int sig);
 
 #endif

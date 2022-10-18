@@ -30,6 +30,8 @@ int	parent_process(t_exec *exec, t_list *lcmd, int *fdd)
 	pid_t	pid;
 	int		fd[2];
 
+	signal(SIGINT, handle_sigint_pro);
+	signal(SIGQUIT, handle_sigquit_pro);
 	if (init_parent(lcmd, &pid, &cmd, &fd))
 		return (1);
 	if (pid == 0)
@@ -41,5 +43,6 @@ int	parent_process(t_exec *exec, t_list *lcmd, int *fdd)
 	}
 	else
 		core_parent_process(fdd, &fd, lcmd, cmd);
+	begin_signal();
 	return (0);
 }
