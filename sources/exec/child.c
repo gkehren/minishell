@@ -18,7 +18,6 @@ void	redirect_child(t_list *lcmd, t_cmd *cmd, int *fd, int *fdd)
 	{
 		if (lcmd->next != NULL)
 			dup2(fd[1], STDOUT_FILENO);
-		close(STDOUT_FILENO);
 	}
 	if (lcmd->next != NULL)
 		close(*fdd);
@@ -38,10 +37,11 @@ void	child_process(int *fd, int *fdd, t_list **venv, t_list *lcmd)
 		exit(0);
 	path = path_command(cmd->full_cmd[0], env);
 	if (!path)
-		return (ft_putstr_fd(cmd->full_cmd[0], 2),
-			write(2, ": command not found\n", 21),
+		return (print_error_str("minishell: ", cmd->full_cmd[0], ": command not found\n"),
 			free(path), close(fd[1]),
-			close(fd[0]), close(*fdd), free_double_tab((void *)env));
+			close(fd[0]), close(*fdd), free_double_tab((void *)env),
+			ft_lstclear(&lcmd, &del_cmd), ft_lstclear(venv, &del_venv),
+			exit(127));
 	redirect_child(lcmd, cmd, fd, fdd);
 	if (execve(path, cmd->full_cmd, env) == -1)
 		return (free(path), close(*fdd), perror("Minishell"),
