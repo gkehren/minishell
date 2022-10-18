@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:10:10 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/18 01:55:42 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/18 15:33:35 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	exec_error(t_list *lcmd, t_list *venv)
+void	free_exec(t_list *lcmd, t_list *venv)
 {
-	perror("Minishell");
 	ft_lstclear(&lcmd, &del_cmd);
 	ft_lstclear(&venv, &del_venv);
 	exit(1);
@@ -44,7 +43,7 @@ int	exec(t_list **lcmd, t_list **venv)
 		if (cmd->builtin != NULL && size_cmd == 1)
 			only_builtins(cmd->builtin, cmd, *venv);
 		else if (parent_process(&exec, tmp_list, &fdd) == 1)
-			return (exec_error(tmp_list, *venv), 1);
+			return (free_exec(tmp_list, *venv), 1);
 		if (cmd->files->is_heredoc == 1)
 		{
 			if (delete_tmp())

@@ -37,10 +37,12 @@ void	child_process(int *fd, int *fdd, t_list **venv, t_list *lcmd)
 		exit(0);
 	path = path_command(cmd->full_cmd[0], env);
 	if (!path)
-		return (perror("Minishell"), free_double_tab((void *)env), free(path));
+		return (write(2, "Minishell: command not found\n", 30),
+			free_double_tab((void *)env), free(path), close(fd[1]),
+			close(fd[0]), free_exec(lcmd, *venv));
 	redirect_child(lcmd, cmd, fd, fdd);
 	if (execve(path, cmd->full_cmd, env) == -1)
-		return (free(path), perror("Minishell"), free_double_tab((void *)env));
+		return (free(path), close(*fdd), perror("Minishell"), free_double_tab((void *)env));
 }
 
 void	child_process_builtins(int *fd, int *fdd, t_exec *exec, t_list *lcmd)

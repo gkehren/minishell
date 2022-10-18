@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:02:44 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/18 01:56:08 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/18 15:33:52 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int			parent_process(t_exec *exec, t_list *lcmd, int *fdd);
 void		child_process(int *fd, int *fdd, t_list **venv, t_list *lcmd);
 void		child_process_builtins(int *fd, int *fdd, t_exec *exec, t_list *lcmd);
 int			only_builtins(t_builtins p_builtins, t_cmd *cmd, t_list *venv);
+void		free_exec(t_list *lcmd, t_list *venv);
 
 /*						FILES						*/
 int			init_files_cmd(t_list *cmd, t_list *venv);
