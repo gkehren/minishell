@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
+/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:10:10 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/18 21:13:14 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/19 00:15:35 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	exec(t_list **lcmd, t_list **venv)
 	t_list	*tmp_list;
 
 	tmp_list = *lcmd;
-	fdd = 0;
+	fdd = -2;
 	init_exec(&exec, lcmd, venv);
 	size_cmd = ft_lstsize(*lcmd);
 	while (tmp_list)

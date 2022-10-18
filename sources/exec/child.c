@@ -19,7 +19,7 @@ void	redirect_child(t_list *lcmd, t_cmd *cmd, int *fd, int *fdd)
 		if (lcmd->next != NULL)
 			dup2(fd[1], STDOUT_FILENO);
 	}
-	if (lcmd->next != NULL)
+	if (*fdd != -2)
 		close(*fdd);
 	close(fd[0]);
 	close(fd[1]);

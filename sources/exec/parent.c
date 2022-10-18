@@ -14,6 +14,8 @@ static int	init_parent(t_list *lcmd, pid_t *pid, t_cmd **cmd, int (*fd)[])
 static void	core_parent_process(int *fdd, int (*fd)[], t_list *lcmd, t_cmd *cmd)
 {
 	close((*fd)[1]);
+	if (*fdd != -2)
+		close(*fdd);
 	(*fdd) = (*fd)[0];
 	if (lcmd->next == NULL)
 		close(*fdd);
