@@ -32,9 +32,6 @@
 
 # define BUFFER_SIZE 42
 
-extern int	g_status;
-extern int	stop;
-
-void	monitor(t_list *venv, t_list *token_list, t_list *cmd, char **env);
+extern t_global	g_global;
 
 #endif

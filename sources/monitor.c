@@ -32,7 +32,7 @@ void	monitor(t_list *venv, t_list *token_list, t_list *cmd, char **env)
 	{
 		input = readline("MINISHELL$> ");
 		if (input == 0)
-			return (ft_lstclear(&venv, &del_venv), printf("exit\n"), rl_clear_history(), exit(g_status));
+			return (ft_lstclear(&venv, &del_venv), printf("exit\n"), rl_clear_history(), exit(0));
 		add_history(input);
 		if (parsing_part(&venv, &token_list, &cmd, input) == 0)
 		{
