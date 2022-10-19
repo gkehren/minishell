@@ -28,6 +28,7 @@
 # include "parser.h"
 # include "exec.h"
 # include "signals.h"
+# include "monitor.h"
 
 # define BUFFER_SIZE 42
 
