@@ -50,6 +50,7 @@ SRC_NAME = 	minishell.c						\
 			exec/files2.c 					\
 			exec/heredoc.c 					\
 			exec/parent.c 					\
+			exec/path.c 					\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
