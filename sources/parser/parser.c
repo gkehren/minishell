@@ -60,7 +60,7 @@ static int	add_cmd(t_list **cmd_list, t_cmd **current_cmd, t_list *tmp_list)
 	return (0);
 }
 
-t_list	*generate_cmd(t_list *token_list, t_list *venv)
+t_list	*generate_cmd(t_list **token_list, t_list *venv)
 {
 	t_list	*cmd_list;
 	t_list	*tmp_list;
@@ -69,18 +69,18 @@ t_list	*generate_cmd(t_list *token_list, t_list *venv)
 	if (!token_list)
 		return (NULL);
 	cmd_list = NULL;
-	tmp_list = token_list;
+	tmp_list = *token_list;
 	current_cmd = init_current_cmd();
 	if (current_cmd == NULL)
-		return (NULL);
+		return (ft_lstclear(token_list, &del_token_lex), NULL);
 	while (tmp_list)
 	{
 		if (process_cmd(&tmp_list, current_cmd))
-			return (NULL);
+			return (ft_lstclear(token_list, &del_token_lex), ft_lstclear(&cmd_list, &del_cmd), NULL);
 		if (add_cmd(&cmd_list, &current_cmd, tmp_list))
-			return (NULL);
+			return (ft_lstclear(token_list, &del_token_lex), ft_lstclear(&cmd_list, &del_cmd), NULL);
 	}
-	ft_lstclear(&token_list, &del_token_lex);
+	ft_lstclear(token_list, &del_token_lex);
 	clean_quotes_v2(cmd_list);
 	init_argc_cmd(cmd_list);
 	init_builtins_cmd(cmd_list);

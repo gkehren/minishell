@@ -80,7 +80,7 @@ int	ft_exit(int argc, char **args, t_list **venv)
 
 	(void)venv;
 	if (argc == 1)
-		exit_status(g_status, venv);
+		exit_status(g_global.g_status, venv);
 	ret = check_errors(args);
 	if (ret == 2)
 		exit_status(2, venv);

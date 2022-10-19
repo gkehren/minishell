@@ -65,6 +65,7 @@ t_list	*generate_token(char *entry, int mode)
 {
 	int			i;
 	t_list		*token_list;
+	int			check;
 
 	token_list = NULL;
 	i = 0;
@@ -74,16 +75,16 @@ t_list	*generate_token(char *entry, int mode)
 			i++;
 		if (!entry[i])
 			break ;
-		if (lexer_monitor(entry, &i, &token_list))
-		{
-			ft_lstclear(&token_list, &del_token_lex);
+		check = lexer_monitor(entry, &i, &token_list);
+		if (check == 1 && mode == 1)
+			return (ft_lstclear(&token_list, &del_token_lex), malloc_failed(), NULL);
+		else if (check == 1 && mode == 1)
 			return (NULL);
-		}
 	}
 	if (mode == 1)
 	{
 		if (check_token_word(token_list))
-			return (ft_lstclear(&token_list, &del_token_lex), NULL);
+			return (NULL);
 	}
 	return (token_list);
 }

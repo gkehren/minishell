@@ -24,7 +24,7 @@ void	handle_sigint(int sig)
 void	handle_sigint_hevar(int sig)
 {
 	(void)sig;
-	stop = -42;
+	g_global.stop = -42;
 	write(1, "\n", 1);
 	close(0);
 }

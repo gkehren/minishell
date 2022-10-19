@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 01:58:21 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/18 01:50:18 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/19 17:10:22 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,12 @@ typedef struct s_exec
 	t_list		**cmd;
 	t_list		**venv;
 }	t_exec;
+
+/*						GLOBAL						*/
+typedef struct s_global
+{
+	int	g_status;
+	int	stop;
+}	t_global;
 
 #endif
