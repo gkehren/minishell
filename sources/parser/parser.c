@@ -60,7 +60,7 @@ static int	add_cmd(t_list **cmd_list, t_cmd **current_cmd, t_list *tmp_list)
 	return (0);
 }
 
-t_list	*generate_cmd(t_list **token_list, t_list *venv)
+t_list	*generate_cmd(t_list **token_list, t_list **venv)
 {
 	t_list	*cmd_list;
 	t_list	*tmp_list;
@@ -76,15 +76,16 @@ t_list	*generate_cmd(t_list **token_list, t_list *venv)
 	while (tmp_list)
 	{
 		if (process_cmd(&tmp_list, current_cmd))
-			return (ft_lstclear(token_list, &del_token_lex), ft_lstclear(&cmd_list, &del_cmd), NULL);
+			return (ft_lstclear(venv, &del_venv), ft_lstclear(token_list, &del_token_lex), ft_lstclear(&cmd_list, &del_cmd), malloc_failed(), NULL);
 		if (add_cmd(&cmd_list, &current_cmd, tmp_list))
-			return (ft_lstclear(token_list, &del_token_lex), ft_lstclear(&cmd_list, &del_cmd), NULL);
+			return (ft_lstclear(venv, &del_venv), ft_lstclear(token_list, &del_token_lex), ft_lstclear(&cmd_list, &del_cmd), malloc_failed(), NULL);
 	}
 	ft_lstclear(token_list, &del_token_lex);
-	clean_quotes_v2(cmd_list);
+	if (clean_quotes_v2(cmd_list))
+		return (ft_lstclear(venv, &del_venv), ft_lstclear(&cmd_list, &del_cmd), malloc_failed(), NULL);
 	init_argc_cmd(cmd_list);
 	init_builtins_cmd(cmd_list);
-	if (init_files_cmd(cmd_list, venv))
+	if (init_files_cmd(cmd_list, *venv))
 		return (ft_lstclear(&cmd_list, &del_cmd), NULL);
 	return (cmd_list);
 }

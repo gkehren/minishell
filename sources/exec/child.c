@@ -38,7 +38,6 @@ void	child_process(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 	path = path_command(cmd->full_cmd[0], env);
 	if (!path)
 	{
-		write(1, "la\n", 3);
 		if (*fdd != -2)
 			close(*fdd);
 		return (close(fd[1]), close(fd[0]), free(path),

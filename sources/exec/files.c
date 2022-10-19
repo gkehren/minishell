@@ -19,7 +19,6 @@ static int	check_files(t_list *token_list)
 				print_error_str("minishell: ", tmp_token->content, ": ");
 				ft_putstr_fd(strerror(errno), 2);
 				ft_putstr_fd("\n", 2);
-				close (fd);
 				return (1);
 			}
 			close(fd);
