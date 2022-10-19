@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:25:54 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/19 18:31:18 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/19 22:38:12 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,13 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 
 char	*file_exec(char *cmd)
 {
-	int	i;
-	int	j;
+	char	*tmp;
+	int		i;
+	int		j;
 
 	i = 2;
 	j = 0;
+	tmp = ft_strdup(cmd);
 	while (cmd[i])
 	{
 		cmd[j] = cmd[i];
@@ -102,10 +104,10 @@ char	*file_exec(char *cmd)
 		j++;
 	}
 	cmd[i - 2] = '\0';
-	if (access(cmd, X_OK) == 0)
-		return ("");
+	if (access(tmp, X_OK) == 0)
+		return (free(tmp), cmd);
 	else
-		return (NULL);
+		return (print_error_str("minishell: ", tmp, ": "), perror(""), free(tmp), NULL);
 }
 
 char	*path_command(char *cmd, char **env)
@@ -118,23 +120,27 @@ char	*path_command(char *cmd, char **env)
 	i = 0;
 	if (cmd[0] == '.' && cmd[1] == '/')
 		return (file_exec(cmd));
-	while (ft_strnstr(env[i], "PATH", 4) == 0)
+	else
 	{
-		if (!env[i])
-			return (NULL);
-		i++;
+		while (ft_strnstr(env[i], "PATH", 4) == 0)
+		{
+			if (!env[i])
+				return (NULL);
+			i++;
+		}
+		paths = ft_split(env[i] + 5, ':');
+		i = 0;
+		while (paths[i])
+		{
+			part_path = ft_strjoin(paths[i], "/");
+			path = ft_strjoin(part_path, cmd);
+			free(part_path);
+			if (access(path, F_OK) == 0)
+				return (free_double_tab((void **)paths), path);
+			free(path);
+			i++;
+		}
+		return (free_double_tab((void **)paths),
+			print_error_str("minishell: ", cmd, ": command not found\n"), NULL);
 	}
-	paths = ft_split(env[i] + 5, ':');
-	i = 0;
-	while (paths[i])
-	{
-		part_path = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(part_path, cmd);
-		free(part_path);
-		if (access(path, F_OK) == 0)
-			return (free_double_tab((void **)paths), path);
-		free(path);
-		i++;
-	}
-	return (free_double_tab((void **)paths), NULL);
 }
