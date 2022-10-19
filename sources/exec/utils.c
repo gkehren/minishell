@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:25:54 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/18 00:09:09 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/19 18:31:18 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,26 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	return (NULL);
 }
 
+char	*file_exec(char *cmd)
+{
+	int	i;
+	int	j;
+
+	i = 2;
+	j = 0;
+	while (cmd[i])
+	{
+		cmd[j] = cmd[i];
+		i++;
+		j++;
+	}
+	cmd[i - 2] = '\0';
+	if (access(cmd, X_OK) == 0)
+		return ("");
+	else
+		return (NULL);
+}
+
 char	*path_command(char *cmd, char **env)
 {
 	char	**paths;
@@ -96,6 +116,8 @@ char	*path_command(char *cmd, char **env)
 	char	*part_path;
 
 	i = 0;
+	if (cmd[0] == '.' && cmd[1] == '/')
+		return (file_exec(cmd));
 	while (ft_strnstr(env[i], "PATH", 4) == 0)
 	{
 		if (!env[i])
