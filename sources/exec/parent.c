@@ -41,7 +41,7 @@ int	parent_process(t_exec *exec, t_list *lcmd, int *fdd)
 		if (cmd->builtin)
 			child_process_builtins(fd, fdd, exec, lcmd);
 		else
-			child_process(fd, fdd, exec->venv, lcmd);
+			child_process(fd, fdd, exec, lcmd);
 	}
 	else
 		core_parent_process(fdd, &fd, lcmd, cmd);
