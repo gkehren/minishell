@@ -46,6 +46,8 @@ char	*path_command(char *cmd, char **env)
 	int		i;
 	char	*part_path;
 
+	if (cmd[0] == '/')
+		return (cmd);
 	if (cmd[0] == '.' && cmd[1] == '/')
 		return (file_exec(cmd));
 	paths = split_env(env);

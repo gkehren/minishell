@@ -25,6 +25,16 @@ void	redirect_child(t_list *lcmd, t_cmd *cmd, int *fd, int *fdd)
 	close(fd[1]);
 }
 
+void	close_fd(int *fdd, t_cmd *cmd)
+{
+	if (*fdd != -2)
+		close(*fdd);
+	if (cmd->files->outfile != -2)
+		close(cmd->files->outfile);
+	if (cmd->files->infile != -2)
+		close(cmd->files->infile);
+}
+
 void	child_process(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 {
 	t_cmd	*cmd;
@@ -38,8 +48,7 @@ void	child_process(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 	path = path_command(cmd->full_cmd[0], env);
 	if (!path)
 	{
-		if (*fdd != -2)
-			close(*fdd);
+		close_fd(fdd, cmd);
 		return (close(fd[1]), close(fd[0]), free(path),
 			free_double_tab((void *)env), ft_lstclear(exec->venv, &del_venv),
 			ft_lstclear(exec->cmd, &del_cmd), exit(127));
