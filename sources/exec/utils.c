@@ -6,28 +6,11 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:25:54 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/20 11:49:15 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/20 16:54:05 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	delete_tmp(void)
-{
-	pid_t			pid;
-	const char		*path = "/usr/bin/rm";
-	char *const		args[] = {"rm", ".270607020399", NULL};
-
-	pid = fork();
-	if (pid == -1)
-		return (perror("fork"), EXIT_FAILURE);
-	if (pid == 0)
-	{
-		if (execve(path, args, NULL) == -1)
-			return (perror("execve"), 1);
-	}
-	return (0);
-}
 
 int	get_token_id(t_list *ltoken)
 {

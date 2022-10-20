@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 01:58:21 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/19 17:10:22 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/20 16:46:32 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_files
 	int		infile;
 	int		outfile;
 	int		is_heredoc;
+	int		index_cmd;
+	char	*index_cmd_str;
 }	t_files;
 
 /*						PARSER						*/

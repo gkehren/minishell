@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:10:10 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/20 16:22:49 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/20 18:41:06 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,10 @@ int	exec(t_list **lcmd, t_list **venv)
 		else if (parent_process(&exec, tmp_list, &fdd) == 1)
 			return (free_exec(tmp_list, *venv), 1);
 		if (cmd->files->is_heredoc == 1)
-		{
-			if (delete_tmp())
-				return (1);
-		}
+			unlink(cmd->files->index_cmd_str);
 		tmp_list = (tmp_list)->next;
 	}
-	while (size_cmd + 1)
+	while (size_cmd)
 	{
 		wait(NULL);
 		size_cmd--;

@@ -28,7 +28,7 @@ static int	check_files(t_list *token_list)
 	return (0);
 }
 
-static t_files	*set_files(t_list *token_list, t_list *venv)
+static t_files	*set_files(t_list *token_list, t_list *venv, int index)
 {
 	t_files	*files;
 
@@ -38,6 +38,8 @@ static t_files	*set_files(t_list *token_list, t_list *venv)
 	files->is_heredoc = 0;
 	files->infile = -2;
 	files->outfile = -2;
+	files->index_cmd = index;
+	files->index_cmd_str = NULL;
 	if (check_files(token_list))
 		return (free(files), NULL);
 	if (init_infile(token_list, files, venv))
@@ -50,13 +52,16 @@ static t_files	*set_files(t_list *token_list, t_list *venv)
 int	init_files_cmd(t_list *cmd, t_list *venv)
 {
 	t_cmd	*tmp_cmd;
+	int		index;
 
+	index = 0;
 	while (cmd)
 	{
 		tmp_cmd = (t_cmd *)cmd->content;
-		tmp_cmd->files = set_files(tmp_cmd->token_files, venv);
+		tmp_cmd->files = set_files(tmp_cmd->token_files, venv, index);
 		if (tmp_cmd->files == NULL)
 			return (1);
+		index++;
 		cmd = cmd->next;
 	}
 	return (0);

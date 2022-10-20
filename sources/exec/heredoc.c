@@ -15,10 +15,25 @@ t_heredoc	init_heredoc_var(char *stop, int heredoc_ex,
 	return (heredoc_var);
 }
 
+static void	set_up_tmp(t_heredoc *hevar)
+{
+	char	*index;
+	char	pwd[PATH_MAX];
+	char	*tmp;
+
+	getcwd(pwd, PATH_MAX);
+	tmp = ft_strjoin(pwd, "/.tmp");
+	index = ft_itoa(hevar->files->index_cmd);
+	hevar->files->index_cmd_str = ft_strjoin(tmp, index);
+	free(index);
+	free(tmp);
+}
+
 static int	expand_heredoc(char *str, t_heredoc hevar, t_list *venv)
 {
 	t_token_lex	*tmp;
 
+	set_up_tmp(&hevar);
 	tmp = init_token_lex(str, WORD);
 	if (tmp == NULL)
 		return (1);
@@ -27,13 +42,13 @@ static int	expand_heredoc(char *str, t_heredoc hevar, t_list *venv)
 		if (expand_process(tmp, venv, 1))
 			return (del_token_lex((void *)tmp), 1);
 	}
-	hevar.files->infile = open(".270607020399", O_CREAT | O_WRONLY, 0777);
+	hevar.files->infile = open(hevar.files->index_cmd_str, O_CREAT | O_WRONLY, 0777);
 	if (hevar.files->infile == -1)
 		return (del_token_lex((void *)tmp), 1);
 	if (str)
 		write(hevar.files->infile, tmp->content, ft_strlen(tmp->content));
 	close(hevar.files->infile);
-	hevar.files->infile = open(".270607020399", O_RDONLY);
+	hevar.files->infile = open(hevar.files->index_cmd_str, O_RDONLY);
 	del_token_lex((void *)tmp);
 	if (hevar.files->infile == -1)
 		return (1);
@@ -83,7 +98,6 @@ int	heredoc(t_heredoc hevar, t_list *venv, char *result, int temp)
 				return (signal(SIGINT, handle_sigint), dup2(temp, STDIN_FILENO),
 					close(temp), free(result), free(input), 1);
 			}
-			close(temp);
 			break ;
 		}
 		if (ft_strcmp(input, hevar.stop) == 0)
