@@ -44,15 +44,14 @@ void	child_process(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 	cmd = (t_cmd *)lcmd->content;
 	env = send_env(exec->venv);
 	if (!cmd->full_cmd)
-		exit(0);
+		return (close_fd(fdd, cmd), close(fd[1]), close(fd[0]),
+			free_double_tab((void *)env), ft_lstclear(exec->venv, &del_venv),
+			ft_lstclear(exec->cmd, &del_cmd), exit(1));
 	path = path_command(cmd->full_cmd[0], env);
 	if (!path)
-	{
-		close_fd(fdd, cmd);
-		return (close(fd[1]), close(fd[0]), free(path),
+		return (close_fd(fdd, cmd), close(fd[1]), close(fd[0]), free(path),
 			free_double_tab((void *)env), ft_lstclear(exec->venv, &del_venv),
 			ft_lstclear(exec->cmd, &del_cmd), exit(127));
-	}
 	redirect_child(lcmd, cmd, fd, fdd);
 	if (execve(path, cmd->full_cmd, env) == -1)
 		return (perror("minishell"), free(path), close(*fdd),
@@ -69,6 +68,7 @@ void	child_process_builtins(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 	builtins = (t_builtins)cmd->builtin;
 	redirect_child(lcmd, cmd, fd, fdd);
 	(*builtins)(cmd->argc, cmd->full_cmd, exec->venv);
+	close(STDIN_FILENO);
 	ft_lstclear(exec->cmd, &del_cmd);
 	ft_lstclear(exec->venv, &del_venv);
 	exit(0);
