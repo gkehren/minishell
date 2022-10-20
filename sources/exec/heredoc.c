@@ -62,7 +62,7 @@ static char	*process_heredoc(char *input, char *current)
 
 static void	begin_heredoc(char **result)
 {
-	g_global.stop = 1;
+	g_global.stop = 2;
 	*result = NULL;
 	signal(SIGINT, handle_sigint_hevar);
 }
@@ -78,10 +78,12 @@ int	heredoc(t_heredoc hevar, t_list *venv, char *result, int temp)
 		if (input == 0)
 		{
 			if (g_global.stop == -42)
+			{
+				g_global.stop = 2;
 				return (signal(SIGINT, handle_sigint), dup2(temp, STDIN_FILENO),
-					close(temp), free(result), free(input), 0);
+					close(temp), free(result), free(input), 1);
+			}
 			close(temp);
-			write(1, "\n", 1);
 			break ;
 		}
 		if (ft_strcmp(input, hevar.stop) == 0)

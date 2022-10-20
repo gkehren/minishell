@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
+/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:25:54 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/19 22:49:48 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/20 11:49:15 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	delete_tmp(void)
 		if (execve(path, args, NULL) == -1)
 			return (perror("execve"), 1);
 	}
-	return (1);
+	return (0);
 }
 
 int	get_token_id(t_list *ltoken)

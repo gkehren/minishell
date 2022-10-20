@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:48:27 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/19 17:12:01 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/20 14:30:34 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char **argv, char **env)
 	t_list		*token_list;
 	t_list		*cmd;
 	
+	g_global.stop = 1;
 	begin_signal();
 	(void)argc;
 	(void)argv;

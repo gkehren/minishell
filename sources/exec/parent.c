@@ -23,7 +23,6 @@ static void	core_parent_process(int *fdd, int (*fd)[], t_list *lcmd, t_cmd *cmd)
 		close(cmd->files->infile);
 	if (cmd->files->outfile != -2)
 		close(cmd->files->outfile);
-	wait(NULL);
 }
 
 int	parent_process(t_exec *exec, t_list *lcmd, int *fdd)
@@ -45,6 +44,5 @@ int	parent_process(t_exec *exec, t_list *lcmd, int *fdd)
 	}
 	else
 		core_parent_process(fdd, &fd, lcmd, cmd);
-	begin_signal();
 	return (0);
 }

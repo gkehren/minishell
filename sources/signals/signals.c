@@ -15,7 +15,8 @@ void	handle_sigquit_pro(int sig)
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	printf("\n");
+	if (g_global.stop != 2)
+		printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
@@ -25,7 +26,7 @@ void	handle_sigint_hevar(int sig)
 {
 	(void)sig;
 	g_global.stop = -42;
-	write(1, "\n", 1);
+	printf("\n");
 	close(0);
 }
 

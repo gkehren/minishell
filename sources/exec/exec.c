@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:10:10 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/19 00:15:35 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/20 16:22:49 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,11 @@ int	exec(t_list **lcmd, t_list **venv)
 		}
 		tmp_list = (tmp_list)->next;
 	}
+	while (size_cmd + 1)
+	{
+		wait(NULL);
+		size_cmd--;
+	}
+	begin_signal();
 	return (0);
 }
