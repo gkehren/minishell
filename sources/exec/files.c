@@ -1,5 +1,32 @@
 #include "minishell.h"
 
+static int	is_sort_token_files(t_list *token_files)
+{
+	int			booli;
+	t_token_lex	*tmp_token;
+
+	booli = 0;
+	while (token_files)
+	{
+		tmp_token = (t_token_lex *)token_files->content;
+		if (tmp_token->token == OUT || tmp_token->token == OUT_APPEND)
+			booli = 1;
+		if ((tmp_token->token == IN && booli == 1) || (tmp_token->token == IN_HEREDOC && booli == 1))
+			return (1);
+		token_files = token_files->next;
+	}
+	return (0);
+}
+
+// static void	sort_token_files(t_list **token_files)
+// {
+// 	t_list		*tmp_list;
+// 	t_token_lex	*tmp_token;
+
+
+
+// }
+
 static int	check_files(t_list *token_list)
 {
 	t_token_lex	*tmp_token;
@@ -58,6 +85,7 @@ int	init_files_cmd(t_list *cmd, t_list *venv)
 	while (cmd)
 	{
 		tmp_cmd = (t_cmd *)cmd->content;
+		printf("is sort : %d\n", is_sort_token_files(tmp_cmd->token_files));
 		tmp_cmd->files = set_files(tmp_cmd->token_files, venv, index);
 		if (tmp_cmd->files == NULL)
 			return (1);
