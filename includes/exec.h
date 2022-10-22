@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
+/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:02:44 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/19 16:34:15 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/22 15:10:09 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*path_command(char *cmd, char **env);
 int		get_token_id(t_list *ltoken);
 char	*get_token_content(t_list *lcmd);
+int		is_sort_token_files(t_list *token_files);
 
 #endif

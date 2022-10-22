@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:25:54 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/20 16:54:05 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/22 15:10:21 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,23 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 		i++;
 	}
 	return (NULL);
+}
+
+int	is_sort_token_files(t_list *token_files)
+{
+	int			booli;
+	t_token_lex	*tmp_token;
+
+	booli = 0;
+	while (token_files)
+	{
+		tmp_token = (t_token_lex *)token_files->content;
+		if (tmp_token->token == OUT || tmp_token->token == OUT_APPEND)
+			booli = 1;
+		if ((tmp_token->token == IN && booli == 1)
+			|| (tmp_token->token == IN_HEREDOC && booli == 1))
+			return (1);
+		token_files = token_files->next;
+	}
+	return (0);
 }

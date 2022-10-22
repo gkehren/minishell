@@ -1,24 +1,7 @@
 #include "minishell.h"
 
-static int	is_sort_token_files(t_list *token_files)
-{
-	int			booli;
-	t_token_lex	*tmp_token;
-
-	booli = 0;
-	while (token_files)
-	{
-		tmp_token = (t_token_lex *)token_files->content;
-		if (tmp_token->token == OUT || tmp_token->token == OUT_APPEND)
-			booli = 1;
-		if ((tmp_token->token == IN && booli == 1) || (tmp_token->token == IN_HEREDOC && booli == 1))
-			return (1);
-		token_files = token_files->next;
-	}
-	return (0);
-}
-
-static void	swap_token(t_list **prec, t_list **current, t_list **next, t_list **bg_lst)
+static void	swap_token(t_list **prec, t_list **current,
+	t_list **next, t_list **bg_lst)
 {
 	t_list	*tmp;
 
@@ -48,12 +31,12 @@ static void	swap_token_files(t_list **token_files)
 		tmp_token_next = (t_token_lex *)tmp_list->next->content;
 		if (tmp_token->token == OUT || tmp_token->token == OUT_APPEND)
 			booli = 1;
-		if ((tmp_token_next->token == IN && booli == 1) || (tmp_token_next->token == IN_HEREDOC && booli == 1))
+		if ((tmp_token_next->token == IN && booli == 1)
+			|| (tmp_token_next->token == IN_HEREDOC && booli == 1))
 			return (swap_token(&prec, &tmp_list, &tmp_list->next, token_files));
 		prec = tmp_list;
 		tmp_list = tmp_list->next;
 	}
-
 }
 
 static int	check_files(t_list *token_list)

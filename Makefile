@@ -49,6 +49,7 @@ SRC_NAME = 	minishell.c						\
 			exec/files.c 					\
 			exec/files2.c 					\
 			exec/heredoc.c 					\
+			exec/heredoc2.c 				\
 			exec/parent.c 					\
 			exec/path.c 					\
 
