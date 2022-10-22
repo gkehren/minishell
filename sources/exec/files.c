@@ -18,14 +18,43 @@ static int	is_sort_token_files(t_list *token_files)
 	return (0);
 }
 
-// static void	sort_token_files(t_list **token_files)
-// {
-// 	t_list		*tmp_list;
-// 	t_token_lex	*tmp_token;
+static void	swap_token(t_list **prec, t_list **current, t_list **next, t_list **bg_lst)
+{
+	t_list	*tmp;
 
+	if (*prec != NULL)
+		(*prec)->next = *next;
+	if (*current == *bg_lst)
+		*bg_lst = *next;
+	tmp = (*next)->next;
+	(*next)->next = *current;
+	(*current)->next = tmp;
+}
 
+static void	swap_token_files(t_list **token_files)
+{
+	t_list		*tmp_list;
+	t_token_lex	*tmp_token;
+	t_token_lex	*tmp_token_next;
+	t_list		*prec;
+	int			booli;
 
-// }
+	booli = 0;
+	prec = NULL;
+	tmp_list = *token_files;
+	while (tmp_list->next)
+	{
+		tmp_token = (t_token_lex *)tmp_list->content;
+		tmp_token_next = (t_token_lex *)tmp_list->next->content;
+		if (tmp_token->token == OUT || tmp_token->token == OUT_APPEND)
+			booli = 1;
+		if ((tmp_token_next->token == IN && booli == 1) || (tmp_token_next->token == IN_HEREDOC && booli == 1))
+			return (swap_token(&prec, &tmp_list, &tmp_list->next, token_files));
+		prec = tmp_list;
+		tmp_list = tmp_list->next;
+	}
+
+}
 
 static int	check_files(t_list *token_list)
 {
@@ -85,7 +114,8 @@ int	init_files_cmd(t_list *cmd, t_list *venv)
 	while (cmd)
 	{
 		tmp_cmd = (t_cmd *)cmd->content;
-		printf("is sort : %d\n", is_sort_token_files(tmp_cmd->token_files));
+		while (is_sort_token_files(tmp_cmd->token_files))
+			swap_token_files(&tmp_cmd->token_files);
 		tmp_cmd->files = set_files(tmp_cmd->token_files, venv, index);
 		if (tmp_cmd->files == NULL)
 			return (1);
