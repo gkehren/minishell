@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:10:10 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/22 14:58:51 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/22 16:39:50 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,20 @@ static void	init_struct_exec(t_exec *exec, t_list **lcmd, t_list **venv)
 	exec->venv = venv;
 }
 
-static void	init_exec(int *fdd, int *size_cmd, t_list **tmp_list, t_list *lcmd)
+static void	init_exec(int *size_cmd, t_list **tmp_list, t_list *lcmd)
 {
-	*fdd = -2;
 	*size_cmd = ft_lstsize(lcmd);
 	*tmp_list = lcmd;
 }
 
-int	exec(t_list **lcmd, t_list **venv)
+int	exec(t_list **lcmd, t_list **venv, int fdd)
 {
 	t_cmd	*cmd;
 	t_exec	exec;
-	int		fdd;
 	int		size_cmd;
 	t_list	*tmp_list;
 
-	init_exec(&fdd, &size_cmd, &tmp_list, *lcmd);
+	init_exec(&size_cmd, &tmp_list, *lcmd);
 	init_struct_exec(&exec, lcmd, venv);
 	while (tmp_list)
 	{
@@ -50,7 +48,10 @@ int	exec(t_list **lcmd, t_list **venv)
 		else if (parent_process(&exec, tmp_list, &fdd) == 1)
 			return (free_exec(tmp_list, *venv), 1);
 		if (cmd->files->is_heredoc == 1)
+		{
 			unlink(cmd->files->index_cmd_str);
+			free(cmd->files->index_cmd_str);
+		}
 		tmp_list = (tmp_list)->next;
 	}
 	while (size_cmd--)

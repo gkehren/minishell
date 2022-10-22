@@ -36,7 +36,7 @@ void	monitor(t_list *venv, t_list *token_list, t_list *cmd, char **env)
 		add_history(input);
 		if (parsing_part(&venv, &token_list, &cmd, input) == 0)
 		{
-			exec(&cmd, &venv);
+			exec(&cmd, &venv, -2);
 			ft_lstclear(&cmd, &del_cmd);
 		}
 		free(input);

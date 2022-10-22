@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:02:44 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/22 15:10:09 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/22 16:48:21 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 /*						EXEC						*/
 
-int			exec(t_list **lcmd, t_list **venv);
+int			exec(t_list **lcmd, t_list **venv, int fdd);
 int			parent_process(t_exec *exec, t_list *lcmd, int *fdd);
 void		child_process(int *fd, int *fdd, t_exec *exec, t_list *lcmd);
 void		child_process_builtins(int *fd, int *fdd, t_exec *exec, t_list *lcmd);
@@ -34,6 +34,7 @@ int			init_outfile(t_list *token_list, t_files *files);
 t_heredoc	init_heredoc_var(char *stop, int heredoc_ex, t_files *files, int mode);
 int			heredoc(t_heredoc hevar, t_list *venv, char *result, int temp);
 int			delete_tmp(void);
+void		set_up_tmp(t_heredoc *hevar);
 
 /*						UTILS						*/
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);

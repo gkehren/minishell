@@ -3,20 +3,6 @@
 #define EXIT_1 "minishell: warning: here-document at line "
 #define EXIT_2 " delimited by end-of-file (wanted `end\')\n"
 
-static void	set_up_tmp(t_heredoc *hevar)
-{
-	char	*index;
-	char	pwd[PATH_MAX];
-	char	*tmp;
-
-	getcwd(pwd, PATH_MAX);
-	tmp = ft_strjoin(pwd, "/.tmp");
-	index = ft_itoa(hevar->files->index_cmd);
-	hevar->files->index_cmd_str = ft_strjoin(tmp, index);
-	free(index);
-	free(tmp);
-}
-
 static int	expand_heredoc(char *str, t_heredoc hevar, t_list *venv)
 {
 	t_token_lex	*tmp;
@@ -71,6 +57,12 @@ static void	begin_heredoc(char **result)
 	signal(SIGINT, handle_sigint_hevar);
 }
 
+static void	fake_heredoc(char *input, char *result)
+{
+	free(input);
+	free(result);
+}
+
 int	heredoc(t_heredoc hevar, t_list *venv, char *result, int temp)
 {
 	char	*input;
@@ -93,7 +85,8 @@ int	heredoc(t_heredoc hevar, t_list *venv, char *result, int temp)
 		if (result == NULL)
 			return (close(temp), 1);
 	}
-	free(input);
+	if (hevar.mode == 0)
+		return (fake_heredoc(input, result), 0);
 	if (expand_heredoc(result, hevar, venv))
 		return (close(temp), 1);
 	return (close(temp), 0);

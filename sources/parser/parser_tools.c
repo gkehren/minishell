@@ -42,7 +42,7 @@ int	new_token_files(t_list **token_files, t_token_lex *token_redir, t_token_lex 
 	new_file = init_token_lex(tmp, token_redir->token);
 	if (new_file == NULL)
 		return (free(tmp), 1);
-	if (new_file->token == IN_HEREDOC && (tmp[0] == '\'' || tmp[0] == '\"'))
+	if (new_file->token == IN_HEREDOC && (find_char('\"', tmp) || find_char('\'', tmp)))
 		new_file->heredoc_ex = 1;
 	new_element = ft_lstnew((void *)new_file);
 	if (new_element == NULL)
