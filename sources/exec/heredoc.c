@@ -57,12 +57,6 @@ static void	begin_heredoc(char **result)
 	signal(SIGINT, handle_sigint_hevar);
 }
 
-static void	fake_heredoc(char *input, char *result)
-{
-	free(input);
-	free(result);
-}
-
 int	heredoc(t_heredoc hevar, t_list *venv, char *result, int temp)
 {
 	char	*input;
@@ -86,8 +80,8 @@ int	heredoc(t_heredoc hevar, t_list *venv, char *result, int temp)
 			return (close(temp), 1);
 	}
 	if (hevar.mode == 0)
-		return (fake_heredoc(input, result), 0);
+		return (free(input), free(result), 0);
 	if (expand_heredoc(result, hevar, venv))
-		return (close(temp), 1);
-	return (close(temp), 0);
+		return (close(temp), free(input), 1);
+	return (close(temp), free(input), 0);
 }
