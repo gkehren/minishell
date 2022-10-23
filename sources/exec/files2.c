@@ -72,7 +72,7 @@ static int	pro_init_infile(t_list *token_list, t_files *files,
 		else if (tmp_token->token == IN_HEREDOC)
 		{
 			hevar = init_heredoc_var(tmp_token->content,
-					tmp_token->heredoc_ex, files, 0);
+					tmp_token->heredoc_ex, files, 1);
 			if (heredoc(hevar, venv, NULL, dup(STDIN_FILENO)))
 				return (1);
 		}

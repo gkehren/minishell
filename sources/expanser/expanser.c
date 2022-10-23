@@ -63,16 +63,22 @@ int	expanser(t_list **token_list, t_list *venv, int heredoc)
 {
 	t_token_lex	*tmp_token;
 	t_list		*tmp_list;
+	int			booli;
 
+	booli = 0;
 	tmp_list = *token_list;
 	while (tmp_list)
 	{
 		tmp_token = (t_token_lex *)tmp_list->content;
-		if (tmp_token->token == WORD)
+		if (tmp_token->token == WORD && booli != 1)
 		{
 			if (expand_process(tmp_token, venv, heredoc))
 				return (1);
 		}
+		if (tmp_token->token == IN_HEREDOC)
+			booli = 1;
+		else
+			booli = 0;
 		tmp_list = tmp_list->next;
 	}
 	if (clean_expand(token_list))
