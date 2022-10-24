@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:02:44 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/24 23:24:09 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/25 00:42:57 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ int			init_files_cmd(t_list *cmd, t_list *venv);
 /*						FILES2						*/
 int			init_infile(t_list *token_list, t_files *files, t_list *venv);
 int			init_outfile(t_list *token_list, t_files *files);
+/*						FILES3						*/
+void		print_error_files(char *error, t_token_lex *tmp_token);
+int			set_error_files(char **error, t_token_lex **tmp_token_error, char *errno_str, t_token_lex *tmp_token);
 
 /*						HEREDOC						*/
 t_heredoc	init_heredoc_var(char *stop, int heredoc_ex, t_files *files, int mode);
