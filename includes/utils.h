@@ -5,6 +5,7 @@
 
 /*						UTILS						*/
 int 		find_char(char c, char *str);
+int			save_quote(int booli, char c);
 
 /*						PRINT_ERROR						*/
 int			print_error(char *error);

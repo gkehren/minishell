@@ -1,37 +1,49 @@
 #include "minishell.h"
 
+static void	manage_booli(int *booli, char c)
+{
+	if (c == '\"' && *booli == 0)
+		*booli = 1;
+	else if (c == '\"' && *booli == 1)
+		*booli = 0;
+	if (c == '\'' && *booli == 0)
+		*booli = 2;
+	else if (c == '\'' && *booli == 2)
+		*booli = 0;
+}
+
 static int	count_quotes(char *str)
 {
 	int	i;
 	int	count;
+	int	booli;
 
+	booli = 0;
 	count = 0;
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'' || str[i] == '\"')
+		manage_booli(&booli, str[i]);
+		if ((str[i] == '\'' && booli != 1) || (str[i] == '\"' && booli != 2))
 			count++;
 		i++;
 	}
 	return (count);
 }
 
-static char	*process_clean_quotes(char *str)
+static char	*process_clean_quotes(char *str, int i, int j, int booli)
 {
 	int		size;
-	int		i;
-	int		j;
 	char	*result;
 
 	size = ft_strlen(str) - count_quotes(str) + 1;
 	result = (char *)malloc(sizeof(char) * size);
 	if (result == NULL)
 		return (NULL);
-	i = 0;
-	j = 0;
 	while (str[i])
 	{
-		if (str[i] != '\'' && str[i] != '\"')
+		manage_booli(&booli, str[i]);
+		if (save_quote(booli, str[i]))
 		{
 			result[j] = str[i];
 			j++;
@@ -50,7 +62,7 @@ static int	clean_tk(t_list *token_list)
 	while (token_list)
 	{
 		tmp_token = (t_token_lex *)token_list->content;
-		tmp_token->content = process_clean_quotes(tmp_token->content);
+		tmp_token->content = process_clean_quotes(tmp_token->content, 0, 0, 0);
 		if (tmp_token->content == NULL)
 			return (1);
 		token_list = token_list->next;
@@ -69,7 +81,7 @@ int clean_quotes_v2(t_list *cmd)
 		i = 0;
 		while (tmp_cmd->full_cmd && tmp_cmd->full_cmd[i])
 		{
-			tmp_cmd->full_cmd[i] = process_clean_quotes(tmp_cmd->full_cmd[i]);
+			tmp_cmd->full_cmd[i] = process_clean_quotes(tmp_cmd->full_cmd[i], 0, 0, 0);
 			if (tmp_cmd->full_cmd[i] == NULL)
 				return (1);
 			i++;
@@ -79,16 +91,4 @@ int clean_quotes_v2(t_list *cmd)
 		cmd = cmd->next;
 	}
 	return (0);
-}
-
-void	turn_to_word(t_list *token_list)
-{
-	t_token_lex	*tmp_content;
-
-	while (token_list)
-	{
-		tmp_content = (t_token_lex *)token_list->content;
-		tmp_content->token = WORD;
-		token_list = token_list->next;
-	}
 }
