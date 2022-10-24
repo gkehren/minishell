@@ -4,13 +4,15 @@
 #include "minishell.h"
 
 /*						EXPANSER						*/
-int		expand_process(t_token_lex	*token, t_list *venv, int heredoc);
+int		expand_process(t_token_lex	*token, t_list *venv, int heredoc, int i);
 int		expanser(t_list **token_list, t_list *venv, int heredoc);
 
 /*						EXPAND_WORD						*/
-int		expand_word(t_expanse expanse, t_list *venv, char **str, int i);
+int		expand_word(t_expanse expanse, t_list *venv, char **str, int *i);
 /*						EXPAND_WORD2						*/
 int		expand_return_value(char **expand, char **str);
+void	init_begin(int *j, int i, char *begin, char *str);
+void	set_incr_expand(int *i, char c);
 
 /*						CLEAN_EXPAND						*/
 int		clean_expand(t_list **token_list);

@@ -23,7 +23,7 @@ int	ft_isalnum(int c)
 
 int	good_token(int c)
 {
-	const char	token[] = {'$', '\"', '\'', '_', '-', '/', '.', '~', '?', '\0'};
+	const char	token[] = {'$', '\"', '\'', '_', '-', '/', '.', '~', '?', '+', '\0'};
 	int			i;
 
 	i = 0;
