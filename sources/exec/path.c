@@ -64,6 +64,8 @@ char	*path_command(char *cmd, char **env)
 		return (path_exec(cmd));
 	if (cmd[0] == '.' && cmd[1] == '/')
 		return (file_exec(cmd));
+	if (cmd[0] == '\0')
+		return (print_error("minishell: '': command not found\n"), NULL);
 	paths = split_env(env);
 	i = 0;
 	while (paths[i])
