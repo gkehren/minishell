@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 01:58:21 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/24 17:37:41 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/24 22:58:32 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_exec
 {
 	t_list		**cmd;
 	t_list		**venv;
+	int			*fdd;
 }	t_exec;
 
 /*						BUILTINS						*/

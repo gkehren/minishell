@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:25:54 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/22 15:10:21 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/24 22:50:05 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,11 @@ int	is_sort_token_files(t_list *token_files)
 		token_files = token_files->next;
 	}
 	return (0);
+}
+
+void	free_child(t_exec *exec, char **env)
+{
+	free_double_tab((void *)env);
+	ft_lstclear(exec->venv, &del_venv);
+	ft_lstclear(exec->cmd, &del_cmd);
 }

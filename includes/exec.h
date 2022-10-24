@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:02:44 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/24 12:25:08 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/24 23:24:09 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ void		set_up_tmp(t_heredoc *hevar);
 /*						UTILS						*/
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*path_command(char *cmd, char **env);
+char	*path_exec(char *cmd);
+int		check_abs_path(char *cmd);
+void	free_child(t_exec *exec, char **env);
 int		get_token_id(t_list *ltoken);
 char	*get_token_content(t_list *lcmd);
 int		is_sort_token_files(t_list *token_files);

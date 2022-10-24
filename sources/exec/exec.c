@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:10:10 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/24 19:45:37 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/24 23:02:14 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void	free_exec(t_list *lcmd, t_list *venv)
 	exit(1);
 }
 
-static void	init_struct_exec(t_exec *exec, t_list **lcmd, t_list **venv)
+static void	init_struct_exec(t_exec *exec, t_list **lcmd,
+	t_list **venv, int fdd)
 {
 	exec->cmd = lcmd;
 	exec->venv = venv;
+	exec->fdd = &fdd;
 }
 
 static void	init_exec(int *size_cmd, t_list **tmp_list, t_list *lcmd)
@@ -49,7 +51,7 @@ int	exec(t_list **lcmd, t_list **venv, int fdd)
 	t_list	*tmp_list;
 
 	init_exec(&size_cmd, &tmp_list, *lcmd);
-	init_struct_exec(&exec, lcmd, venv);
+	init_struct_exec(&exec, lcmd, venv, fdd);
 	while (tmp_list)
 	{
 		cmd = (t_cmd *)(tmp_list)->content;

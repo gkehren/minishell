@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char	*file_exec(char *cmd)
+static char	*file_exec(char *cmd)
 {
 	char	*tmp;
 	int		i;
@@ -20,10 +20,10 @@ char	*file_exec(char *cmd)
 		return (free(tmp), cmd);
 	else
 		return (print_error_str("minishell: ", tmp, ": "),
-			perror(""), free(tmp), NULL);
+			set_status(126), perror(""), free(tmp), NULL);
 }
 
-char	**split_env(char **env)
+static char	**split_env(char **env)
 {
 	char	**paths;
 	int		i;
@@ -39,18 +39,34 @@ char	**split_env(char **env)
 	return (paths);
 }
 
+int	check_abs_path(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if ((cmd[i] == '/' || cmd[i] == '.') && cmd[i + 1] == '\0')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 char	*path_exec(char *cmd)
 {
 	int	fd;
 
-	fd = open(cmd, O_RDONLY);
-	if (fd == -1)
-		return (close(fd), cmd);
+	if (cmd[0] == '.' && cmd[1] == '/')
+		return (file_exec(cmd));
+	if (check_abs_path(cmd) == 1)
+		fd = -1;
 	else
-	{
+		fd = open(cmd, O_RDONLY);
+	if (fd == -1)
 		return (print_error_str("minishell: ", cmd, ": Is a directory\n"),
-			close(fd), set_status(126), NULL);
-	}
+			set_status(126), NULL);
+	return (close(fd), cmd);
 }
 
 char	*path_command(char *cmd, char **env)
@@ -60,10 +76,6 @@ char	*path_command(char *cmd, char **env)
 	int		i;
 	char	*part_path;
 
-	if (cmd[0] == '/')
-		return (path_exec(cmd));
-	if (cmd[0] == '.' && cmd[1] == '/')
-		return (file_exec(cmd));
 	if (cmd[0] == '\0')
 		return (print_error("minishell: '': command not found\n"), NULL);
 	paths = split_env(env);

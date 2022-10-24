@@ -19,6 +19,7 @@ void	handle_sigint(int sig)
 	(void)sig;
 	if (g_global.stop != 2)
 		printf("\n");
+	set_status(130);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();

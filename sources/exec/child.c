@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	redirect_child(t_list *lcmd, t_cmd *cmd, int *fd, int *fdd)
+static void	redirect_child(t_list *lcmd, t_cmd *cmd, int *fd, int *fdd)
 {
 	if (cmd->files->infile != -2)
 	{
@@ -25,7 +25,7 @@ void	redirect_child(t_list *lcmd, t_cmd *cmd, int *fd, int *fdd)
 	close(fd[1]);
 }
 
-void	close_fd(int *fdd, t_cmd *cmd)
+static void	close_fd(int *fdd, t_cmd *cmd)
 {
 	if (*fdd != -2)
 		close(*fdd);
@@ -33,6 +33,31 @@ void	close_fd(int *fdd, t_cmd *cmd)
 		close(cmd->files->outfile);
 	if (cmd->files->infile != -2)
 		close(cmd->files->infile);
+}
+
+static char	*child_process_path(t_cmd *cmd, t_exec *exec, int *fd, char **env)
+{
+	char	*path;
+
+	if (!cmd->full_cmd)
+		return (close_fd(exec->fdd, cmd), close(fd[1]), close(fd[0]),
+			free_child(exec, env), exit(1), NULL);
+	if (cmd->full_cmd[0][0] == '/' ||
+		(cmd->full_cmd[0][0] == '.' && cmd->full_cmd[0][1] == '/'))
+	{
+		path = path_exec(cmd->full_cmd[0]);
+		if (!path)
+			return (close_fd(exec->fdd, cmd), close(fd[1]), close(fd[0]),
+				free(path), free_child(exec, env), exit(126), NULL);
+	}
+	else
+	{
+		path = path_command(cmd->full_cmd[0], env);
+		if (!path)
+			return (close_fd(exec->fdd, cmd), free(path), close(fd[1]),
+				close(fd[0]), free_child(exec, env), exit(127), NULL);
+	}
+	return (path);
 }
 
 void	child_process(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
@@ -43,20 +68,18 @@ void	child_process(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 
 	cmd = (t_cmd *)lcmd->content;
 	env = send_env(exec->venv);
-	if (!cmd->full_cmd)
-		return (close_fd(fdd, cmd), close(fd[1]), close(fd[0]),
-			free_double_tab((void *)env), ft_lstclear(exec->venv, &del_venv),
-			ft_lstclear(exec->cmd, &del_cmd), exit(1));
-	path = path_command(cmd->full_cmd[0], env);
-	if (!path)
-		return (close_fd(fdd, cmd), close(fd[1]), close(fd[0]), free(path),
-			free_double_tab((void *)env), ft_lstclear(exec->venv, &del_venv),
-			ft_lstclear(exec->cmd, &del_cmd), exit(127));
+	if (cmd->full_cmd[0][0] == '/' && check_abs_path(cmd->full_cmd[0]) == 0)
+		path = ft_strdup(cmd->full_cmd[0]);
+	else
+		path = child_process_path(cmd, exec, fd, env);
 	redirect_child(lcmd, cmd, fd, fdd);
 	if (execve(path, cmd->full_cmd, env) == -1)
-		return (perror("minishell"), free(path), close(*fdd),
-			free_double_tab((void *)env), ft_lstclear(exec->venv, &del_venv),
-			ft_lstclear(exec->cmd, &del_cmd), exit(1));
+	{
+		if (*fdd != -2)
+			close(*fdd);
+		return (perror("minishell"), free(path),
+			free_child(exec, env), exit(1));
+	}
 }
 
 void	child_process_builtins(int *fd, int *fdd, t_exec *exec, t_list *lcmd)

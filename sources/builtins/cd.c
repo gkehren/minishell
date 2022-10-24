@@ -6,7 +6,7 @@ static int	set_up_env_var(t_list **venv)
 	char	*tmp;
 
 	if (getcwd(path, PATH_MAX) == NULL)
-		return (perror("minishell: cd"), 1);
+		return (set_status(1), perror("minishell: cd"), 1);
 	tmp = ft_strdup(path);
 	if (tmp == NULL)
 		return (1);
@@ -96,6 +96,9 @@ int	ft_cd(int argc, char **args, t_list **venv, t_exec *exec)
 			return (1);
 	}
 	else
+	{
+		set_status(1);
 		print_cd_error(path, strerror(errno));
+	}
 	return (ret);
 }
