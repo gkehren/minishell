@@ -15,7 +15,7 @@ static int	parsing_part(t_list **venv, t_list **token_list, t_list **cmd, char *
 	if (expanser(token_list, *venv, 0))
 		return (ft_lstclear(venv, &del_venv), ft_lstclear(token_list, &del_token_lex), malloc_failed(), 1);
 	if (parser_checker(token_list))
-		return (ft_lstclear(venv, &del_venv), ft_lstclear(token_list, &del_token_lex), 1);
+		return (ft_lstclear(token_list, &del_token_lex), 1);
 	*cmd = generate_cmd(token_list, venv);
 	if (*cmd == NULL)
 		return (1);
