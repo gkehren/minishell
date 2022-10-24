@@ -90,12 +90,12 @@ static int	export_action(t_list **venv, char **cuting, char **args, int i)
 	{
 		if (find_char('=', args[i]))
 		{
-			if (venv_create(venv, cuting[0], NULL, NOT_INIT))
+			if (venv_create(venv, cuting[0], cuting[1], INIT))
 				return (1);
 		}
 		else
 		{
-			if (venv_create(venv, cuting[0], cuting[1], INIT))
+			if (venv_create(venv, cuting[0], NULL, NOT_INIT))
 				return (1);
 		}
 	}

@@ -2,7 +2,7 @@
 
 #define ERROR_MSG "minishell: syntax error near unexpected token `"
 #define ERROR_P "minishell: syntax error near unexpected token `|\'\n"
-#define ERROR_NL "minishell: syntax error near unexpected newline\'\n"
+#define ERROR_NL "minishell: syntax error near unexpected token `newline\'\n"
 #define ERROR_EL "minishell: syntax error: unexpected end of file\n"
 
 int	core_checker(t_list **token_list, t_token_lex *tmp_content,
