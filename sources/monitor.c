@@ -11,7 +11,7 @@ static int	parsing_part(t_list **venv, t_list **token_list, t_list **cmd, char *
 {
 	*token_list = generate_token(input, 1);
 	if (*token_list == NULL)
-		return (ft_lstclear(token_list, &del_token_lex), 1);
+		return (1);
 	if (expanser(token_list, *venv, 0))
 		return (ft_lstclear(venv, &del_venv), ft_lstclear(token_list, &del_token_lex), malloc_failed(), 1);
 	if (parser_checker(token_list))

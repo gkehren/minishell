@@ -76,15 +76,13 @@ t_list	*generate_token(char *entry, int mode)
 		if (!entry[i])
 			break ;
 		check = lexer_monitor(entry, &i, &token_list);
-		if (check == 1 && mode == 1)
+		if (check == 1)
 			return (ft_lstclear(&token_list, &del_token_lex), NULL);
-		else if (check == 1 && mode == 0)
-			return (NULL);
 	}
 	if (mode == 1)
 	{
 		if (check_token_word(token_list))
-			return (NULL);
+			return (ft_lstclear(&token_list, &del_token_lex), NULL);
 	}
 	return (token_list);
 }
