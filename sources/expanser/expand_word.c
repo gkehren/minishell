@@ -50,10 +50,8 @@ static char	*find_env_word(t_list *venv, char *title)
 static int	find_size_title(char *str, int *i)
 {
 	*i = 1;
-	if (str[1] == '$' || str[1] == '\0')
+	if (str[1] == '$' || str[1] == '\"' || str[1] == '\0')
 		return (2);
-	else if (str[1] == '\'' || str[1] == '\"')
-		*i = 0;
 	else if (str[1] == '?' || ft_isdigit(str[1])
 		|| !(ft_isalnum(str[1]) || str[1] == '_'))
 	{
@@ -100,7 +98,7 @@ static int	find_title_expand(char **str, char **expand, int it)
 	return (returned);
 }
 
-int	expand_word(t_expanse expanse, t_list *venv, char **str, int i)
+int	expand_word(t_expanse expanse, t_list *venv, char **str, int *i)
 {
 	int		j;
 	char	*begin;
@@ -110,14 +108,11 @@ int	expand_word(t_expanse expanse, t_list *venv, char **str, int i)
 	tmp2 = *str;
 	if (expanse.mode == PASS)
 		return (0);
-	begin = (char *)malloc(sizeof(char) * (i + 1));
+	begin = (char *)malloc(sizeof(char) * (*i + 1));
 	if (begin == NULL)
 		return (free(tmp2), 1);
-	j = -1;
-	while (++j != i)
-		begin[j] = (*str)[j];
-	begin[j] = '\0';
-	j = find_title_expand(str, &expand, i);
+	init_begin(&j, *i, begin, *str);
+	j = find_title_expand(str, &expand, *i);
 	if (j == 1)
 		return (free(tmp2), free(begin), 1);
 	else if (j == 0)
