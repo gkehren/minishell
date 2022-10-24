@@ -49,15 +49,16 @@ static int	check_files(t_list *token_list)
 		tmp_token = (t_token_lex *)token_list->content;
 		if (tmp_token->token != IN_HEREDOC)
 		{
-			if (tmp_token->token == OUT_APPEND || tmp_token->token == OUT)
-				fd = open(tmp_token->content, O_RDONLY | O_CREAT, 0644);
+			if (tmp_token->token == OUT_APPEND)
+				fd = open(tmp_token->content, O_APPEND | O_WRONLY | O_CREAT, 0644);
+			else if (tmp_token->token == OUT)
+				fd = open(tmp_token->content, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 			else
 				fd = open(tmp_token->content, O_RDONLY);
 			if (fd == -1)
 			{
 				print_error_str("minishell: ", tmp_token->content, ": ");
-				ft_putstr_fd(strerror(errno), 2);
-				ft_putstr_fd("\n", 2);
+				print_error_char(strerror(errno), '\n', NULL);
 				return (1);
 			}
 			close(fd);
@@ -81,6 +82,8 @@ static t_files	*set_files(t_list *token_list, t_list *venv, int index)
 	files->index_cmd_str = NULL;
 	if (check_files(token_list))
 		return (free(files), NULL);
+	while (is_sort_token_files(token_list))
+		swap_token_files(&token_list);
 	if (init_infile(token_list, files, venv))
 		return (free(files), NULL);
 	if (init_outfile(token_list, files))
@@ -97,8 +100,6 @@ int	init_files_cmd(t_list *cmd, t_list *venv)
 	while (cmd)
 	{
 		tmp_cmd = (t_cmd *)cmd->content;
-		while (is_sort_token_files(tmp_cmd->token_files))
-			swap_token_files(&tmp_cmd->token_files);
 		tmp_cmd->files = set_files(tmp_cmd->token_files, venv, index);
 		if (tmp_cmd->files == NULL)
 			return (1);
