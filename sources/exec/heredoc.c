@@ -13,7 +13,7 @@ static int	expand_heredoc(char *str, t_heredoc hevar, t_list *venv)
 		return (1);
 	if (hevar.heredoc_ex == 0)
 	{
-		if (expand_process(tmp, venv, 1))
+		if (expand_process(tmp, venv, 1, 0))
 			return (del_token_lex((void *)tmp), 1);
 	}
 	hevar.files->infile = open(hevar.files->index_cmd_str,
