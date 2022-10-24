@@ -49,7 +49,7 @@ char	*path_exec(char *cmd)
 	else
 	{
 		return (print_error_str("minishell: ", cmd, ": Is a directory\n"),
-			close(fd), NULL);
+			close(fd), set_status(126), NULL);
 	}
 }
 

@@ -4,12 +4,14 @@ void	handle_sigint_pro(int sig)
 {
 	(void)sig;
 	printf("\n");
+	set_status(2);
 }
 
 void	handle_sigquit_pro(int sig)
 {
 	(void)sig;
 	printf("Quit\n");
+	set_status(131);
 }
 
 void	handle_sigint(int sig)

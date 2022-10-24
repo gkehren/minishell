@@ -15,10 +15,10 @@ static int	check_arg_pwd(int argc, char **args)
 		if (args[1][i] != '\0')
 		{
 			if (i == 1)
-				return (print_error_char(ERROR_MSG,
+				return (set_status(2), print_error_char(ERROR_MSG,
 						args[1][1], ": invalid option\n"));
 			else
-				return (print_error(ERROR_MSG2));
+				return (set_status(2), print_error(ERROR_MSG2));
 		}
 	}
 	return (0);

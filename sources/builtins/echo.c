@@ -44,5 +44,5 @@ int	ft_echo(int argc, char **args, t_list **venv, t_exec *exec)
 	}
 	if (option_ok == 0)
 		printf("\n");
-	return (0);
+	return (set_status(0), 0);
 }

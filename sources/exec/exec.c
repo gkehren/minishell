@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:10:10 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/24 09:50:52 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/24 19:45:37 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ static void	init_exec(int *size_cmd, t_list **tmp_list, t_list *lcmd)
 {
 	*size_cmd = ft_lstsize(lcmd);
 	*tmp_list = lcmd;
+}
+
+static void	status(int size_cmd, t_cmd *cmd)
+{
+	while (size_cmd--)
+		wait(&g_global.g_status);
+	if (WIFEXITED(g_global.g_status))
+		g_global.g_status = WEXITSTATUS(g_global.g_status);
+	else if (WIFSIGNALED(g_global.g_status) && cmd->builtin == NULL)
+		g_global.g_status = WTERMSIG(g_global.g_status) + 128;
 }
 
 int	exec(t_list **lcmd, t_list **venv, int fdd)
@@ -54,8 +64,7 @@ int	exec(t_list **lcmd, t_list **venv, int fdd)
 		}
 		tmp_list = (tmp_list)->next;
 	}
-	while (size_cmd--)
-		wait(NULL);
+	status(size_cmd, cmd);
 	begin_signal();
 	return (0);
 }
