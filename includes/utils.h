@@ -6,6 +6,7 @@
 /*						UTILS						*/
 int 		find_char(char c, char *str);
 int			save_quote(int booli, char c);
+void		set_status(int status);
 
 /*						PRINT_ERROR						*/
 int			print_error(char *error);

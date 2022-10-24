@@ -24,3 +24,8 @@ int	save_quote(int booli, char c)
 		return (1);
 	return (0);
 }
+
+void	set_status(int status)
+{
+	g_global.g_status = status;
+}
