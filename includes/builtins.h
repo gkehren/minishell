@@ -12,10 +12,10 @@ void	venv_remove(t_list **venv, char *title);
 
 /*						ENV						*/
 char	**send_env(t_list **venv);
-int		ft_env(int argc, char **args, t_list **venv);
+int		ft_env(int argc, char **args, t_list **venv, t_exec *exec);
 
 /*						EXPORT						*/
-int		ft_export(int argc, char **args, t_list **venv);
+int		ft_export(int argc, char **args, t_list **venv, t_exec *exec);
 
 /*						HANDLE_ENV						*/
 char	**cut_env(char *env_part);
@@ -28,18 +28,18 @@ int		malloc_failed_env(t_list **venv);
 int		parsing_export(char **args);
 
 /*						UNSET						*/
-int		ft_unset(int argc, char **args, t_list **venv);
+int		ft_unset(int argc, char **args, t_list **venv, t_exec *exec);
 
 /*						PWD						*/
-int		ft_pwd(int argc, char **args, t_list **venv);
+int		ft_pwd(int argc, char **args, t_list **venv, t_exec *exec);
 
 /*						CD						*/
-int		ft_cd(int argc, char **args, t_list **venv);
+int		ft_cd(int argc, char **args, t_list **venv, t_exec *exec);
 
 /*						ECHO						*/
-int		ft_echo(int argc, char **argv, t_list **venv);
+int		ft_echo(int argc, char **argv, t_list **venv, t_exec *exec);
 
 /*						EXIT						*/
-int		ft_exit(int argc, char **args, t_list **venv);
+int		ft_exit(int argc, char **args, t_list **venv, t_exec *exec);
 
 #endif

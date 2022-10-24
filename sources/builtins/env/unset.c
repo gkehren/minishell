@@ -1,9 +1,10 @@
 #include "minishell.h"
 
-int	ft_unset(int argc, char **args, t_list **venv)
+int	ft_unset(int argc, char **args, t_list **venv, t_exec *exec)
 {
 	int	i;
 
+	(void)exec;
 	(void)argc;
 	i = 0;
 	while (args[i])

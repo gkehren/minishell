@@ -102,11 +102,12 @@ static int	export_action(t_list **venv, char **cuting, char **args, int i)
 	return (0);
 }
 
-int	ft_export(int argc, char **args, t_list **venv)
+int	ft_export(int argc, char **args, t_list **venv, t_exec *exec)
 {
 	int		i;
 	char	**cuting;
 
+	(void)exec;
 	(void)argc;
 	if (ft_strcmp(args[0], "export") == 0 && args[1] == NULL)
 		export_print_all(venv);

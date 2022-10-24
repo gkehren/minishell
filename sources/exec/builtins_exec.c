@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	only_builtins(t_builtins p_builtins, t_cmd *cmd, t_list *venv)
+int	only_builtins(t_builtins p_builtins, t_cmd *cmd, t_list *venv, t_exec *exec)
 {
 	int	tmp_stdin;
 	int	tmp_stdout;
@@ -11,7 +11,7 @@ int	only_builtins(t_builtins p_builtins, t_cmd *cmd, t_list *venv)
 		dup2(cmd->files->infile, STDIN_FILENO);
 	if (cmd->files->outfile != -2)
 		dup2(cmd->files->outfile, STDOUT_FILENO);
-	(*p_builtins)(cmd->argc, cmd->full_cmd, &venv);
+	(*p_builtins)(cmd->argc, cmd->full_cmd, &venv, exec);
 	if (cmd->files->infile != -2)
 	{
 		dup2(tmp_stdin, STDIN_FILENO);

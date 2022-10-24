@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 01:58:21 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/20 16:46:32 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/24 09:48:51 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,15 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+/*						EXEC						*/
+typedef struct s_exec
+{
+	t_list		**cmd;
+	t_list		**venv;
+}	t_exec;
+
 /*						BUILTINS						*/
-typedef int (*t_builtins)(int, char **, t_list **);
+typedef int (*t_builtins)(int, char **, t_list **, t_exec *exec);
 
 /*						LEXER						*/
 typedef enum s_token
@@ -98,13 +105,6 @@ typedef struct s_heredoc
 	t_files	*files;
 	int		mode;
 }	t_heredoc;
-
-/*						EXEC						*/
-typedef struct s_exec
-{
-	t_list		**cmd;
-	t_list		**venv;
-}	t_exec;
 
 /*						GLOBAL						*/
 typedef struct s_global

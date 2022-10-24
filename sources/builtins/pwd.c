@@ -24,11 +24,12 @@ static int	check_arg_pwd(int argc, char **args)
 	return (0);
 }
 
-int	ft_pwd(int argc, char **args, t_list **venv)
+int	ft_pwd(int argc, char **args, t_list **venv, t_exec *exec)
 {
 	char		path[PATH_MAX];
 	char		*tmp;
 
+	(void)exec;
 	if (check_arg_pwd(argc, args))
 		return (1);
 	if (getcwd(path, PATH_MAX) == NULL)

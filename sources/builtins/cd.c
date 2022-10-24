@@ -75,11 +75,12 @@ static int	check_errors(int argc, char **args, t_list **venv)
 	return (0);
 }
 
-int	ft_cd(int argc, char **args, t_list **venv)
+int	ft_cd(int argc, char **args, t_list **venv, t_exec *exec)
 {
 	char	*path;
 	int		ret;
 
+	(void)exec;
 	if (check_errors(argc, args, venv))
 		return (1);
 	path = return_env_path(argc, args, venv);
@@ -96,7 +97,5 @@ int	ft_cd(int argc, char **args, t_list **venv)
 	}
 	else
 		print_cd_error(path, strerror(errno));
-	//if (argc == 2 && ft_strcmp(args[1], "-") == 0)
-		//printf("%s\n", venv_find_content(venv, "PWD"));
 	return (ret);
 }

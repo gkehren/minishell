@@ -1,11 +1,12 @@
 #include "minishell.h"
 
-static void	exit_status(long long int_status, t_list **venv)
+static void	exit_status(long long int_status, t_list **venv, t_exec *exec)
 {
 	int_status = int_status % 256;
 	if (int_status != 2)
 		printf("exit (%lld)\n", int_status);
 	ft_lstclear(venv, &del_venv);
+	ft_lstclear(exec->cmd, &del_cmd);
 	exit(int_status);
 }
 
@@ -74,23 +75,23 @@ static int	check_errors(char **args)
 	return (0);
 }
 
-int	ft_exit(int argc, char **args, t_list **venv)
+int	ft_exit(int argc, char **args, t_list **venv, t_exec *exec)
 {
 	int	ret;
 
 	(void)venv;
 	if (argc == 1)
-		exit_status(g_global.g_status, venv);
+		exit_status(g_global.g_status, venv, exec);
 	ret = check_errors(args);
 	if (ret == 2)
-		exit_status(2, venv);
+		exit_status(2, venv, exec);
 	else if (ret == 1)
 	{
 		ft_putstr_fd("Malloc failed !", 2);
-		exit_status(1, venv);
+		exit_status(1, venv, exec);
 	}
 	if (argc > 2)
 		return (print_error("exit\nbash: exit: too many arguments\n"));
-	exit_status(ft_atoi(args[1]), venv);
+	exit_status(ft_atoi(args[1]), venv, exec);
 	return (0);
 }

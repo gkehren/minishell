@@ -67,7 +67,7 @@ void	child_process_builtins(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 	cmd = (t_cmd *)lcmd->content;
 	builtins = (t_builtins)cmd->builtin;
 	redirect_child(lcmd, cmd, fd, fdd);
-	(*builtins)(cmd->argc, cmd->full_cmd, exec->venv);
+	(*builtins)(cmd->argc, cmd->full_cmd, exec->venv, exec);
 	close(STDIN_FILENO);
 	ft_lstclear(exec->cmd, &del_cmd);
 	ft_lstclear(exec->venv, &del_venv);

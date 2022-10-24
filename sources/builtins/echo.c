@@ -17,12 +17,13 @@ static int	check_option(char *str)
 		return (0);
 }
 
-int	ft_echo(int argc, char **args, t_list **venv)
+int	ft_echo(int argc, char **args, t_list **venv, t_exec *exec)
 {
 	int	i;
 	int	check;
 	int	option_ok;
 
+	(void)exec;
 	(void)argc;
 	(void)venv;
 	check = 0;

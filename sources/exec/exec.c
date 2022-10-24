@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:10:10 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/22 16:39:50 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/24 09:50:52 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	exec(t_list **lcmd, t_list **venv, int fdd)
 	{
 		cmd = (t_cmd *)(tmp_list)->content;
 		if (cmd->builtin != NULL && size_cmd == 1)
-			only_builtins(cmd->builtin, cmd, *venv);
+			only_builtins(cmd->builtin, cmd, *venv, &exec);
 		else if (parent_process(&exec, tmp_list, &fdd) == 1)
 			return (free_exec(tmp_list, *venv), 1);
 		if (cmd->files->is_heredoc == 1)

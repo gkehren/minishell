@@ -26,11 +26,12 @@ char	**send_env(t_list **venv)
 	return (env);
 }
 
-int	ft_env(int argc, char **args, t_list **venv)
+int	ft_env(int argc, char **args, t_list **venv, t_exec *exec)
 {
 	t_list	*tmp_list;
 	t_venv	*tmp_venv;
 
+	(void)exec;
 	(void)args;
 	(void)argc;
 	tmp_list = *venv;

@@ -6,7 +6,7 @@
 /*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:02:44 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/22 16:48:21 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/24 09:51:30 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			exec(t_list **lcmd, t_list **venv, int fdd);
 int			parent_process(t_exec *exec, t_list *lcmd, int *fdd);
 void		child_process(int *fd, int *fdd, t_exec *exec, t_list *lcmd);
 void		child_process_builtins(int *fd, int *fdd, t_exec *exec, t_list *lcmd);
-int			only_builtins(t_builtins p_builtins, t_cmd *cmd, t_list *venv);
+int			only_builtins(t_builtins p_builtins, t_cmd *cmd, t_list *venv, t_exec *exec);
 void		free_exec(t_list *lcmd, t_list *venv);
 
 /*						FILES						*/
