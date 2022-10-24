@@ -39,6 +39,20 @@ char	**split_env(char **env)
 	return (paths);
 }
 
+char	*path_exec(char *cmd)
+{
+	int	fd;
+
+	fd = open(cmd, O_RDONLY);
+	if (fd == -1)
+		return (close(fd), cmd);
+	else
+	{
+		return (print_error_str("minishell: ", cmd, ": Is a directory\n"),
+			close(fd), NULL);
+	}
+}
+
 char	*path_command(char *cmd, char **env)
 {
 	char	**paths;
@@ -47,7 +61,7 @@ char	*path_command(char *cmd, char **env)
 	char	*part_path;
 
 	if (cmd[0] == '/')
-		return (cmd);
+		return (path_exec(cmd));
 	if (cmd[0] == '.' && cmd[1] == '/')
 		return (file_exec(cmd));
 	paths = split_env(env);
