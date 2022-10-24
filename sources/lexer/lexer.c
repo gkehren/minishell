@@ -77,8 +77,8 @@ t_list	*generate_token(char *entry, int mode)
 			break ;
 		check = lexer_monitor(entry, &i, &token_list);
 		if (check == 1 && mode == 1)
-			return (ft_lstclear(&token_list, &del_token_lex), malloc_failed(), NULL);
-		else if (check == 1 && mode == 1)
+			return (ft_lstclear(&token_list, &del_token_lex), NULL);
+		else if (check == 1 && mode == 0)
 			return (NULL);
 	}
 	if (mode == 1)
