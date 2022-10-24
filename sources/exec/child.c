@@ -47,7 +47,7 @@ void	child_process(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 		return (close_fd(fdd, cmd), close(fd[1]), close(fd[0]),
 			free_double_tab((void *)env), ft_lstclear(exec->venv, &del_venv),
 			ft_lstclear(exec->cmd, &del_cmd), exit(1));
-	path = path_command(cmd->full_cmd[0], env, exec);
+	path = path_command(cmd->full_cmd[0], env);
 	if (!path)
 		return (close_fd(fdd, cmd), close(fd[1]), close(fd[0]), free(path),
 			free_double_tab((void *)env), ft_lstclear(exec->venv, &del_venv),
