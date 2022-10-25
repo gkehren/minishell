@@ -32,3 +32,22 @@ void	set_incr_expand(int *i, char c)
 	else
 		*i = 0;
 }
+
+int	check_weird_expand(char *str)
+{
+	int	count;
+	int	i;
+
+	i = 1;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == '\"')
+			count++;
+		i++;
+	}
+	if (str[1] == '\"' && (count % 2 != 0))
+		return (1);
+	printf("la");
+	return (0);
+}
