@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int	find_quote(char *str, int *i, int *count)
+static int	find_quote(char *str, int *i, int *count, int mode)
 {
 	char	tmp;
 
@@ -12,26 +12,28 @@ static int	find_quote(char *str, int *i, int *count)
 		(*count)++;
 		(*i)++;
 	}
-	if (str[*i] == '\0')
+	if (str[*i] == '\0' && mode == 1)
 		return (print_error_char(
 				"minishell: syntax error near unexpected token `", tmp, "\'\n"));
+	if (str[*i] == '\0' && mode == 0)
+		return (0);
 	(*i)++;
 	(*count)++;
 	return (0);
 }
 
-static int	count_size_word(char *charset, char *str)
+static int	count_size_word(char *charset, char *str, int mode)
 {
 	int	i;
 	int	count;
 
 	count = 0;
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (str[i] == '\'' || str[i] == '\"')
 		{
-			if (find_quote(str, &i, &count))
+			if (find_quote(str, &i, &count, mode))
 				return (-1);
 		}
 		else
@@ -81,13 +83,13 @@ int	create_spe_token(t_list **token_list, int analyse)
 	return (0);
 }
 
-int	create_mand_token(t_list **token_list, char *entry, int *i)
+int	create_mand_token(t_list **token_list, char *entry, int *i, int mode)
 {
 	int		count;
 	char	*word;
 	int		j;
 
-	count = count_size_word(" \t<>|", entry + *i);
+	count = count_size_word(" \t<>|", entry + *i, mode);
 	if (count == -1)
 		return (1);
 	word = (char *)malloc(sizeof(char) * (count + 1));

@@ -4,7 +4,6 @@ int	export_concat(t_list **venv, char *title_env, char **new_content)
 {
 	char	*result;
 
-	printf("la\n");
 	result = ft_strjoin(venv_find_content(venv, title_env), *new_content);
 	if (result == NULL)
 		return (1);

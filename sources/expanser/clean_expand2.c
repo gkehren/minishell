@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static void	manage_booli(int *booli, char c)
+void	manage_booli(int *booli, char c)
 {
 	if (c == '\"' && *booli == 0)
 		*booli = 1;

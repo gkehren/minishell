@@ -21,7 +21,7 @@ static int	metachar_analysis(char *entry, int i)
 	return (-1);
 }
 
-static int	lexer_monitor(char *entry, int *i, t_list **token_list)
+static int	lexer_monitor(char *entry, int *i, t_list **token_list, int mode)
 {
 	int	analyse;
 	int	check;
@@ -31,7 +31,7 @@ static int	lexer_monitor(char *entry, int *i, t_list **token_list)
 	if (analyse != -1)
 		check = create_spe_token(token_list, analyse);
 	else
-		check = create_mand_token(token_list, entry, i);
+		check = create_mand_token(token_list, entry, i, mode);
 	if (analyse == 3 || analyse == 4)
 		(*i) += 2;
 	else if (analyse != -1)
@@ -69,13 +69,13 @@ t_list	*generate_token(char *entry, int mode)
 
 	token_list = NULL;
 	i = 0;
-	while (entry[i])
+	while (entry && entry[i])
 	{
 		while (entry[i] == ' ' || entry[i] == '\t')
 			i++;
 		if (!entry[i])
 			break ;
-		check = lexer_monitor(entry, &i, &token_list);
+		check = lexer_monitor(entry, &i, &token_list, mode);
 		if (check == 1)
 			return (ft_lstclear(&token_list, &del_token_lex), NULL);
 	}

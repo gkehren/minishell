@@ -19,5 +19,6 @@ int		clean_expand(t_list **token_list);
 /*						CLEAN_EXPAND2						*/
 int		clean_quotes_v2(t_list *cmd);
 void	turn_to_word(t_list *token_list);
+void	manage_booli(int *booli, char c);
 
 #endif

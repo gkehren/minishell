@@ -20,8 +20,6 @@ static int	*count_size_env(char *str, char charset)
 	while (str[i] && str[++i])
 		count++;
 	result[1] = count + 1;
-	printf("count1 = %d\n", result[0]);
-	printf("count2 = %d\n", result[1]);
 	return (result);
 }
 
