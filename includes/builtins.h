@@ -23,6 +23,7 @@ int		parse_env_data(t_list **venv, char **env);
 /*						HANDLE_ENV2						*/
 char	**malloc_not_init(char *env_part);
 int		malloc_failed_env(t_list **venv);
+int		export_concat(t_list **venv, char *title_env, char **new_content);
 
 /*						PARSING_EXPORT					*/
 int		parsing_export(char **args);

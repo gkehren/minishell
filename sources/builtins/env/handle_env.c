@@ -20,6 +20,8 @@ static int	*count_size_env(char *str, char charset)
 	while (str[i] && str[++i])
 		count++;
 	result[1] = count + 1;
+	printf("count1 = %d\n", result[0]);
+	printf("count2 = %d\n", result[1]);
 	return (result);
 }
 
@@ -66,6 +68,8 @@ char	**cut_env(char *env_part)
 		if (handle_malloc_env(&result, &size_strs, &env_part))
 			return (NULL);
 		set_env_str(result, size_strs, env_part, 0);
+		if (find_char('+', env_part))
+			env_part++;
 		set_env_str(result, size_strs, env_part + size_strs[0], 1);
 		free(size_strs);
 	}

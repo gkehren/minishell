@@ -82,7 +82,11 @@ static int	export_action(t_list **venv, char **cuting, char **args, int i)
 	if (venv_exist(venv, cuting[0]) == 1)
 	{
 		if (find_char('=', args[i]))
+		{
+			if (find_char('+', args[i]))
+				export_concat(venv, cuting[0], &cuting[1]);
 			venv_replace(venv, cuting[0], cuting[1]);
+		}
 		else
 			return (free(cuting[0]), free(cuting[1]), 0);
 	}
@@ -125,5 +129,5 @@ int	ft_export(int argc, char **args, t_list **venv, t_exec *exec)
 			i++;
 		}
 	}
-	return (0);
+	return (set_status(0), 0);
 }
