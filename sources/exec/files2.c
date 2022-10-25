@@ -49,7 +49,8 @@ int	init_outfile(t_list *token_list, t_files *files)
 		tmp_token = (t_token_lex *)token_list->content;
 		if (tmp_token->token == OUT || tmp_token->token == OUT_APPEND)
 		{
-			if (open(tmp_token->content, O_CREAT | O_TRUNC | O_WRONLY, 0644) == -1)
+			if (open(tmp_token->content, O_CREAT | O_TRUNC | O_WRONLY,
+					0644) == -1)
 				return (1);
 		}
 		token_list = token_list->next;

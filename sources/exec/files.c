@@ -50,17 +50,17 @@ static int	check_files(t_list *token_list)
 		if (tmp_token->token != IN_HEREDOC)
 		{
 			if (tmp_token->token == OUT_APPEND)
-				fd = open(tmp_token->content, O_APPEND | O_WRONLY | O_CREAT, 0644);
+				fd = open(tmp_token->content, O_APPEND | O_WRONLY | O_CREAT,
+						0644);
 			else if (tmp_token->token == OUT)
-				fd = open(tmp_token->content, O_TRUNC | O_WRONLY | O_CREAT, 0644);
+				fd = open(tmp_token->content, O_TRUNC | O_WRONLY | O_CREAT,
+						0644);
 			else
 				fd = open(tmp_token->content, O_RDONLY);
 			if (fd == -1)
-			{
-				print_error_str("minishell: ", tmp_token->content, ": ");
-				print_error_char(strerror(errno), '\n', NULL);
-				return (1);
-			}
+				return (print_error_str("minishell: ", tmp_token->content,
+						": "), print_error_char(strerror(errno), '\n', NULL),
+					1);
 			close(fd);
 		}
 		token_list = token_list->next;

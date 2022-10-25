@@ -70,7 +70,7 @@ static int	clean_tk(t_list *token_list)
 	return (0);
 }
 
-int clean_quotes_v2(t_list *cmd)
+int	clean_quotes_v2(t_list *cmd)
 {
 	t_cmd	*tmp_cmd;
 	int		i;
@@ -81,7 +81,8 @@ int clean_quotes_v2(t_list *cmd)
 		i = 0;
 		while (tmp_cmd->full_cmd && tmp_cmd->full_cmd[i])
 		{
-			tmp_cmd->full_cmd[i] = process_clean_quotes(tmp_cmd->full_cmd[i], 0, 0, 0);
+			tmp_cmd->full_cmd[i] = process_clean_quotes(tmp_cmd->full_cmd[i],
+					0, 0, 0);
 			if (tmp_cmd->full_cmd[i] == NULL)
 				return (1);
 			i++;

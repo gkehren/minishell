@@ -30,7 +30,8 @@ char	**new_full_cmd(char **full_cmd, char *cmd)
 	return (result);
 }
 
-int	new_token_files(t_list **token_files, t_token_lex *token_redir, t_token_lex *token_word)
+int	new_token_files(t_list **token_files, t_token_lex *token_redir,
+	t_token_lex *token_word)
 {
 	t_token_lex	*new_file;
 	t_list		*new_element;
@@ -42,7 +43,8 @@ int	new_token_files(t_list **token_files, t_token_lex *token_redir, t_token_lex 
 	new_file = init_token_lex(tmp, token_redir->token);
 	if (new_file == NULL)
 		return (free(tmp), 1);
-	if (new_file->token == IN_HEREDOC && (find_char('\"', tmp) || find_char('\'', tmp)))
+	if (new_file->token == IN_HEREDOC && (find_char('\"', tmp)
+			|| find_char('\'', tmp)))
 		new_file->heredoc_ex = 1;
 	new_element = ft_lstnew((void *)new_file);
 	if (new_element == NULL)
@@ -64,7 +66,7 @@ static int	count_argc(char **full_cmd)
 void	init_argc_cmd(t_list *cmd)
 {
 	t_cmd	*tmp_cmd;
-	
+
 	while (cmd)
 	{
 		tmp_cmd = (t_cmd *)cmd->content;

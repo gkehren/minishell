@@ -20,7 +20,7 @@ int	expand_return_value(char **expand, char **str)
 void	init_begin(int *j, int i, char *begin, char *str)
 {
 	*j = -1;
-	while(++(*j) != i)
+	while (++(*j) != i)
 		begin[*j] = str[*j];
 	begin[*j] = '\0';
 }

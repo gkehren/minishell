@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:48:27 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/24 23:51:58 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/25 16:14:33 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **env)
 	t_list		*venv;
 	t_list		*token_list;
 	t_list		*cmd;
-	
+
 	if (argc != 1)
 	{
 		ft_putstr_fd("Wrong number of arguments !\n", 2);

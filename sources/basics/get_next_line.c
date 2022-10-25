@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 // size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
@@ -28,7 +27,7 @@ static int	ft_find_line(char *buff, int buff_size)
 		if (buff[i] == '\n')
 		{
 			return (i);
-		}	
+		}
 		i++;
 	}
 	return (-1);
@@ -57,7 +56,7 @@ static char	*initialize_buff(int *ret, char *save, int fd)
 		{
 			free(new_buff);
 			return (NULL);
-		}	
+		}
 	}
 	return (new_buff);
 }
