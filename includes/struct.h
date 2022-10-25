@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 01:58:21 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/24 22:58:32 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/25 15:21:56 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_exec
 }	t_exec;
 
 /*						BUILTINS						*/
-typedef int (*t_builtins)(int, char **, t_list **, t_exec *exec);
+typedef int	(*t_builtins)(int, char **, t_list **, t_exec *exec);
 
 /*						LEXER						*/
 typedef enum s_token

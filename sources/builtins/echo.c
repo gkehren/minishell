@@ -23,9 +23,6 @@ int	ft_echo(int argc, char **args, t_list **venv, t_exec *exec)
 	int	check;
 	int	option_ok;
 
-	(void)exec;
-	(void)argc;
-	(void)venv;
 	check = 0;
 	option_ok = 0;
 	i = 0;
@@ -44,5 +41,5 @@ int	ft_echo(int argc, char **args, t_list **venv, t_exec *exec)
 	}
 	if (option_ok == 0)
 		printf("\n");
-	return (set_status(0), 0);
+	return ((void)exec, (void)argc, (void)venv, set_status(0), 0);
 }

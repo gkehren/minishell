@@ -60,15 +60,19 @@ static char	*return_env_path(int argc, char **args, t_list **venv)
 static int	check_errors(int argc, char **args, t_list **venv)
 {
 	if (argc > 2)
-		return (set_status(1), print_error("minishell: cd: too many arguments\n"));
-	if ((argc == 1 && !venv_exist(venv, "HOME")) || (venv_exist(venv, "HOME") && venv_find_content(venv, "HOME") == NULL))
+		return (set_status(1),
+			print_error("minishell: cd: too many arguments\n"));
+	if ((argc == 1 && !venv_exist(venv, "HOME")) || (venv_exist(venv, "HOME")
+			&& venv_find_content(venv, "HOME") == NULL))
 		return (set_status(1), print_error("minishell: cd: HOME not set \n"));
 	if (argc == 2 && args[1][0] == '-')
 	{
 		if (args[1][1] != '-')
-			return (set_status(2), print_error_str("minishell: cd: ", args[1], " :invalid option\n"));
+			return (set_status(2), print_error_str("minishell: cd: ",
+					args[1], " :invalid option\n"));
 		else if (args[1][2] != '\0')
-			return (set_status(2), print_error("minishell: cd: --: invalid option\n"));
+			return (set_status(2),
+				print_error("minishell: cd: --: invalid option\n"));
 	}
 	if (argc == 2 && args[1][0] == '-' && !venv_exist(venv, "OLDPWD"))
 		return (set_status(1), print_error("minishell: cd: OLDPWD not set \n"));

@@ -1,7 +1,7 @@
 #ifndef EXPANSER_H
 # define EXPANSER_H
 
-#include "minishell.h"
+# include "minishell.h"
 
 /*						EXPANSER						*/
 int		expand_process(t_token_lex	*token, t_list *venv, int heredoc, int i);
@@ -17,7 +17,7 @@ void	set_incr_expand(int *i, char c);
 /*						CLEAN_EXPAND						*/
 int		clean_expand(t_list **token_list);
 /*						CLEAN_EXPAND2						*/
-int 	clean_quotes_v2(t_list *cmd);
+int		clean_quotes_v2(t_list *cmd);
 void	turn_to_word(t_list *token_list);
 
 #endif
