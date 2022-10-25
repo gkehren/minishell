@@ -6,7 +6,7 @@
 /*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:02:44 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/25 15:21:17 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/25 18:26:47 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void		set_up_tmp(t_heredoc *hevar);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		*path_command(char *cmd, char **env);
 char		*path_exec(char *cmd);
+void		close_builtins(t_cmd *cmd, int tmp_stdin, int tmp_stdout);
 int			check_abs_path(char *cmd);
 void		free_child(t_exec *exec, char **env);
 int			get_token_id(t_list *ltoken);

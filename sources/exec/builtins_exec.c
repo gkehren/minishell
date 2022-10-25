@@ -1,5 +1,15 @@
 #include "minishell.h"
 
+void	close_builtins(t_cmd *cmd, int tmp_stdin, int tmp_stdout)
+{
+	if (cmd->files->outfile != -2)
+		close(cmd->files->outfile);
+	if (cmd->files->infile != -2)
+		close(cmd->files->infile);
+	close(tmp_stdin);
+	close(tmp_stdout);
+}
+
 int	only_builtins(t_builtins p_builtins, t_cmd *cmd, t_list *venv, t_exec *exec)
 {
 	int	tmp_stdin;
@@ -11,6 +21,8 @@ int	only_builtins(t_builtins p_builtins, t_cmd *cmd, t_list *venv, t_exec *exec)
 		dup2(cmd->files->infile, STDIN_FILENO);
 	if (cmd->files->outfile != -2)
 		dup2(cmd->files->outfile, STDOUT_FILENO);
+	if (ft_strcmp(cmd->full_cmd[0], "exit") == 0)
+		close_builtins(cmd, tmp_stdin, tmp_stdout);
 	(*p_builtins)(cmd->argc, cmd->full_cmd, &venv, exec);
 	if (cmd->files->infile != -2)
 	{

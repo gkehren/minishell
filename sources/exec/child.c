@@ -90,6 +90,11 @@ void	child_process_builtins(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 	cmd = (t_cmd *)lcmd->content;
 	builtins = (t_builtins)cmd->builtin;
 	redirect_child(lcmd, cmd, fd, fdd);
+	if (ft_strcmp(cmd->full_cmd[0], "exit") == 0)
+	{
+		close_builtins(cmd, 0, 0);
+		close(STDIN_FILENO);
+	}
 	(*builtins)(cmd->argc, cmd->full_cmd, exec->venv, exec);
 	close(STDIN_FILENO);
 	ft_lstclear(exec->cmd, &del_cmd);

@@ -1,82 +1,74 @@
 #include "minishell.h"
 
-static int	size_number(int n)
+static char	*ft_strnew(size_t size)
 {
-	int	count;
-
-	if (n == 0)
-		return (1);
-	count = 0;
-	while (n)
-	{
-		count++;
-		n /= 10;
-	}
-	return (count);
-}
-
-static char	*ft_strrev(char *str)
-{
-	char	tmp;
-	size_t	size;
-	size_t	i;
+	char	*str;
+	int		i;
 
 	i = 0;
-	size = ft_strlen(str);
-	while (i < size / 2)
+	str = (char *)malloc(sizeof(char) * size + 1);
+	if (!str)
+		return (NULL);
+	while (i < (int)size)
 	{
-		tmp = str[i];
-		str[i] = str[size - i - 1];
-		str[size - i - 1] = tmp;
+		str[i] = '\0';
 		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+static int	len_nb(long nb)
+{
+	int	len;
+
+	len = 1;
+	if (nb < 0)
+		nb = nb * -1;
+	while (nb >= 10)
+	{
+		nb = nb / 10;
+		len++;
+	}
+	return (len);
+}
+
+static char	*ft_fillnbr(char *str, long nbr, int i)
+{
+	int	j;
+
+	str[i] = '\0';
+	i--;
+	if (nbr < 0)
+	{
+		str[0] = '-';
+		j = 1;
+		nbr *= -1;
+	}
+	else
+		j = 0;
+	while (i >= j)
+	{
+		str[i] = 48 + (nbr % 10);
+		nbr = nbr / 10;
+		i--;
 	}
 	return (str);
 }
 
-static char	*create_number(char *result, int n, long tmp)
-{
-	int	j;
-	int	size_nb;
-
-	size_nb = size_number(tmp);
-	j = 0;
-	while (size_nb > 0)
-	{
-		result[j] = tmp % 10 + 48;
-		j++;
-		tmp /= 10;
-		size_nb--;
-	}
-	if (n < 0)
-	{
-		result[j] = '-';
-		j++;
-	}
-	result[j] = '\0';
-	return (result);
-}
-
 char	*ft_itoa(long long n)
 {
-	char	*result;
-	long	tmp;
+	char	*str;
+	long	nbr;
 	int		i;
 
-	tmp = n;
-	i = size_number(tmp) + 1;
-	if (tmp < 0)
-	{
-		tmp = -tmp;
-		i += 1;
-	}
-	result = (char *)malloc(sizeof(char) * i);
-	if (result == NULL)
+	nbr = n;
+	i = len_nb(nbr);
+	if (nbr < 0)
+		i++;
+	str = ft_strnew(i);
+	if (!str)
 		return (NULL);
-	if (tmp == 0)
-	{
-		result[0] = '0';
-		result[1] = '\0';
-		return (result);
-	}
-	return (ft_strrev(create_number(result, n, tmp)));
+	str = ft_fillnbr(str, nbr, i);
+	return (str);
 }

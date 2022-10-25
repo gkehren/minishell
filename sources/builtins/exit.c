@@ -91,7 +91,7 @@ int	ft_exit(int argc, char **args, t_list **venv, t_exec *exec)
 		exit_status(1, venv, exec);
 	}
 	if (argc > 2)
-		return (print_error("exit\nbash: exit: too many arguments\n"));
+		return (set_status(1), print_error("exit\nbash: exit: too many arguments\n"));
 	exit_status(ft_atoi(args[1]), venv, exec);
 	return (0);
 }
