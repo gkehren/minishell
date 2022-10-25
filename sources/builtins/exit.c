@@ -58,20 +58,19 @@ static int	check_errors(char **args)
 	char		*tmp;
 
 	if (check_parsing(args))
-	{
-		print_error_str("exit\nbash: exit: ", args[1],
-			": numeric argument required\n");
-		return (2);
-	}
+		return (print_error_str("exit\nminishell: exit: ", args[1],
+				": numeric argument required\n"), 2);
+	if (ft_atoi(args[1]) != 0 && ft_atoll(args[1]) == 0)
+		return (print_error_str("exit\nminishell: exit: ", args[1],
+				": numeric argument required\n"), 2);
+	if (ft_atoi(args[1]) == LLONG_MIN && ft_atoll(args[1]) == LLONG_MIN)
+		return (0);
 	tmp = ft_itoa(ft_atoi(args[1]));
 	if (tmp == NULL)
 		return (1);
 	if (checker_integer(args[1], tmp, NULL))
-	{
-		print_error_str("exit\nbash: exit: ", args[1],
-			": numeric argument required\n");
-		return (2);
-	}
+		return (print_error_str("exit\nminishell: exit: ", args[1],
+				": numeric argument required\n"), 2);
 	return (0);
 }
 
@@ -91,7 +90,8 @@ int	ft_exit(int argc, char **args, t_list **venv, t_exec *exec)
 		exit_status(1, venv, exec);
 	}
 	if (argc > 2)
-		return (set_status(1), print_error("exit\nbash: exit: too many arguments\n"));
+		return (set_status(1),
+			print_error("exit\nminishell: exit: too many arguments\n"));
 	exit_status(ft_atoi(args[1]), venv, exec);
 	return (0);
 }

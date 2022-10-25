@@ -23,6 +23,7 @@ int			ft_strlcpy(char *dst, char *src, int dstsize);
 /*						BASIC_STR2						*/
 char		*ft_strdup(char *s);
 long long	ft_atoi(char *str);
+long long	ft_atoll(const char *s);
 int			ft_strncmp(char *s1, char *s2, size_t n);
 void		ft_putchar_fd(char c, int fd);
 void		ft_putnbr_fd(int n, int fd);

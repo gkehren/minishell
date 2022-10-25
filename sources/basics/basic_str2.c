@@ -13,29 +13,6 @@ char	*ft_strdup(char *s)
 	return (copy);
 }
 
-long long	ft_atoi(char *str)
-{
-	int			i;
-	int			neg;
-	long long	result;
-
-	result = 0;
-	neg = 1;
-	i = 0;
-	while (str[i] == ' ' || (str[i] > 8 && str[i] < 14))
-		i++;
-	if (str[i] == '-')
-		neg = -neg;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (ft_isdigit(str[i]))
-	{
-		result = result * 10 + (str[i] - 48);
-		i++;
-	}
-	return (result * neg);
-}
-
 int	ft_strncmp(char *s1, char *s2, size_t n)
 {
 	size_t	i;

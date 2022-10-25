@@ -68,6 +68,9 @@ void	child_process(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 
 	cmd = (t_cmd *)lcmd->content;
 	env = send_env(exec->venv);
+	if (!cmd->full_cmd)
+		return (close_fd(exec->fdd, cmd), close(fd[1]), close(fd[0]),
+			free_child(exec, env), exit(1));
 	if (cmd->full_cmd[0][0] == '/' && check_abs_path(cmd->full_cmd[0]) == 0)
 		path = ft_strdup(cmd->full_cmd[0]);
 	else
@@ -90,10 +93,13 @@ void	child_process_builtins(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 	cmd = (t_cmd *)lcmd->content;
 	builtins = (t_builtins)cmd->builtin;
 	redirect_child(lcmd, cmd, fd, fdd);
-	if (ft_strcmp(cmd->full_cmd[0], "exit") == 0)
+	if (ft_strcmp(cmd->full_cmd[0], "exit") == 0
+		|| ft_strcmp(cmd->full_cmd[0], "export") == 0
+		|| ft_strcmp(cmd->full_cmd[0], "env") == 0)
 	{
 		close_builtins(cmd, 0, 0);
 		close(STDIN_FILENO);
+		close(STDOUT_FILENO);
 	}
 	(*builtins)(cmd->argc, cmd->full_cmd, exec->venv, exec);
 	close(STDIN_FILENO);
