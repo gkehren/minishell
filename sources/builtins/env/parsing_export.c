@@ -40,7 +40,7 @@ int	parsing_export(char **args)
 	int	i;
 
 	i = 1;
-	if (args[1][0]== '-')
+	if (args[1][0] == '-')
 	{
 		ft_putstr_fd("minishell: export: ", 2);
 		ft_putchar_fd(args[1][0], 2);

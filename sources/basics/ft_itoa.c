@@ -58,9 +58,9 @@ static char	*ft_fillnbr(char *str, long nbr, int i)
 
 char	*ft_itoa(long long n)
 {
-	char	*str;
-	long	nbr;
-	int		i;
+	char		*str;
+	long long	nbr;
+	int			i;
 
 	nbr = n;
 	i = len_nb(nbr);
