@@ -13,13 +13,12 @@ char	**new_full_cmd(char **full_cmd, char *cmd)
 	if (result == NULL)
 		return (NULL);
 	i = 0;
-	while (size)
+	while (size--)
 	{
 		result[i] = ft_strdup(full_cmd[i]);
 		if (result[i] == NULL)
 			return (free_double_tab((void **)result), NULL);
 		i++;
-		size--;
 	}
 	result[i] = ft_strdup(cmd);
 	if (result[i] == NULL)

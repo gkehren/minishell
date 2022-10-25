@@ -62,6 +62,14 @@ static int	add_cmd(t_list **cmd_list, t_cmd **current_cmd, t_list *tmp_list)
 	return (0);
 }
 
+static void	init_cmd(t_list **cmd_list, t_list **tmp_list,
+	t_cmd **current_cmd, t_list **token_list)
+{
+	*cmd_list = NULL;
+	*tmp_list = *token_list;
+	*current_cmd = init_current_cmd();
+}
+
 t_list	*generate_cmd(t_list **token_list, t_list **venv)
 {
 	t_list	*cmd_list;
@@ -70,9 +78,7 @@ t_list	*generate_cmd(t_list **token_list, t_list **venv)
 
 	if (!token_list)
 		return (NULL);
-	cmd_list = NULL;
-	tmp_list = *token_list;
-	current_cmd = init_current_cmd();
+	init_cmd(&cmd_list, &tmp_list, &current_cmd, token_list);
 	if (current_cmd == NULL)
 		return (ft_lstclear(token_list, &del_token_lex), NULL);
 	while (tmp_list)
