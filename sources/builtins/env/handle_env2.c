@@ -1,5 +1,18 @@
 #include "minishell.h"
 
+int	export_concat(t_list **venv, char *title_env, char **new_content)
+{
+	char	*result;
+
+	printf("la\n");
+	result = ft_strjoin(venv_find_content(venv, title_env), *new_content);
+	if (result == NULL)
+		return (1);
+	free(*new_content);
+	*new_content = result;
+	return (0);
+}
+
 char	**malloc_not_init(char *env_part)
 {
 	char	**result;
