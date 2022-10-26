@@ -49,7 +49,7 @@ int	expand_process(t_token_lex	*token, t_list *venv, int heredoc, int i)
 				return (1);
 			if (tmp[i] == '\0')
 				break ;
-			set_incr_expand(&i, tmp[i]);
+			i++;
 		}
 		else
 			i++;

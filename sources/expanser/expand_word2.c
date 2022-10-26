@@ -25,12 +25,19 @@ void	init_begin(int *j, int i, char *begin, char *str)
 	begin[*j] = '\0';
 }
 
-void	set_incr_expand(int *i, char c)
+void	set_incr_expand(int *i, char c, t_expanse *expanse)
 {
+	(void)expanse;
 	if (c == '$')
 		(*i)++;
 	else
 		*i = 0;
+	if (c == '\"' || c == '\'')
+	{
+		(*i)++;
+	}
+	expanse->char_to_rem = 0;
+	expanse->mode = REPLACE;
 }
 
 int	check_weird_expand(char *str)

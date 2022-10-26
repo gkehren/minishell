@@ -12,7 +12,7 @@ int		expand_word(t_expanse expanse, t_list *venv, char **str, int *i);
 /*						EXPAND_WORD2						*/
 int		expand_return_value(char **expand, char **str);
 void	init_begin(int *j, int i, char *begin, char *str);
-void	set_incr_expand(int *i, char c);
+void	set_incr_expand(int *i, char c, t_expanse *expanse);
 int		check_weird_expand(char *str);
 
 /*						CLEAN_EXPAND						*/
