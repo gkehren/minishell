@@ -109,7 +109,7 @@ int	expand_word(t_expanse expanse, t_list *venv, char **str, int *i)
 
 	tmp2 = *str;
 	if (expanse.mode == PASS)
-		return (0);
+		return ((*i)++, 0);
 	begin = (char *)malloc(sizeof(char) * (*i + 1));
 	if (begin == NULL)
 		return (free(tmp2), 1);
@@ -119,6 +119,7 @@ int	expand_word(t_expanse expanse, t_list *venv, char **str, int *i)
 		return (free(tmp2), free(begin), 1);
 	else if (j == 0)
 		expand = find_env_word(venv, expand);
+	*i += ft_strlen(expand);
 	if (join_env_word(begin, expand, str, tmp2))
 		return (1);
 	if (j != 0)
