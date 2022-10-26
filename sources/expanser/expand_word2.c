@@ -48,6 +48,5 @@ int	check_weird_expand(char *str)
 	}
 	if (str[1] == '\"' && (count % 2 != 0))
 		return (1);
-	printf("la");
 	return (0);
 }

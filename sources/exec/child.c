@@ -103,6 +103,7 @@ void	child_process_builtins(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 	}
 	(*builtins)(cmd->argc, cmd->full_cmd, exec->venv, exec);
 	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
 	ft_lstclear(exec->cmd, &del_cmd);
 	ft_lstclear(exec->venv, &del_venv);
 	exit(0);

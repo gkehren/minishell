@@ -1,5 +1,18 @@
 #include "minishell.h"
 
+int	malloc_cd(char *str, t_list **venv, char *tmp)
+{
+	str = ft_strdup(str);
+	if (venv_exist(venv, str))
+		venv_replace(venv, str, tmp);
+	else
+	{
+		if (venv_create(venv, str, tmp, INIT))
+			return (1);
+	}
+	return (0);
+}
+
 static int	set_up_env_var(t_list **venv)
 {
 	char	path[PATH_MAX];
@@ -10,13 +23,8 @@ static int	set_up_env_var(t_list **venv)
 	tmp = ft_strdup(path);
 	if (tmp == NULL)
 		return (1);
-	if (venv_exist(venv, "PWD"))
-		venv_replace(venv, "PWD", tmp);
-	else
-	{
-		if (venv_create(venv, "PWD", tmp, INIT))
-			return (1);
-	}
+	if (malloc_cd("PWD", venv, tmp) == 1)
+		return (1);
 	return (0);
 }
 
@@ -27,13 +35,8 @@ static int	swap_pwd_env(t_list **venv)
 	old_pwd = ft_strdup(venv_find_content(venv, "PWD"));
 	if (old_pwd == NULL)
 		return (1);
-	if (venv_exist(venv, "OLDPWD"))
-		venv_replace(venv, "OLDPWD", old_pwd);
-	else
-	{
-		if (venv_create(venv, "OLDPWD", old_pwd, INIT))
-			return (1);
-	}
+	if (malloc_cd("OLDPWD", venv, old_pwd) == 1)
+		return (1);
 	if (set_up_env_var(venv))
 		return (1);
 	return (0);
