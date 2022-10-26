@@ -43,7 +43,7 @@ int	malloc_failed_env(t_list **venv)
 
 static int	begin_env_i(t_list **venv)
 {
-	char **args;
+	char	**args;
 
 	args = ft_split("export OLPWD", ' ');
 	if (args == NULL)

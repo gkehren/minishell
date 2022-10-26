@@ -1,18 +1,5 @@
 #include "minishell.h"
 
-int	malloc_cd(char *str, t_list **venv, char *tmp)
-{
-	str = ft_strdup(str);
-	if (venv_exist(venv, str))
-		venv_replace(venv, str, tmp);
-	else
-	{
-		if (venv_create(venv, str, tmp, INIT))
-			return (1);
-	}
-	return (0);
-}
-
 static int	set_up_env_var(t_list **venv)
 {
 	char	path[PATH_MAX];
