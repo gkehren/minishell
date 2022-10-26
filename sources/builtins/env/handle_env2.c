@@ -40,3 +40,51 @@ int	malloc_failed_env(t_list **venv)
 	printf("ENV creation failed !\n");
 	return (1);
 }
+
+static int	begin_env_i(t_list **venv)
+{
+	char **args;
+
+	args = ft_split("export OLPWD", ' ');
+	if (args == NULL)
+		return (1);
+	ft_export(0, args, venv, NULL);
+	free_double_tab((void **)args);
+	args = ft_split("export SHLVL=1", ' ');
+	if (args == NULL)
+		return (1);
+	ft_export(0, args, venv, NULL);
+	free_double_tab((void **)args);
+	args = ft_split("export _=/usr/bin/env", ' ');
+	if (args == NULL)
+		return (1);
+	ft_export(0, args, venv, NULL);
+	free_double_tab((void **)args);
+	return (0);
+}
+
+int	init_env_i(t_list **venv, char **args)
+{
+	char	*tmp;
+	char	*tmp2;
+	char	path[PATH_MAX];
+
+	begin_env_i(venv);
+	if (getcwd(path, PATH_MAX) == NULL)
+		return (1);
+	tmp = ft_strjoin("PWD=", path);
+	if (tmp == NULL)
+		return (1);
+	tmp2 = tmp;
+	tmp = ft_strjoin("export ", tmp);
+	if (tmp == NULL)
+		return (free(tmp2), 1);
+	free(tmp2);
+	args = ft_split(tmp, ' ');
+	if (args == NULL)
+		return (free(tmp), 1);
+	free(tmp);
+	ft_export(0, args, venv, NULL);
+	free_double_tab((void **)args);
+	return (0);
+}

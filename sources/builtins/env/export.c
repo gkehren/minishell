@@ -67,10 +67,10 @@ static void	export_print_all(t_list **venv)
 		return ;
 	while (i < size)
 	{
-		if (tab_sort[i]->set == INIT)
+		if (tab_sort[i]->set == INIT && ft_strcmp(tab_sort[i]->title, "_") != 0)
 			printf("declare -x %s=\"%s\"\n",
 				tab_sort[i]->title, tab_sort[i]->content);
-		else
+		else if (ft_strcmp(tab_sort[i]->title, "_") != 0)
 			printf("declare -x %s\n", tab_sort[i]->title);
 		i++;
 	}
