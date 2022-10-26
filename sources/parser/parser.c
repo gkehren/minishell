@@ -26,6 +26,7 @@ static int	process_cmd(t_list **tmp_list, t_cmd *current_cmd,
 					tmp_content->content);
 			if (current_cmd->full_cmd == NULL)
 				return (del_cmd(current_cmd), 1);
+			(*tmp_list) = (*tmp_list)->next;
 		}
 		else if (tmp_content->token == PIPE)
 			return ((*tmp_list) = (*tmp_list)->next, 0);
@@ -34,8 +35,8 @@ static int	process_cmd(t_list **tmp_list, t_cmd *current_cmd,
 			if (new_token_files(&current_cmd->token_files, tmp_content,
 					(t_token_lex *)(*tmp_list)->next->content))
 				return (1);
+			(*tmp_list) = (*tmp_list)->next->next;
 		}
-		(*tmp_list) = (*tmp_list)->next;
 	}
 	return (0);
 }
