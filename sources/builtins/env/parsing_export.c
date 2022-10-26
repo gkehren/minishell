@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int	check_char_export(char c, int mode)
+int	check_char_export(char c, int mode)
 {
 	if (mode == 0)
 	{
@@ -19,7 +19,7 @@ static int	check_char_export(char c, int mode)
 	}
 }
 
-static int	parsing_str_export(char *str)
+int	parsing_str_export(char *str)
 {
 	int	i;
 
@@ -35,29 +35,15 @@ static int	parsing_str_export(char *str)
 	return (0);
 }
 
-int	parsing_export(char **args)
+int	parsing_export(char *str)
 {
-	int	i;
-
-	i = 1;
-	if (args[1][0] == '-')
+	if (parsing_str_export(str))
 	{
-		ft_putstr_fd("minishell: export: ", 2);
-		ft_putchar_fd(args[1][0], 2);
-		ft_putchar_fd(args[1][1], 2);
-		ft_putstr_fd(": invalid option\n", 2);
-		return (set_status(2), 1);
-	}
-	while (args[i])
-	{
-		if (parsing_str_export(args[i]))
-		{
-			ft_putstr_fd("minishell: export: `", 2);
-			ft_putstr_fd(args[i], 2);
-			ft_putstr_fd("': not a valid identifier\n", 2);
-			return (set_status(1), 1);
-		}
-		i++;
+		ft_putstr_fd("minishell: export: `", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
+		set_status(1);
+		return (1);
 	}
 	return (0);
 }

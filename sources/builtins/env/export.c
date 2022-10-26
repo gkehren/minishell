@@ -113,21 +113,25 @@ int	ft_export(int argc, char **args, t_list **venv, t_exec *exec)
 
 	(void)exec;
 	(void)argc;
+	set_status(0);
 	if (ft_strcmp(args[0], "export") == 0 && args[1] == NULL)
 		export_print_all(venv);
 	else
 	{
-		if (parsing_export(args))
+		if (error_before(args))
 			return (1);
 		i = 1;
 		while (args[i])
 		{
-			cuting = cut_env(args[i]);
-			if (export_action(venv, cuting, args, i))
-				return (free(cuting), 1);
-			free(cuting);
+			if (parsing_export(args[i]) == 0)
+			{
+				cuting = cut_env(args[i]);
+				if (export_action(venv, cuting, args, i))
+					return (free(cuting), 1);
+				free(cuting);
+			}
 			i++;
 		}
 	}
-	return (set_status(0), 0);
+	return (0);
 }

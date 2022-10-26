@@ -27,10 +27,13 @@ int		export_concat(t_list **venv, char *title_env, char **new_content);
 int		init_env_i(t_list **venv, char **args);
 
 /*						PARSING_EXPORT					*/
-int		parsing_export(char **args);
+int		parsing_export(char *str);
+int		parsing_str_export(char *str);
+int		check_char_export(char c, int mode);
 
 /*						UNSET						*/
 int		ft_unset(int argc, char **args, t_list **venv, t_exec *exec);
+int		error_before(char **args);
 
 /*						PWD						*/
 int		ft_pwd(int argc, char **args, t_list **venv, t_exec *exec);
