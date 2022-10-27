@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/27 12:28:38 by gkehren           #+#    #+#             */
+/*   Updated: 2022/10/27 12:28:39 by gkehren          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	exit_status(long long int_status, t_list **venv, t_exec *exec)
 {
 	int_status = int_status % 256;
-	if (int_status != 2)
-		printf("exit (%lld)\n", int_status);
+	printf("exit\n");
 	ft_lstclear(venv, &del_venv);
 	ft_lstclear(exec->cmd, &del_cmd);
 	exit(int_status);

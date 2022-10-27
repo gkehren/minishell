@@ -1,21 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/27 12:29:50 by gkehren           #+#    #+#             */
+/*   Updated: 2022/10/27 12:29:53 by gkehren          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-
-// size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
-// {
-// 	size_t	i;
-
-// 	if (dstsize != 0)
-// 	{
-// 		i = 0;
-// 		while (i + 1 < dstsize && src[i])
-// 		{
-// 			dst[i] = src[i];
-// 			i++;
-// 		}
-// 		dst[i] = '\0';
-// 	}
-// 	return (ft_strlen(src));
-// }
 
 static int	ft_find_line(char *buff, int buff_size)
 {
