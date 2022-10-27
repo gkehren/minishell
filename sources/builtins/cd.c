@@ -6,7 +6,7 @@ static int	set_up_env_var(t_list **venv)
 	char	*tmp;
 
 	if (getcwd(path, PATH_MAX) == NULL)
-		return (set_status(1), perror("minishell: cd"), 1);
+		return (0);
 	tmp = ft_strdup(path);
 	if (tmp == NULL)
 		return (1);
@@ -57,10 +57,10 @@ static int	check_errors(int argc, char **args, t_list **venv)
 		return (set_status(1), print_error("minishell: cd: HOME not set \n"));
 	if (argc == 2 && args[1][0] == '-')
 	{
-		if (args[1][1] != '-')
+		if ((args[1][0] != '-' && args[1][1] != '\0') && args[1][1] != '-')
 			return (set_status(2), print_error_str("minishell: cd: ",
 					args[1], " :invalid option\n"));
-		else if (args[1][2] != '\0')
+		else if ((args[1][0] != '-' && args[1][1] != '\0') && args[1][2] != '\0')
 			return (set_status(2),
 				print_error("minishell: cd: --: invalid option\n"));
 	}
