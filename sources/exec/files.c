@@ -68,7 +68,7 @@ static int	check_files(t_list *token_list)
 	return (0);
 }
 
-static t_files	*set_files(t_list *token_list, t_list *venv, int index)
+static t_files	*set_files(t_list **token_list, t_list *venv, int index)
 {
 	t_files	*files;
 
@@ -80,13 +80,13 @@ static t_files	*set_files(t_list *token_list, t_list *venv, int index)
 	files->outfile = -2;
 	files->index_cmd = index;
 	files->index_cmd_str = NULL;
-	if (check_files(token_list))
+	if (check_files(*token_list))
 		return (free(files), NULL);
-	while (is_sort_token_files(token_list))
-		swap_token_files(&token_list);
-	if (init_infile(token_list, files, venv))
+	while (is_sort_token_files(*token_list))
+		swap_token_files(token_list);
+	if (init_infile(*token_list, files, venv))
 		return (free(files), NULL);
-	if (init_outfile(token_list, files))
+	if (init_outfile(*token_list, files))
 		return (free(files), NULL);
 	return (files);
 }
@@ -100,7 +100,7 @@ int	init_files_cmd(t_list *cmd, t_list *venv)
 	while (cmd)
 	{
 		tmp_cmd = (t_cmd *)cmd->content;
-		tmp_cmd->files = set_files(tmp_cmd->token_files, venv, index);
+		tmp_cmd->files = set_files(&tmp_cmd->token_files, venv, index);
 		if (tmp_cmd->files == NULL)
 			return (1);
 		index++;

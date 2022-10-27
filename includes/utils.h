@@ -8,6 +8,7 @@ int			find_char(char c, char *str);
 int			save_quote(int booli, char c);
 void		set_status(int status);
 int			malloc_cd(char *str, t_list **venv, char *tmp);
+int			init_outfile_bis(t_token_lex *token);
 
 /*						PRINT_ERROR						*/
 int			print_error(char *error);

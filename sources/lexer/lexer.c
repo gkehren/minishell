@@ -52,7 +52,7 @@ static int	check_token_word(t_list *token_list)
 		{
 			if (!ft_isalnum(tmp_content->content[0])
 				&& !good_token(tmp_content->content[0]))
-				return (print_error_char
+				return (set_status(2), print_error_char
 					("minishell: syntax error near unexpected token `",
 						tmp_content->content[0], "\'\n"));
 		}

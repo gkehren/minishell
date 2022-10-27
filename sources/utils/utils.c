@@ -42,3 +42,19 @@ int	malloc_cd(char *str, t_list **venv, char *tmp)
 	}
 	return (0);
 }
+
+int	init_outfile_bis(t_token_lex *token)
+{
+	if (token->token == OUT)
+	{
+		if (open(token->content, O_CREAT | O_TRUNC | O_WRONLY,
+				0644) == -1)
+			return (1);
+	}
+	else if (token->token == OUT_APPEND)
+	{
+		if (open(token->content, O_APPEND | O_WRONLY | O_CREAT, 0644) == -1)
+			return (1);
+	}
+	return (0);
+}

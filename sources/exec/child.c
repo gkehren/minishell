@@ -67,6 +67,8 @@ void	child_process(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 	char	**env;
 
 	cmd = (t_cmd *)lcmd->content;
+	if (cmd->files->is_heredoc == 1)
+		free(cmd->files->index_cmd_str);
 	env = send_env(exec->venv);
 	if (!cmd->full_cmd)
 		return (close_fd(exec->fdd, cmd), close(fd[1]), close(fd[0]),
@@ -91,6 +93,8 @@ void	child_process_builtins(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 	t_builtins	builtins;
 
 	cmd = (t_cmd *)lcmd->content;
+	if (cmd->files->is_heredoc == 1)
+		free(cmd->files->index_cmd_str);
 	builtins = (t_builtins)cmd->builtin;
 	redirect_child(lcmd, cmd, fd, fdd);
 	if (ft_strcmp(cmd->full_cmd[0], "exit") == 0
