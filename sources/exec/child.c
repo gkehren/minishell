@@ -67,6 +67,7 @@ void	child_process(int *fd, int *fdd, t_exec *exec, t_list *lcmd)
 	char	**env;
 
 	cmd = (t_cmd *)lcmd->content;
+	exec->fdd = fdd;
 	if (cmd->files->is_heredoc == 1)
 		free(cmd->files->index_cmd_str);
 	env = send_env(exec->venv);

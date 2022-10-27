@@ -60,7 +60,8 @@ static int	check_errors(int argc, char **args, t_list **venv)
 		if ((args[1][0] != '-' && args[1][1] != '\0') && args[1][1] != '-')
 			return (set_status(2), print_error_str("minishell: cd: ",
 					args[1], " :invalid option\n"));
-		else if ((args[1][0] != '-' && args[1][1] != '\0') && args[1][2] != '\0')
+		else if ((args[1][0] != '-' && args[1][1] != '\0')
+			&& args[1][2] != '\0')
 			return (set_status(2),
 				print_error("minishell: cd: --: invalid option\n"));
 	}

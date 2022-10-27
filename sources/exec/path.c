@@ -83,5 +83,5 @@ char	*path_command(char *cmd, char **env)
 		i++;
 	}
 	return (free_double_tab((void **)paths),
-		print_error_str("minishell: ", cmd, ": command not found\n"), NULL);
+		print_error_str("minishell0: ", cmd, ": command not found\n"), NULL);
 }
