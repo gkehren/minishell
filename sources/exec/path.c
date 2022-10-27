@@ -5,9 +5,14 @@ static char	*file_exec(char *cmd)
 	char	*tmp;
 	int		i;
 	int		j;
+	int		fd;
 
 	i = 2;
 	j = 0;
+	fd = open(cmd, O_DIRECTORY);
+	if (fd != -1)
+		return (close(fd), print_error_str("minishell: ",
+				cmd, ": Is a directory\n"), set_status(126), NULL);
 	tmp = ft_strdup(cmd);
 	while (cmd[i])
 	{
@@ -39,34 +44,17 @@ static char	**split_env(char **env)
 	return (paths);
 }
 
-int	check_abs_path(char *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd[i])
-	{
-		if ((cmd[i] == '/' || cmd[i] == '.') && cmd[i + 1] == '\0')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 char	*path_exec(char *cmd)
 {
 	int	fd;
 
 	if (cmd[0] == '.' && cmd[1] == '/')
 		return (file_exec(cmd));
-	if (check_abs_path(cmd) == 1)
-		fd = -1;
-	else
-		fd = open(cmd, O_RDONLY);
+	fd = open(cmd, O_DIRECTORY);
 	if (fd == -1)
-		return (print_error_str("minishell: ", cmd, ": Is a directory\n"),
-			set_status(126), NULL);
-	return (close(fd), cmd);
+		return (cmd);
+	return (close(fd), print_error_str("minishell: ", cmd, ": Is a directory\n"),
+		set_status(126), NULL);
 }
 
 char	*path_command(char *cmd, char **env)
