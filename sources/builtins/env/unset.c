@@ -2,6 +2,8 @@
 
 int	error_before(char **args)
 {
+	if (!(args[1]))
+		return (0);
 	if (args[1][0] == '-')
 	{
 		ft_putstr_fd("minishell: export: ", 2);
