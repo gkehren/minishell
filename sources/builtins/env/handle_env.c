@@ -50,7 +50,7 @@ static int	handle_malloc_env(char ***result, int **size_strs, char **env_part)
 		return (free(*size_strs), free(*result), 1);
 	(*result)[1] = (char *)malloc(sizeof(char) * (*size_strs)[1]);
 	if ((*result)[1] == NULL)
-		return (free(*size_strs), free(*result), free((*result)[0]), 1);
+		return (free(*size_strs), free((*result)[0]), free(*result), 1);
 	return (0);
 }
 

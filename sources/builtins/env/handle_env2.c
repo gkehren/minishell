@@ -22,7 +22,7 @@ char	**malloc_not_init(char *env_part)
 		return (NULL);
 	result[0] = (char *)malloc(sizeof(char) * (ft_strlen(env_part) + 1));
 	if (result[0] == NULL)
-		return (NULL);
+		return (free(result), NULL);
 	i = 0;
 	while (env_part[i])
 	{
