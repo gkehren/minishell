@@ -57,6 +57,14 @@ static void	begin_heredoc(char **result)
 	signal(SIGINT, handle_sigint_hevar);
 }
 
+static int	for_one_line(char **result, char *input, int temp)
+{
+	*result = process_heredoc(input, *result);
+	if (*result == NULL)
+		return (close(temp), 1);
+	return (0);
+}
+
 int	heredoc(t_heredoc hevar, t_list *venv, char *result, int temp)
 {
 	char	*input;
@@ -71,16 +79,15 @@ int	heredoc(t_heredoc hevar, t_list *venv, char *result, int temp)
 				return (g_global.stop = 2, signal(SIGINT, handle_sigint),
 					dup2(temp, STDIN_FILENO), close(temp),
 					free(result), free(input), 1);
+			write(1, "\n", 1);
 			break ;
 		}
 		if (ft_strcmp(input, hevar.stop) == 0)
 			break ;
-		result = process_heredoc(input, result);
-		if (result == NULL)
-			return (close(temp), 1);
+		for_one_line(&result, input, temp);
 	}
 	if (hevar.mode == 0)
-		return (free(input), free(result), 0);
+		return (free(result), free(input), 0);
 	if (expand_heredoc(result, hevar, venv))
 		return (close(temp), free(input), 1);
 	return (close(temp), free(input), 0);

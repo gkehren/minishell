@@ -47,6 +47,7 @@ int	init_outfile_bis(t_token_lex *token)
 {
 	int	fd;
 
+	fd = 0;
 	if (token->token == OUT)
 	{
 		fd = open(token->content, O_CREAT | O_TRUNC | O_WRONLY,
