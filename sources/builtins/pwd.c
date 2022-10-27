@@ -38,7 +38,7 @@ int	ft_pwd(int argc, char **args, t_list **venv, t_exec *exec)
 		if (tmp == NULL || ft_strlcpy(path, tmp, PATH_MAX) == 0)
 		{
 			perror("minishell: pwd: .\n");
-			return (1);
+			return (set_status(1), 1);
 		}
 	}
 	printf("%s\n", path);

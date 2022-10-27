@@ -58,7 +58,7 @@ static int	check_files(t_list *token_list)
 			else
 				fd = open(tmp_token->content, O_RDONLY);
 			if (fd == -1)
-				return (print_error_str("minishell: ", tmp_token->content,
+				return (set_status(1) ,print_error_str("minishell: ", tmp_token->content,
 						": "), print_error_char(strerror(errno), '\n', NULL),
 					1);
 			close(fd);

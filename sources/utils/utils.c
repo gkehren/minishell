@@ -45,16 +45,21 @@ int	malloc_cd(char *str, t_list **venv, char *tmp)
 
 int	init_outfile_bis(t_token_lex *token)
 {
+	int	fd;
+
 	if (token->token == OUT)
 	{
-		if (open(token->content, O_CREAT | O_TRUNC | O_WRONLY,
-				0644) == -1)
+		fd = open(token->content, O_CREAT | O_TRUNC | O_WRONLY,
+				0644);
+		if (fd == -1)
 			return (1);
 	}
 	else if (token->token == OUT_APPEND)
 	{
-		if (open(token->content, O_APPEND | O_WRONLY | O_CREAT, 0644) == -1)
+		fd = open(token->content, O_APPEND | O_WRONLY | O_CREAT,
+				0644);
+		if (fd == -1)
 			return (1);
 	}
-	return (0);
+	return (close(fd), 0);
 }
