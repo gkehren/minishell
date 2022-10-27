@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
+/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 12:32:00 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/27 12:32:01 by gkehren          ###   ########.fr       */
+/*   Updated: 2022/10/27 13:19:29 by genouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@
 # include <signal.h>
 
 /*						INCLUDE OTHER HEADER						*/
-# include "couleurs.h"
 # include "struct.h"
 # include "lexer.h"
 # include "basics.h"
 # include "free.h"
-# include "tools.h"
 # include "utils.h"
 # include "builtins.h"
 # include "expanser.h"

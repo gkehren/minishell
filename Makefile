@@ -5,7 +5,6 @@ OBJ_PATH = obj/
 
 SRC_NAME = 	minishell.c						\
 			monitor.c						\
-			tools.c 						\
 			basics/basic_list.c				\
 			basics/basic_list2.c			\
 			basics/basic_str.c				\
@@ -65,27 +64,27 @@ FLAGS = -Wall -Wextra -Werror -g
 LIBS = -lreadline
 RM = @rm -rf
 
+DEPS_NAME = $(SRC_NAME:.c=.d)
+DEPS = $(addprefix $(OBJ_PATH),$(DEPS_NAME))
+
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): Makefile $(OBJ)
 		@echo "Build $(NAME)"
-		@$(CC) $(FLAGS) $(INC) $(OBJ) -o $(NAME) $(LIBS)
+		@$(CC) $(FLAGS) $(INC) $(OBJ) -o $(NAME) $(LIBS) -MMD
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 		mkdir -p $(@D)
-		$(CC) $(FLAGS) $(INC) -o $@ -c $<
+		$(CC) $(FLAGS) $(INC) -MMD -o $@ -c $<
 
-skiperror: $(OBJS)
-			$(CC) -o $(NAME) $(SRCS) -lpthread
-
-fsa:	$(OBJS)
-		$(CC) -fsanitize=address $(FLAGS) -o $@ $(SRCS)
+-include $(DEPS)
 
 clean:
 		$(RM) $(OBJ_PATH)
 
 fclean:	clean
 		$(RM) $(NAME)
+	
 
 re:	fclean
 	make all
