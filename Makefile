@@ -71,7 +71,7 @@ all: $(NAME)
 
 $(NAME): Makefile $(OBJ)
 		@echo "Build $(NAME)"
-		@$(CC) $(FLAGS) $(INC) $(OBJ) -o $(NAME) $(LIBS) -MMD
+		@$(CC) $(FLAGS) $(INC) $(OBJ) -o $(NAME) $(LIBS) -MMD -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 		mkdir -p $(@D)
@@ -84,7 +84,7 @@ clean:
 
 fclean:	clean
 		$(RM) $(NAME)
-	
+
 
 re:	fclean
 	make all

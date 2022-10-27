@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: genouf <genouf@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkehren <gkehren@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 12:32:00 by gkehren           #+#    #+#             */
-/*   Updated: 2022/10/27 13:19:29 by genouf           ###   ########.fr       */
+/*   Updated: 2022/10/27 20:37:16 by gkehren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 /*						INCLUDE BASIC HEADER						*/
 # include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include </opt/local/include/readline/readline.h>
+# include </opt/local/include/readline/history.h>
+//# include <readline/readline.h>
+//# include <readline/history.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/wait.h>
