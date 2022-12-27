@@ -84,7 +84,7 @@ clean:
 
 fclean:	clean
 		$(RM) $(NAME)
-	
+
 
 re:	fclean
 	make all
